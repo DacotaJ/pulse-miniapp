@@ -1175,11 +1175,44 @@ function selectTariff(el, tariff) {
   selectedTariff = tariff;
 }
 
-function openPayment() {
+async function openPayment() {
   const price = tariffPrices[selectedTariff];
   const names = { start: 'START', business: 'BUSINESS', pro: 'PRO' };
-  // ЮКасса виджет — замени YOUR_SHOP_ID и YOUR_PAYMENT_TOKEN на реальные
-  const checkout = new window.YooMoneyCheckoutWidget({ shop_id: '1345951', show_yoomoney_wallet: true, amount: price, currency: 'RUB', description: `Pulse ${names[selectedTariff]}`, customization: { modal: true }, error_callback: function(error) { console.log(error); } }); checkout.render('payment-form');
+  const description = `Pulse ${names[selectedTariff]}`;
+
+  const btn = document.querySelector('.pay-btn');
+  btn.disabled = true;
+  btn.textContent = 'Создаём платёж...';
+
+  try {
+    const res = await fetch('https://pulse-bot-production-f6d3.up.railway.app/create-payment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: price, description })
+    });
+    const data = await res.json();
+
+    if (!data.confirmation_token) {
+      alert('Ошибка создания платежа. Попробуйте ещё раз.');
+      btn.disabled = false;
+      btn.textContent = 'Оплатить и подключить →';
+      return;
+    }
+
+    const checkout = new window.YooMoneyCheckoutWidget({
+      confirmation_token: data.confirmation_token,
+      return_url: 'https://pulse-pro.ru',
+      customization: { modal: true },
+      error_callback: function(error) { console.log(error); }
+    });
+    checkout.render('payment-form');
+
+  } catch(e) {
+    alert('Ошибка соединения. Попробуйте ещё раз.');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Оплатить и подключить →';
 }
 
 // ── TOPIC CARDS DATA ──
