@@ -1481,7 +1481,7 @@ const TOPIC_CARDS = [
   { key: 'how', icon: '📊', title: 'Как работает', prompt: 'Как работает Pulse? Объясни просто за 1 минуту.' },
   { key: 'losses', icon: '💸', title: 'Считаем потери', prompt: 'Помоги посчитать сколько я теряю на необработанных заявках.' },
   { key: 'tariffs', icon: '💳', title: 'Тарифы', prompt: 'Какие тарифы есть в Pulse?' },
-  { key: 'report', icon: '📱', title: 'Пример отчёта', prompt: 'SHOW_REPORT_DEMO' },
+  { key: 'report', icon: '📱', title: 'Пример отчёта', prompt: 'Как выглядит отчёт Pulse в Telegram?' },
 ];
 let usedTopicKey = null;
 
@@ -1608,12 +1608,8 @@ function addMsg(containerId, role, html, showSugs = false) {
       btn.onclick = () => {
         sugs.remove();
         usedTopicKey = card.key;
-        if (card.key === 'report') {
-          showReportDemo();
-        } else {
-          document.getElementById('chatInput').value = card.prompt;
-          sendMessage();
-        }
+        document.getElementById('chatInput').value = card.prompt;
+        sendMessage();
       };
       sugs.appendChild(btn);
     });
