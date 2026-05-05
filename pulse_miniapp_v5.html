@@ -390,9 +390,12 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
   /* ── CHAT (inside consultant) ── */
   .chat-container {
     display: none;
-    flex: 1;
+    position: absolute;
+    inset: 0;
     flex-direction: column;
     overflow: hidden;
+    background: var(--bg);
+    z-index: 10;
   }
 
   .chat-container.active { display: flex; }
@@ -799,7 +802,54 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     cursor: pointer;
   }
 
-  /* BOTTOM TABS */
+  /* ── REPORT DEMO ── */
+  .rd-label { font-size:10px;font-family:'Geist Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;text-align:center; }
+  .rd-msg { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px; }
+  .rd-msg-head { display:flex;align-items:center;gap:8px;margin-bottom:12px; }
+  .rd-avatar { width:30px;height:30px;background:var(--text);color:var(--bg);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0; }
+  .rd-avatar.small { width:24px;height:24px;font-size:9px; }
+  .rd-name { font-size:13px;font-weight:600; }
+  .rd-time { font-size:11px;color:var(--text3);font-family:'Geist Mono',monospace; }
+  .rd-badge { font-size:10px;font-weight:600;padding:3px 8px;border-radius:100px;margin-left:auto; }
+  .rd-badge.green { background:var(--green-light);color:var(--green);border:1px solid var(--green-border); }
+  .rd-section-title { font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px; }
+  .rd-metrics { display:grid;grid-template-columns:repeat(4,1fr);gap:6px; }
+  .rd-metric { background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 6px;text-align:center; }
+  .rd-metric-val { font-size:16px;font-weight:700;font-family:'Geist Mono',monospace;line-height:1; }
+  .rd-metric-label { font-size:10px;color:var(--text3);margin:3px 0 2px; }
+  .rd-metric-delta { font-size:10px;font-family:'Geist Mono',monospace; }
+  .green { color:var(--green); }
+  .red { color:var(--red); }
+  .rd-alert { background:#fff5f5;border:1px solid #fecaca;border-radius:var(--radius);padding:14px;margin-bottom:10px; }
+  .rd-alert-header { display:flex;align-items:center;gap:6px;margin-bottom:8px; }
+  .rd-alert-icon { font-size:14px; }
+  .rd-alert-title { font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.06em; }
+  .rd-alert-body { font-size:13px;color:#7f1d1d;line-height:1.6;margin-bottom:6px; }
+  .rd-alert-note { font-size:11px;color:#991b1b;padding-top:6px;border-top:1px solid #fecaca; }
+  .rd-growth { background:#f0fdf4;border:1px solid var(--green-border);border-radius:var(--radius);padding:14px;margin-bottom:10px; }
+  .rd-growth-header { display:flex;align-items:center;gap:6px;margin-bottom:8px; }
+  .rd-growth-title { font-size:12px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.06em; }
+  .rd-growth-body { font-size:13px;color:#14532d;line-height:1.6; }
+  .rd-forecast { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px; }
+  .rd-forecast-header { font-size:12px;font-weight:700;color:var(--text);margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em; }
+  .rd-forecast-row { display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text2); }
+  .rd-forecast-row:last-child { border-bottom:none; }
+  .rd-forecast-tip { font-size:12px;color:var(--text2);margin-top:10px;padding:8px 10px;background:var(--surface2);border-radius:8px; }
+  .rd-chart-block { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px; }
+  .rd-chart-title { font-size:12px;font-weight:600;color:var(--text2);margin-bottom:12px; }
+  .rd-bars { display:flex;align-items:flex-end;gap:4px;height:60px;margin-bottom:6px; }
+  .rd-bar-col { flex:1;display:flex;flex-direction:column;gap:2px;align-items:center; }
+  .rd-bar { width:100%;border-radius:3px 3px 0 0; }
+  .rd-bar-day { font-size:9px;color:var(--text3);font-family:'Geist Mono',monospace; }
+  .rd-chart-legend { display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text3); }
+  .rd-legend-dot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
+  .rd-legend-dot.green { background:var(--green); }
+  .rd-legend-dot.red { background:var(--red); }
+  .rd-summary { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px; }
+  .rd-summary-header { display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:12px;font-weight:600;color:var(--text2); }
+  .rd-summary-text { font-size:13px;color:var(--text);line-height:1.65; }
+
+  /* ── BOTTOM TABS ── */
   .tabs {
     display: flex;
     border-top: 1px solid var(--border);
@@ -874,10 +924,10 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <div class="t-title">Тарифы</div>
           <div class="t-sub">Что подойдёт вам</div>
         </div>
-        <div class="topic-card" onclick="startConsultChat('Как выглядит отчёт Pulse в Telegram?', 'report')">
+        <div class="topic-card" onclick="showReportDemo()">
           <span class="t-icon">📱</span>
           <div class="t-title">Пример отчёта</div>
-          <div class="t-sub">Что приходит утром</div>
+          <div class="t-sub">Как это выглядит вживую</div>
         </div>
       </div>
 
@@ -970,9 +1020,144 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           </div>
         </div>
         <div id="payment-form"></div>
-        <button class="pay-btn" onclick="openPayment()">Оплатить и подключить →</button>
+
+        <!-- Форма перед оплатой убрана - данные берём из Telegram автоматически -->
+        <button class="pay-btn" id="openLeadFormBtn" onclick="submitLeadAndPay()">Начать бесплатную неделю →</button>
       </div>
 
+    </div>
+
+    <!-- REPORT DEMO SCREEN -->
+    <div class="chat-container" id="reportDemo">
+      <div class="chat-back" onclick="closeReportDemo()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        <span>Назад</span>
+      </div>
+      <div class="scroll" style="padding:16px">
+
+        <div class="rd-label">Pulse · Аналитика роста · пн 09:00</div>
+
+        <!-- УТРЕННИЙ ОТЧЁТ -->
+        <div class="rd-msg">
+          <div class="rd-msg-head">
+            <div class="rd-avatar">P</div>
+            <div>
+              <div class="rd-name">Pulse AI</div>
+              <div class="rd-time">09:00</div>
+            </div>
+            <div class="rd-badge green">▲ рост</div>
+          </div>
+          <div class="rd-section-title">📊 Итоги вчера</div>
+          <div class="rd-metrics">
+            <div class="rd-metric">
+              <div class="rd-metric-val green">135 000 ₽</div>
+              <div class="rd-metric-label">Выручка</div>
+              <div class="rd-metric-delta green">+18% к пн</div>
+            </div>
+            <div class="rd-metric">
+              <div class="rd-metric-val">32</div>
+              <div class="rd-metric-label">Заявки</div>
+              <div class="rd-metric-delta green">+8 к пн</div>
+            </div>
+            <div class="rd-metric">
+              <div class="rd-metric-val green">34%</div>
+              <div class="rd-metric-label">Конверсия</div>
+              <div class="rd-metric-delta green">▲ растёт</div>
+            </div>
+            <div class="rd-metric">
+              <div class="rd-metric-val red">11</div>
+              <div class="rd-metric-label">Без ответа</div>
+              <div class="rd-metric-delta red">⚠ риск</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- АЛЕРТ ПОТЕРИ -->
+        <div class="rd-alert">
+          <div class="rd-alert-header">
+            <span class="rd-alert-icon">⚠</span>
+            <span class="rd-alert-title">ПРОСАДКА · СРОЧНО</span>
+          </div>
+          <div class="rd-alert-body">
+            11 заявок без ответа больше 2 часов.<br>
+            При вашем чеке 12 300 ₽:<br>
+            <strong>11 × 12 300 ₽ = 135 300 ₽ под угрозой</strong>
+          </div>
+          <div class="rd-alert-note">Менеджер Иван не обрабатывал заявки с 11:00</div>
+        </div>
+
+        <!-- ТОЧКА РОСТА -->
+        <div class="rd-growth">
+          <div class="rd-growth-header">
+            <span>💡</span>
+            <span class="rd-growth-title">Точка роста</span>
+          </div>
+          <div class="rd-growth-body">Вторник — ваш лучший день. Заявок на 40% больше чем в среднем. <strong>Поставьте дополнительного менеджера во вторник</strong> — это даст +3–4 продажи в неделю.</div>
+        </div>
+
+        <!-- ПРОГНОЗ -->
+        <div class="rd-forecast">
+          <div class="rd-forecast-header">⚡ Прогноз на завтра</div>
+          <div class="rd-forecast-items">
+            <div class="rd-forecast-row">
+              <span>Заявок</span>
+              <span class="green"><strong>28–34</strong> <small>по тренду</small></span>
+            </div>
+            <div class="rd-forecast-row">
+              <span>Выручка</span>
+              <span class="green"><strong>~118 000 ₽</strong></span>
+            </div>
+            <div class="rd-forecast-row">
+              <span>Риск потерь</span>
+              <span class="red"><strong>высокий</strong> если не усилить обработку</span>
+            </div>
+          </div>
+          <div class="rd-forecast-tip">💬 Рекомендация: усильте обработку заявок завтра с 10:00 до 13:00</div>
+        </div>
+
+        <!-- МИНИ-ГРАФИК -->
+        <div class="rd-chart-block">
+          <div class="rd-chart-title">Динамика заявок за 7 дней</div>
+          <div class="rd-bars" id="rdBars"></div>
+          <div class="rd-chart-legend">
+            <span class="rd-legend-dot green"></span><span>заявки</span>
+            <span class="rd-legend-dot red" style="margin-left:12px"></span><span>без ответа</span>
+          </div>
+        </div>
+
+        <!-- AI ИТОГ -->
+        <div class="rd-summary">
+          <div class="rd-summary-header">
+            <div class="rd-avatar small">AI</div>
+            <span>Вывод дня</span>
+          </div>
+          <div class="rd-summary-text">Бизнес растёт — выручка и конверсия вверх третий день подряд. Главный тормоз — скорость обработки заявок. Решите это и следующая неделя будет рекордной.</div>
+        </div>
+
+        <div style="height:16px"></div>
+        <button class="pay-btn" onclick="closeReportDemo(); switchTab('consult')">Хочу такой анализ для своего бизнеса →</button>
+
+        <div style="margin-top:12px">
+          <div class="section-label" style="margin-bottom:8px">Что дальше</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div class="quick-item" onclick="closeReportDemo(); startConsultChat('Какие тарифы есть в Pulse?', 'tariffs')">
+              <span>💳 Посмотреть тарифы и цены</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+            <div class="quick-item" onclick="closeReportDemo(); startConsultChat('Помоги посчитать сколько я теряю на необработанных заявках.', 'losses')">
+              <span>💸 Посчитать мои потери</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+            <div class="quick-item" onclick="closeReportDemo(); startConsultChat('Как работает Pulse? Объясни просто за 1 минуту.', 'how')">
+              <span>📊 Как это работает</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:24px"></div>
+
+      </div>
     </div>
 
     <!-- CHAT VIEW (inside consultant) -->
@@ -1182,13 +1367,122 @@ function selectTariff(el, tariff) {
   selectedTariff = tariff;
 }
 
-function openPayment() {
+async function openPayment() {
   ymGoal('payment_click_' + selectedTariff);
   ymGoal('payment_click');
   const price = tariffPrices[selectedTariff];
   const names = { start: 'START', business: 'BUSINESS', pro: 'PRO' };
-  // ЮКасса виджет — замени YOUR_SHOP_ID и YOUR_PAYMENT_TOKEN на реальные
-  const checkout = new window.YooMoneyCheckoutWidget({ shop_id: '1345951', show_yoomoney_wallet: true, amount: price, currency: 'RUB', description: `Pulse ${names[selectedTariff]}`, customization: { modal: true }, error_callback: function(error) { console.log(error); } }); checkout.render('payment-form');
+  const description = `Pulse ${names[selectedTariff]}`;
+
+  const btn = document.querySelector('.pay-btn');
+  btn.disabled = true;
+  btn.textContent = 'Создаём платёж...';
+
+  try {
+    const res = await fetch('https://pulse-bot-production-f6d3.up.railway.app/create-payment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: price, description })
+    });
+    const data = await res.json();
+
+    if (!data.confirmation_token) {
+      alert('Ошибка создания платежа. Попробуйте ещё раз.');
+      btn.disabled = false;
+      btn.textContent = 'Оплатить и подключить →';
+      return;
+    }
+
+    const checkout = new window.YooMoneyCheckoutWidget({
+      confirmation_token: data.confirmation_token,
+      return_url: 'https://pulse-pro.ru',
+      customization: { modal: true },
+      error_callback: function(error) { console.log(error); }
+    });
+    checkout.render('payment-form');
+
+  } catch(e) {
+    alert('Ошибка соединения. Попробуйте ещё раз.');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Оплатить и подключить →';
+}
+
+function showReportDemo() {
+  const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
+  logToSheets({
+    lead_status: 'demo_click',
+    niche: 'Пример отчёта',
+    topic: 'report_demo',
+    name: tgUser ? (tgUser.first_name || '') : '',
+    contact: tgUser ? ('@' + (tgUser.username || tgUser.id || '')) : ''
+  });
+  document.getElementById('consultHome').style.display = 'none';
+  document.getElementById('reportDemo').classList.add('active');
+  buildRdChart();
+}
+
+function closeReportDemo() {
+  document.getElementById('consultHome').style.display = 'block';
+  document.getElementById('reportDemo').classList.remove('active');
+}
+
+function buildRdChart() {
+  const bars = document.getElementById('rdBars');
+  if (!bars || bars.children.length > 0) return;
+  const leads =   [18, 24, 31, 22, 28, 35, 32];
+  const lost =    [2,  5,  8,  3,  6,  9,  11];
+  const days =    ['пн','вт','ср','чт','пт','сб','вс'];
+  const maxL = Math.max(...leads);
+  leads.forEach((v, i) => {
+    const col = document.createElement('div');
+    col.className = 'rd-bar-col';
+    const b1 = document.createElement('div');
+    b1.className = 'rd-bar';
+    b1.style.cssText = `height:${Math.round((v/maxL)*52)}px;background:var(--green);opacity:${i===6?'1':'0.5'}`;
+    const b2 = document.createElement('div');
+    b2.className = 'rd-bar';
+    b2.style.cssText = `height:${Math.round((lost[i]/maxL)*52)}px;background:var(--red);opacity:0.7;margin-top:2px`;
+    const lbl = document.createElement('div');
+    lbl.className = 'rd-bar-day';
+    lbl.textContent = days[i];
+    col.append(b1, b2, lbl);
+    bars.appendChild(col);
+  });
+}
+
+// ── GOOGLE SHEETS ЛОГИРОВАНИЕ ──
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx32IjSQmcOyKI-V7_m18nSkubyGDc_7BBZbpB837F3-d0A9bGNU3xwzMw_TRtbl89s/exec';
+
+function logToSheets(data) {
+  const payload = {
+    ...data,
+    created_at: new Date().toISOString(),
+    lead_source: 'miniapp',
+    page_title: 'Pulse Mini App'
+  };
+  fetch(SHEETS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload),
+    keepalive: true
+  }).catch(() => {});
+}
+
+function showLeadForm() {
+  document.getElementById('openLeadFormBtn').style.display = 'none';
+  document.getElementById('leadFormBlock').style.display = 'block';
+  logToSheets({ lead_status: 'pay_intent', name: '', contact: '', niche: selectedTariff });
+}
+
+function submitLeadAndPay() {
+  const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
+  const name = tgUser ? (tgUser.first_name || '') : '';
+  const contact = tgUser ? ('@' + (tgUser.username || tgUser.id || '')) : '';
+  logToSheets({ lead_status: 'new', name, contact, niche: selectedTariff, tariff: selectedTariff });
+  openPayment();
 }
 
 // ── TOPIC CARDS DATA ──
@@ -1204,23 +1498,75 @@ let usedTopicKey = null;
 let consultHistory = [];
 let consultLoading = false;
 
+// Очищаем чат при каждом открытии Mini App
+function clearAllChats() {
+  consultHistory = [];
+  const msgs = document.getElementById('chatMessages');
+  if (msgs) msgs.innerHTML = '';
+  // Возвращаем консультанта на главный экран
+  const consultChat = document.getElementById('consultChat');
+  if (consultChat) consultChat.classList.remove('active');
+  const home = document.getElementById('consultHome');
+  if (home) home.style.display = 'block';
+}
+
+// Принудительная перезагрузка при открытии через Telegram
+if (window.Telegram?.WebApp) {
+  const lastOpen = sessionStorage.getItem('pulse_opened');
+  if (lastOpen) {
+    sessionStorage.removeItem('pulse_opened');
+    window.location.reload(true);
+  } else {
+    sessionStorage.setItem('pulse_opened', '1');
+  }
+  window.Telegram.WebApp.onEvent('activated', () => {
+    sessionStorage.removeItem('pulse_opened');
+    window.location.reload(true);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', clearAllChats);
+
 const CONSULT_PROMPT = `Ты — AI-консультант продукта Pulse. Pulse — система ежедневных Telegram-отчётов для владельцев малого и среднего бизнеса. Каждое утро в 09:00 в Telegram приходит сообщение: заявки, продажи, выручка, необработанные заявки и потери в деньгах.
 
-ТАРИФЫ:
-- START — 7 000 ₽/мес: 1 отчёт в день, 2 алерта, 1 источник, запуск 1–3 дня
-- BUSINESS — 15 000 ₽/мес: продажи + расходы + задачи, 5 алертов, 3 источника
-- PRO — 25 000 ₽/мес: кастом, несколько направлений, дашборд, PDF-отчёты
+ТАРИФЫ — рассказывай с максимальной ценностью, не сухими фактами:
+
+START — 7 000 ₽/мес:
+Вы просыпаетесь — и уже знаете всё о вчерашнем дне. Заявки, продажи, выручка и главное: сколько денег потеряно на неотвеченных заявках — в рублях, не в процентах. Большинство клиентов окупают тариф за первую же неделю — просто находят деньги, которые уходили мимо. Один источник данных (CRM или таблица), запуск за 1–3 дня, мы всё настраиваем сами.
+
+BUSINESS — 15 000 ₽/мес (самый популярный):
+Полная картина бизнеса каждое утро: продажи, расходы, задачи команды — в одном сообщении. Плюс AI-аналитик, который помнит ваши данные: спросите «почему упала конверсия в пятницу?» — получите ответ по вашим цифрам, не по шаблону. Наши клиенты на BUSINESS в среднем находят 180 000 ₽ скрытых потерь в первый месяц. До 3 источников данных, история всех отчётов, 5 умных алертов.
+
+PRO — 25 000 ₽/мес:
+AI не ждёт вопросов — сам приходит с выводами: «Конверсия упала во вторник — причина в рекламе, вот что поменять». Это не просто отчёт, это советник который работает 24/7 и никогда не устаёт. Несколько направлений, филиалов, команд — всё в одном месте. PDF для партнёров и инвесторов. Еженедельный живой разбор с командой Pulse.
 
 ИНТЕГРАЦИИ (все поддерживаются): amoCRM, Bitrix24, Google Sheets, Notion, любой REST/Webhook. Клиенту ничего не нужно делать — всё настраивает команда Pulse.
 
 КЕЙСЫ: онлайн-школа — 180 000 ₽ потерь найдено за 5 дней; недвижимость — 480 000 ₽ за неделю; клиника — конверсия +38%.
 
-Отвечай коротко, с цифрами. Задавай один вопрос в конце. Используй **жирный** для важного. Отвечай на русском.`;
+ПРИМЕР ОТЧЁТА: если клиент спрашивает как выглядит отчёт — НЕ описывай его текстом. Скажи: «Нажмите карточку "Пример отчёта" на главном экране — там показан живой визуальный отчёт с метриками, графиком и таблицей менеджеров». Если клиент уже в чате — скажи «Вернитесь на главный экран и нажмите "Пример отчёта"».
+
+Когда рассказываешь про тарифы — говори живо и убедительно, с акцентом на деньги которые клиент найдёт и время которое сэкономит. Не перечисляй функции списком — объясняй ценность. Отвечай коротко и по делу. Задавай один вопрос в конце. Используй **жирный** для важного. Отвечай на русском.`;
 
 function startConsultChat(text, topicKey) {
-  usedTopicKey = topicKey || null;
   if (topicKey) ymGoal('topic_' + topicKey);
   else ymGoal('chat_open');
+  usedTopicKey = topicKey || null;
+  const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
+  logToSheets({
+    lead_status: 'demo_click',
+    niche: topicKey || 'unknown',
+    topic: text.substring(0, 50),
+    name: tgUser ? (tgUser.first_name || '') : '',
+    contact: tgUser ? ('@' + (tgUser.username || tgUser.id || '')) : ''
+  });
+
+  // Пример отчёта — всегда показываем визуальный демо
+  if (text === 'SHOW_REPORT_DEMO' || topicKey === 'report') {
+    showReportDemo();
+    return;
+  }
+
   document.getElementById('consultHome').style.display = 'none';
   document.getElementById('consultChat').classList.add('active');
   if (text) {
