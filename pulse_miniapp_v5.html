@@ -1478,7 +1478,7 @@ const TOPIC_CARDS = [
   { key: 'how', icon: '📊', title: 'Как работает', prompt: 'Как работает Pulse? Объясни просто за 1 минуту.' },
   { key: 'losses', icon: '💸', title: 'Считаем потери', prompt: 'Помоги посчитать сколько я теряю на необработанных заявках.' },
   { key: 'tariffs', icon: '💳', title: 'Тарифы', prompt: 'Какие тарифы есть в Pulse?' },
-  { key: 'report', icon: '📱', title: 'Пример отчёта', prompt: 'Как выглядит отчёт Pulse в Telegram?' },
+  { key: 'report', icon: '📱', title: 'Пример отчёта', prompt: 'SHOW_REPORT_DEMO' },
 ];
 let usedTopicKey = null;
 
@@ -1504,8 +1504,12 @@ document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') clearAllChats();
 });
 window.addEventListener('pageshow', clearAllChats);
+window.addEventListener('focus', clearAllChats);
 if (window.Telegram?.WebApp) {
   window.Telegram.WebApp.onEvent('activated', clearAllChats);
+  window.Telegram.WebApp.onEvent('viewportChanged', () => {
+    if (window.Telegram.WebApp.isExpanded) clearAllChats();
+  });
 }
 
 const CONSULT_PROMPT = `Ты — AI-консультант продукта Pulse. Pulse — система ежедневных Telegram-отчётов для владельцев малого и среднего бизнеса. Каждое утро в 09:00 в Telegram приходит сообщение: заявки, продажи, выручка, необработанные заявки и потери в деньгах.
@@ -1525,6 +1529,8 @@ AI не ждёт вопросов — сам приходит с выводам�
 
 КЕЙСЫ: онлайн-школа — 180 000 ₽ потерь найдено за 5 дней; недвижимость — 480 000 ₽ за неделю; клиника — конверсия +38%.
 
+ПРИМЕР ОТЧЁТА: если клиент спрашивает как выглядит отчёт — НЕ описывай его текстом. Скажи: «Нажмите карточку "Пример отчёта" на главном экране — там показан живой визуальный отчёт с метриками, графиком и таблицей менеджеров». Если клиент уже в чате — скажи «Вернитесь на главный экран и нажмите "Пример отчёта"».
+
 Когда рассказываешь про тарифы — говори живо и убедительно, с акцентом на деньги которые клиент найдёт и время которое сэкономит. Не перечисляй функции списком — объясняй ценность. Отвечай коротко и по делу. Задавай один вопрос в конце. Используй **жирный** для важного. Отвечай на русском.`;
 
 function startConsultChat(text, topicKey) {
@@ -1537,6 +1543,13 @@ function startConsultChat(text, topicKey) {
     name: tgUser ? (tgUser.first_name || '') : '',
     contact: tgUser ? ('@' + (tgUser.username || tgUser.id || '')) : ''
   });
+
+  // Пример отчёта — всегда показываем визуальный демо
+  if (text === 'SHOW_REPORT_DEMO' || topicKey === 'report') {
+    showReportDemo();
+    return;
+  }
+
   document.getElementById('consultHome').style.display = 'none';
   document.getElementById('consultChat').classList.add('active');
   if (text) {
