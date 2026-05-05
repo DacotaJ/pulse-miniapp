@@ -1503,6 +1503,9 @@ if (window.Telegram?.WebApp) {
   window.Telegram.WebApp.onEvent('activated', clearAllChats);
 }
 
+// Также очищаем при загрузке страницы
+document.addEventListener('DOMContentLoaded', clearAllChats);
+
 const CONSULT_PROMPT = `Ты — AI-консультант продукта Pulse. Pulse — система ежедневных Telegram-отчётов для владельцев малого и среднего бизнеса. Каждое утро в 09:00 в Telegram приходит сообщение: заявки, продажи, выручка, необработанные заявки и потери в деньгах.
 
 ТАРИФЫ — рассказывай с максимальной ценностью, не сухими фактами:
