@@ -1494,7 +1494,18 @@ async function startTrial() {
 
   const btn = document.getElementById('openLeadFormBtn');
   btn.disabled = true;
-  btn.textContent = 'Запускаем триал...';
+  btn.textContent = 'Запускаем...';
+
+  // Защита от пустого chat_id (если открыто не из Telegram)
+  if (!chat_id) {
+    btn.disabled = false;
+    btn.textContent = 'Начать 7 дней бесплатно →';
+    alert('Откройте Pulse через Telegram-бот @PulseReportAIBot, чтобы начать триал');
+    return;
+  }
+
+  const BRIEF_URL = 'https://forms.gle/kzasQhwH8kPHhEjb7';
+  const block = document.querySelector('.payment-block');
 
   try {
     const res = await fetch('https://pulse-bot-production-f6d3.up.railway.app/start-trial', {
@@ -1504,41 +1515,108 @@ async function startTrial() {
     });
     const data = await res.json();
 
-    // Проверяем дубль
-    if (data.already_exists) {
-      btn.disabled = false;
-      btn.textContent = 'Начать 7 дней бесплатно →';
-      alert('У вас уже есть активный триал или подписка Pulse 🎉');
+    // === СИТУАЦИЯ 2: Заявка уже у нас, ждём бриф или триал идёт ===
+    if (data.already_pending) {
+      block.innerHTML = `
+        <div style="text-align:center;padding:24px 16px">
+          <div style="font-size:48px;margin-bottom:16px">📥</div>
+          <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px">Заявка уже у нас</div>
+          <div style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:20px">
+            Мы видим вашу заявку — нажимать ещё раз не нужно.<br><br>
+            <strong style="color:var(--text)">Если ещё не заполнили бриф</strong> — это последний шаг, чтобы запустить отчёты:
+          </div>
+          <a href="${BRIEF_URL}" target="_blank"
+            style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent,#7C3AED);color:#fff;border-radius:10px;padding:14px 16px;font-size:14px;font-weight:600;text-decoration:none;margin-bottom:12px">
+            📝 Заполнить бриф (5–7 минут)
+          </a>
+          <a href="https://t.me/PulseReportAIBot" target="_blank"
+            style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--surface-2,#f5f5f0);color:var(--text);border-radius:10px;padding:12px 16px;font-size:13px;font-weight:500;text-decoration:none">
+            Есть вопросы? Написать в Telegram
+          </a>
+        </div>`;
       return;
     }
-  } catch(e) { console.log('Trial save error:', e); }
 
-  // Логируем в Google Sheets
+    // === СИТУАЦИЯ 3: Триал уже использован, второй раз не даём ===
+    if (data.already_used) {
+      block.innerHTML = `
+        <div style="text-align:center;padding:24px 16px">
+          <div style="font-size:48px;margin-bottom:16px">✓</div>
+          <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px">Вы уже пробовали Pulse</div>
+          <div style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:20px">
+            Бесплатный период даётся один раз.<br><br>
+            Хотите продолжить? Выберите подходящий тариф — подключим за 1–2 дня:
+          </div>
+          <div style="background:var(--surface-2,#f5f5f0);border-radius:12px;padding:14px;font-size:13px;color:var(--text2);margin-bottom:20px;text-align:left">
+            • <strong style="color:var(--text)">START</strong> — 7 000 ₽/мес<br>
+            • <strong style="color:var(--text)">BUSINESS</strong> — 15 000 ₽/мес<br>
+            • <strong style="color:var(--text)">PRO</strong> — 25 000 ₽/мес
+          </div>
+          <a href="https://t.me/PulseReportAIBot" target="_blank"
+            style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:#fff;border-radius:10px;padding:14px 16px;font-size:14px;font-weight:600;text-decoration:none">
+            Написать в Telegram чтобы продолжить
+          </a>
+        </div>`;
+      return;
+    }
+
+    // === Сетевая ошибка ===
+    if (data.error) {
+      btn.disabled = false;
+      btn.textContent = 'Начать 7 дней бесплатно →';
+      alert('Не удалось создать заявку. Попробуйте через минуту или напишите нам в Telegram.');
+      return;
+    }
+
+  } catch(e) {
+    console.log('Trial save error:', e);
+    btn.disabled = false;
+    btn.textContent = 'Начать 7 дней бесплатно →';
+    alert('Сетевая ошибка. Попробуйте ещё раз через минуту.');
+    return;
+  }
+
+  // === СИТУАЦИЯ 1: Новая заявка успешно создана ===
   logToSheets({ lead_status: 'trial', name, contact: '@' + username, niche: 'business', tariff: 'business' });
   ymGoal('trial_started');
 
-  // Показываем красивое подтверждение
-  const block = document.querySelector('.payment-block');
   block.innerHTML = `
     <div style="text-align:center;padding:24px 16px">
-      <div style="font-size:48px;margin-bottom:16px">🎉</div>
-      <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px">Триал запущен!</div>
-      <div style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:20px">
-        Вы получили <strong style="color:var(--text)">7 дней BUSINESS бесплатно</strong>.<br>
-        Мы свяжемся с вами сегодня чтобы настроить первый отчёт.<br><br>
-        Что входит в ваш триал:<br>
+      <div style="font-size:48px;margin-bottom:16px">✅</div>
+      <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px">Заявка принята</div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:20px">
+        Мы отправили вам сообщение в Telegram
+      </div>
+
+      <div style="background:#FFF7ED;border:1px solid #FB923C;border-radius:12px;padding:16px;margin-bottom:20px;text-align:left">
+        <div style="font-size:14px;font-weight:700;color:#9A3412;margin-bottom:8px">⚠️ Важно — последний шаг</div>
+        <div style="font-size:13px;color:#7C2D12;line-height:1.5">
+          Триал начнётся <strong>после того как вы заполните бриф</strong> (5–7 минут).<br><br>
+          Без брифа мы не сможем настроить отчёт — нам нужно знать вашу нишу, метрики и где живут данные.
+        </div>
+      </div>
+
+      <a href="${BRIEF_URL}" target="_blank"
+        style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent,#7C3AED);color:#fff;border-radius:10px;padding:16px;font-size:15px;font-weight:700;text-decoration:none;margin-bottom:12px;box-shadow:0 4px 12px rgba(124,58,237,0.25)">
+        📝 Заполнить бриф сейчас →
+      </a>
+
+      <div style="font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:20px">
+        После заполнения мы лично подключим инструмент за 1–2 дня.<br>
+        Без созвонов, всё текстом.
+      </div>
+
+      <div style="background:var(--surface-2,#f5f5f0);border-radius:10px;padding:12px;font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:16px;text-align:left">
+        <strong style="color:var(--text)">Что входит в триал:</strong><br>
         📊 Ежедневный отчёт в Telegram в 09:00<br>
         🔔 5 умных алертов о просадках<br>
         💬 AI-аналитик по вашим данным<br>
         🔌 До 3 источников данных
       </div>
-      <div style="background:var(--surface-2,#f5f5f0);border-radius:12px;padding:14px;font-size:13px;color:var(--text2);margin-bottom:20px">
-        После триала тариф BUSINESS — <strong style="color:var(--text)">15 000 ₽/мес</strong>.<br>
-        Можно выбрать START (7К) или PRO (25К) — решите после того как попробуете.
-      </div>
+
       <a href="https://t.me/PulseReportAIBot" target="_blank"
-        style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:#fff;border-radius:10px;padding:14px 16px;font-size:14px;font-weight:600;text-decoration:none">
-        Написать нам в Telegram 👋
+        style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--surface-2,#f5f5f0);color:var(--text);border-radius:10px;padding:12px;font-size:13px;font-weight:500;text-decoration:none">
+        Есть вопросы? Написать в Telegram 👋
       </a>
     </div>`;
 }
