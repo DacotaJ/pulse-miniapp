@@ -1254,7 +1254,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
       <div class="ls-free-icon">🎁</div>
     </div>
     <div class="ls-cta">
-      <button class="ls-btn-primary" onclick="startTrial()">Попробовать бесплатно →</button>
+      <button class="ls-btn-primary" onclick="navigateToTrial()">Попробовать бесплатно →</button>
       <button class="ls-btn-secondary" onclick="dismissLanding('consult')">Узнать как это работает</button>
     </div>
     <div class="ls-footer-note">Без карты · amoCRM, Битрикс24, Sheets, банки · Ответим за 24 часа</div>
@@ -1806,19 +1806,15 @@ function dismissLanding(tab) {
   if (tab) switchTab(tab);
 }
 
-function startTrial() {
+function navigateToTrial() {
   ymGoal('landing_trial_click');
   dismissLanding(null);
   setTimeout(() => {
-    const trialBtn = document.getElementById('openLeadFormBtn');
-    if (trialBtn) {
-      switchTab('consult');
-      setTimeout(() => {
-        trialBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 100);
-    } else {
-      switchTab('consult');
-    }
+    switchTab('consult');
+    setTimeout(() => {
+      const anchor = document.getElementById('trialAnchor');
+      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   }, 450);
 }
 
@@ -1905,6 +1901,11 @@ function scrollToTrial() {
     const anchor = document.getElementById('trialAnchor');
     if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 80);
+}
+
+// Псевдоним для кнопки hero на главном экране
+function navigateToTrialFromHero() {
+  navigateToTrial();
 }
 
 // ── TABS ──
@@ -2059,12 +2060,6 @@ function logToSheets(data) {
     body: JSON.stringify(payload),
     keepalive: true
   }).catch(() => {});
-}
-
-function showLeadForm() {
-  document.getElementById('openLeadFormBtn').style.display = 'none';
-  document.getElementById('leadFormBlock').style.display = 'block';
-  logToSheets({ lead_status: 'pay_intent', name: '', contact: '', niche: selectedTariff });
 }
 
 async function startTrial() {
