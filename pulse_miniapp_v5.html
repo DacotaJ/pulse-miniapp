@@ -876,9 +876,390 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
   .tab span { font-size: 10px; color: var(--text3); font-weight: 500; transition: color 0.15s; }
   .tab.active svg { color: var(--text); }
   .tab.active span { color: var(--text); }
+
+  /* ── LANDING SCREEN ── */
+  #landingScreen {
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  #landingScreen.hidden {
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+  }
+
+  .ls-top {
+    padding: 18px 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .ls-logo-dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: blink 2.5s infinite;
+  }
+  .ls-logo-name {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+  .ls-logo-name span { color: var(--green); }
+
+  .ls-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px 12px;
+  }
+
+  .ls-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-light);
+    border: 1px solid var(--green-border);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+    width: fit-content;
+    letter-spacing: 0.02em;
+  }
+  .ls-tag-dot {
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: blink 2.5s infinite;
+  }
+
+  .ls-headline {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .ls-headline em {
+    font-style: normal;
+    color: var(--green);
+  }
+
+  .ls-sub {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .ls-proof {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .ls-proof-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+  .ls-proof-icon {
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .ls-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ls-btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: var(--text);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Geist', sans-serif;
+    cursor: pointer;
+    letter-spacing: -0.2px;
+    transition: opacity 0.15s;
+  }
+  .ls-btn-primary:active { opacity: 0.85; }
+
+  .ls-btn-secondary {
+    width: 100%;
+    padding: 14px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Geist', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .ls-btn-secondary:active { opacity: 0.75; }
+
+  .ls-free-badge {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f0fdf4;
+    border: 1.5px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 18px;
+  }
+  .ls-free-left { display: flex; flex-direction: column; gap: 2px; }
+  .ls-free-title { font-size: 13px; font-weight: 700; color: var(--green); }
+  .ls-free-sub { font-size: 11.5px; color: #166534; opacity: 0.8; }
+  .ls-free-icon { font-size: 22px; }
+
+  .ls-footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* ── GREETING HERO ── */
+  .greeting-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-light);
+    border: 1px solid var(--green-border);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+    width: fit-content;
+    letter-spacing: 0.02em;
+  }
+  .greeting-dot {
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: blink 2.5s infinite;
+  }
+  .trial-hero-btn {
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    padding: 15px 16px;
+    background: var(--text);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Geist', sans-serif;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: -0.2px;
+    transition: opacity 0.15s;
+  }
+  .trial-hero-btn:active { opacity: 0.82; }
+  .trial-hero-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 7px;
+  }
+
+  /* ── TRIAL BLOCK HEADER ── */
+  .trial-top-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f0fdf4;
+    border: 1.5px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 14px;
+  }
+  .trial-badge-icon { font-size: 22px; flex-shrink: 0; }
+  .trial-badge-title { font-size: 13px; font-weight: 700; color: var(--green); }
+  .trial-badge-sub { font-size: 11px; color: #166534; opacity: 0.85; margin-top: 2px; }
+  .trial-divider {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text3);
+    margin: 14px 0 10px;
+    position: relative;
+  }
+  .trial-divider::before, .trial-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 1px;
+    background: var(--border);
+  }
+  .trial-divider::before { left: 0; }
+  .trial-divider::after { right: 0; }
+  .pay-btn-secondary {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+    border: 1px solid var(--border) !important;
+    margin-top: 10px !important;
+  }
+
+  /* ── DEMO CTA ── */
+  .demo-cta-block { text-align: center; }
+  .demo-cta-note {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 8px;
+  }
+
+  .tariff-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px 16px;
+    background: var(--surface);
+    border: 1.5px solid var(--border2);
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    font-family: 'Geist', sans-serif;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .tariff-toggle-btn:active { background: var(--surface2); }
+
+  .expired-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #fff7ed;
+    border: 1.5px solid #fed7aa;
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-bottom: 4px;
+  }
+  .expired-icon { font-size: 22px; flex-shrink: 0; }
+  .expired-title { font-size: 14px; font-weight: 700; color: #9a3412; margin-bottom: 3px; }
+  .expired-sub { font-size: 12px; color: #c2410c; line-height: 1.4; }
+
+  .email-field-block {
+    margin-top: 14px;
+  }
+  .email-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text2);
+    margin-bottom: 6px;
+  }
+  .email-input {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1.5px solid var(--border2);
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-family: 'Geist', sans-serif;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .email-input:focus { border-color: var(--green); }
+
+  .contact-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text2);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
+  }
+  .contact-btn:active { background: var(--surface); }
 </style>
 </head>
 <body>
+
+<!-- LANDING SCREEN — для холодного трафика из рекламы -->
+<div id="landingScreen">
+  <div class="ls-top">
+    <div class="ls-logo-dot"></div>
+    <div class="ls-logo-name">Pulse<span>.</span></div>
+  </div>
+  <div class="ls-body">
+    <div class="ls-tag">
+      <div class="ls-tag-dot"></div>
+      Персональный AI-аналитик для владельца бизнеса
+    </div>
+    <div class="ls-headline">
+      Каждое утро знаете<br>что происходит —<br><em>без CRM и Excel</em>
+    </div>
+    <div class="ls-sub">
+      Pulse сам забирает данные, находит просадки и пишет в Telegram. Спросите что угодно — ответит по вашим цифрам.
+    </div>
+    <div class="ls-proof">
+      <div class="ls-proof-item">
+        <span class="ls-proof-icon">📊</span>
+        <span><strong>Отчёт в 09:00 каждый день.</strong> Продажи, заявки, аномалии — сами приходят к вам, не вы к ним</span>
+      </div>
+      <div class="ls-proof-item">
+        <span class="ls-proof-icon">🔔</span>
+        <span><strong>Алерты с суммой потерь в рублях.</strong> Узнаёте о проблеме сразу — не в конце месяца</span>
+      </div>
+      <div class="ls-proof-item">
+        <span class="ls-proof-icon">💬</span>
+        <span><strong>«Почему упала конверсия?»</strong> — AI отвечает по вашим данным за 10 секунд</span>
+      </div>
+    </div>
+    <div class="ls-free-badge">
+      <div class="ls-free-left">
+        <div class="ls-free-title">Бесплатный старт</div>
+        <div class="ls-free-sub">7 дней · настройка 0 ₽ · делаем сами за 1–3 дня</div>
+      </div>
+      <div class="ls-free-icon">🎁</div>
+    </div>
+    <div class="ls-cta">
+      <button class="ls-btn-primary" onclick="startTrial()">Попробовать бесплатно →</button>
+      <button class="ls-btn-secondary" onclick="dismissLanding('consult')">Узнать как это работает</button>
+    </div>
+    <div class="ls-footer-note">Без карты · amoCRM, Битрикс24, Sheets, банки · Ответим за 24 часа</div>
+  </div>
+</div>
 
 <!-- HEADER -->
 <div class="header">
@@ -903,31 +1284,37 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     <!-- HOME VIEW -->
     <div class="scroll" id="consultHome">
       <div class="greeting">
-        <h1>Привет! Чем могу помочь?</h1>
-        <p>Расскажу про Pulse или помогу посчитать потери вашего бизнеса.</p>
+        <div class="greeting-tag">
+          <span class="greeting-dot"></span>
+          AI-аналитик для владельца бизнеса
+        </div>
+        <h1>Каждое утро — полная картина бизнеса в Telegram</h1>
+        <p>Pulse сам собирает данные из CRM и банков, находит просадки и алертит с суммой потерь в рублях. Спросите что угодно — ответит по вашим цифрам.</p>
+        <button class="trial-hero-btn" onclick="scrollToTrial()">Попробовать бесплатно — настроим сами →</button>
+        <div class="trial-hero-note">7 дней · настройка 0 ₽ · без карты</div>
       </div>
 
-      <div class="section-label">Темы</div>
+      <div class="section-label">Узнайте про Pulse</div>
       <div class="topics-grid" style="margin-bottom:24px">
-        <div class="topic-card" onclick="startConsultChat('Как работает Pulse? Объясни просто за 1 минуту.', 'how')">
-          <span class="t-icon">📊</span>
-          <div class="t-title">Как работает</div>
-          <div class="t-sub">Объяснение за 1 мин</div>
+        <div class="topic-card" onclick="showReportDemo()">
+          <span class="t-icon">📱</span>
+          <div class="t-title">Что придёт утром</div>
+          <div class="t-sub">Посмотреть живой отчёт</div>
         </div>
         <div class="topic-card" onclick="startConsultChat('Помоги посчитать сколько я теряю на необработанных заявках.', 'losses')">
           <span class="t-icon">💸</span>
-          <div class="t-title">Считаем потери</div>
-          <div class="t-sub">Ваши деньги в цифрах</div>
+          <div class="t-title">Сколько уходит сейчас</div>
+          <div class="t-sub">Посчитать в рублях</div>
         </div>
-        <div class="topic-card" onclick="startConsultChat('Какие тарифы есть в Pulse?', 'tariffs')">
+        <div class="topic-card" onclick="startConsultChat('Как Pulse заменяет утреннее открытие CRM и Excel? Объясни просто.', 'how')">
+          <span class="t-icon">📊</span>
+          <div class="t-title">Без CRM и Excel</div>
+          <div class="t-sub">Как Pulse заменяет утро</div>
+        </div>
+        <div class="topic-card" onclick="showTariffs()">
           <span class="t-icon">💳</span>
-          <div class="t-title">Тарифы</div>
-          <div class="t-sub">Что подойдёт вам</div>
-        </div>
-        <div class="topic-card" onclick="showReportDemo()">
-          <span class="t-icon">📱</span>
-          <div class="t-title">Пример отчёта</div>
-          <div class="t-sub">Как это выглядит вживую</div>
+          <div class="t-title">Сколько стоит</div>
+          <div class="t-sub">Тарифы от 7 000 ₽</div>
         </div>
       </div>
 
@@ -964,10 +1351,20 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
       </div>
 
       <!-- PAYMENT -->
-      <div class="payment-block">
-        <h3>7 дней бесплатно — на тарифе BUSINESS</h3>
-        <p>Введите email — и завтра утром вы получите первый отчёт. Настраиваем всё сами, вам ничего делать не нужно.<br><span style="font-size:12px;color:var(--text2)">После триала — выберите тариф. Карта не нужна.</span></p>
-        <div class="tariff-options">
+      <div class="payment-block" id="trialAnchor">
+        <div class="trial-top-badge">
+          <span class="trial-badge-icon">🎁</span>
+          <div>
+            <div class="trial-badge-title">Бесплатный старт · 7 дней</div>
+            <div class="trial-badge-sub">Настройка 0 ₽ · делаем сами · без карты</div>
+          </div>
+        </div>
+        <button class="pay-btn" id="openLeadFormBtn" onclick="startTrial()">Попробовать бесплатно — настроим сами →</button>
+        <button class="tariff-toggle-btn" id="tariffToggleBtn" onclick="showTariffsInline()">
+          <span id="tariffToggleText">Посмотреть тарифы и цены</span>
+          <svg id="tariffToggleArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div id="tariffCollapse" style="display:none"><div class="tariff-options" id="tariffOptions">
           <div class="tariff-opt selected" onclick="selectTariff(this, 'start')">
             <div>
               <div class="t-name">START</div>
@@ -1018,18 +1415,13 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
             </div>
             <div class="t-price">25 000 ₽/мес</div>
           </div>
-        </div>
-        <div id="payment-form"></div>
-
-        <!-- Форма перед оплатой убрана - данные берём из Telegram автоматически -->
-        <button class="pay-btn" id="openLeadFormBtn" onclick="startTrial()">Начать 7 дней бесплатно →</button>
-
-        <div style="margin-top:12px;text-align:center">
-          <div style="font-size:12px;color:var(--text2);margin-bottom:8px">Есть вопросы? Пишите прямо в чат боту — ответим быстро 👇</div>
-          <a href="https://t.me/PulseReportAIBot" target="_blank"
-            style="display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:1px solid var(--border);color:var(--text);border-radius:10px;padding:12px 16px;font-size:14px;font-weight:500;text-decoration:none;-webkit-tap-highlight-color:transparent">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="opacity:.7"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
-            Написать в Telegram
+        </div><!-- /tariff-options -->
+        </div><!-- /tariff-collapse -->
+        <div style="margin-top:16px;text-align:center">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:8px">Остались вопросы? Пишите — ответим быстро 👇</div>
+          <a href="https://t.me/dacotaj" target="_blank" class="contact-btn">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+            Связаться с нами
           </a>
         </div>
       </div>
@@ -1144,7 +1536,10 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
         </div>
 
         <div style="height:16px"></div>
-        <button class="pay-btn" onclick="closeReportDemo(); switchTab('consult')">Хочу такой анализ для своего бизнеса →</button>
+        <div class="demo-cta-block">
+          <button class="pay-btn" onclick="closeReportDemo(); setTimeout(scrollToTrial, 100)">Хочу такой отчёт — попробовать бесплатно →</button>
+          <div class="demo-cta-note">7 дней бесплатно · настройка 0 ₽ · без карты</div>
+        </div>
 
         <div style="margin-top:12px">
           <div class="section-label" style="margin-bottom:8px">Что дальше</div>
@@ -1288,6 +1683,59 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
         </div>
       </div>
 
+      <!-- EXPIRED — PAYMENT BLOCK (показывается только при status=expired) -->
+      <div id="expiredPayBlock" style="display:none;margin-top:8px">
+        <div class="expired-banner">
+          <div class="expired-icon">⏰</div>
+          <div>
+            <div class="expired-title">Пробный период завершён</div>
+            <div class="expired-sub">Выберите тариф — и продолжаем. Данные сохранены.</div>
+          </div>
+        </div>
+
+        <div class="section-label" style="margin-top:20px">Выберите тариф</div>
+        <div class="tariff-options" id="expiredTariffOptions">
+          <div class="tariff-opt selected" onclick="selectExpiredTariff(this,'start')">
+            <div>
+              <div class="t-name">START</div>
+              <div class="t-desc">Отчёт каждое утро · 1 источник · 2 алерта</div>
+            </div>
+            <div class="t-price">7 000 ₽/мес</div>
+          </div>
+          <div class="tariff-opt" onclick="selectExpiredTariff(this,'business')">
+            <div>
+              <div class="t-name">BUSINESS <span style="font-size:10px;color:var(--green);font-weight:500">● популярный</span></div>
+              <div class="t-desc">Полная картина + AI-вопросы · до 3 источников · 5 алертов</div>
+            </div>
+            <div class="t-price">15 000 ₽/мес</div>
+          </div>
+          <div class="tariff-opt" onclick="selectExpiredTariff(this,'pro')">
+            <div>
+              <div class="t-name">PRO</div>
+              <div class="t-desc">AI сам находит проблемы · неограниченно · PDF · разбор</div>
+            </div>
+            <div class="t-price">25 000 ₽/мес</div>
+          </div>
+        </div>
+
+        <div class="email-field-block">
+          <label class="email-label">Email для чека</label>
+          <input type="email" id="expiredEmail" class="email-input" placeholder="your@email.com" autocomplete="email">
+        </div>
+
+        <div id="expired-payment-form" style="margin-top:12px"></div>
+        <button class="pay-btn" id="expiredPayBtn" onclick="openExpiredPayment()" style="margin-top:12px">
+          Оплатить и продолжить →
+        </button>
+        <div style="text-align:center;font-size:11px;color:var(--text3);margin-top:8px">
+          Безопасная оплата через ЮКасса · данные карты не хранятся
+        </div>
+        <a href="https://t.me/dacotaj" target="_blank" class="contact-btn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+          Есть вопросы? Напишите нам
+        </a>
+      </div>
+
     </div>
 
     <!-- CABINET CHAT VIEW -->
@@ -1338,10 +1786,41 @@ if (window.Telegram?.WebApp) {
   Telegram.WebApp.expand();
 }
 
-// Check client ID in URL
+// ── LANDING SCREEN ──
+// Показываем холодным пользователям (без client= в URL и без флага в sessionStorage)
 const urlParams = new URLSearchParams(window.location.search);
 const clientId = urlParams.get('client');
 const isClient = !!clientId;
+const seenLanding = sessionStorage.getItem('pulse_seen_landing');
+
+// Если клиент с ID или уже видел экран — скрываем лендинг сразу
+if (isClient || seenLanding) {
+  document.getElementById('landingScreen').style.display = 'none';
+}
+
+function dismissLanding(tab) {
+  sessionStorage.setItem('pulse_seen_landing', '1');
+  const el = document.getElementById('landingScreen');
+  el.classList.add('hidden');
+  setTimeout(() => { el.style.display = 'none'; }, 420);
+  if (tab) switchTab(tab);
+}
+
+function startTrial() {
+  ymGoal('landing_trial_click');
+  dismissLanding(null);
+  setTimeout(() => {
+    const trialBtn = document.getElementById('openLeadFormBtn');
+    if (trialBtn) {
+      switchTab('consult');
+      setTimeout(() => {
+        trialBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    } else {
+      switchTab('consult');
+    }
+  }, 450);
+}
 
 if (isClient) {
   document.getElementById('clientBadge').classList.add('visible');
@@ -1350,6 +1829,82 @@ if (isClient) {
   document.getElementById('cabinetContent').style.display = 'block';
   generateReports();
   generateChart();
+
+  // Показываем блок оплаты если триал истёк
+  const clientStatus = urlParams.get('status');
+  if (clientStatus === 'expired') {
+    const expiredBlock = document.getElementById('expiredPayBlock');
+    if (expiredBlock) expiredBlock.style.display = 'block';
+    // Меняем заголовок кабинета
+    const cabHeader = document.querySelector('.cabinet-header p');
+    if (cabHeader) cabHeader.textContent = 'Пробный период завершён — выберите тариф';
+    // Сразу скроллим к блоку оплаты
+    setTimeout(() => {
+      expiredBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 400);
+  }
+}
+
+// ── EXPIRED PAYMENT ──
+let selectedExpiredTariff = 'start';
+
+function selectExpiredTariff(el, tariff) {
+  document.querySelectorAll('#expiredTariffOptions .tariff-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedExpiredTariff = tariff;
+}
+
+async function openExpiredPayment() {
+  const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
+  const chat_id = tgUser ? String(tgUser.id || '') : '';
+  const username = tgUser ? (tgUser.username || '') : '';
+  const emailInput = document.getElementById('expiredEmail');
+  const email = emailInput ? emailInput.value.trim() : '';
+  if (!email) { alert('Пожалуйста, введите email для чека'); emailInput && emailInput.focus(); return; }
+  const price = tariffPrices[selectedExpiredTariff];
+  const names = { start: 'START', business: 'BUSINESS', pro: 'PRO' };
+  const description = 'Pulse ' + names[selectedExpiredTariff];
+
+  const btn = document.getElementById('expiredPayBtn');
+  btn.disabled = true;
+  btn.textContent = 'Создаём платёж...';
+  ymGoal('payment_click_' + selectedExpiredTariff);
+
+  try {
+    const res = await fetch('https://pulse-bot-production-f6d3.up.railway.app/create-payment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: price, description, email: '', chat_id, username })
+    });
+    const data = await res.json();
+    if (!data.confirmation_token) {
+      alert('Ошибка создания платежа. Попробуйте ещё раз.');
+      btn.disabled = false;
+      btn.textContent = 'Оплатить и продолжить →';
+      return;
+    }
+    const checkout = new window.YooMoneyCheckoutWidget({
+      confirmation_token: data.confirmation_token,
+      return_url: 'https://pulse-pro.ru',
+      customization: { modal: true },
+      error_callback: (err) => console.log(err)
+    });
+    checkout.render('expired-payment-form');
+  } catch(e) {
+    alert('Ошибка соединения. Попробуйте ещё раз.');
+    btn.disabled = false;
+    btn.textContent = 'Оплатить и продолжить →';
+  }
+}
+
+
+// ── SCROLL TO TRIAL ──
+function scrollToTrial() {
+  switchTab('consult');
+  setTimeout(() => {
+    const anchor = document.getElementById('trialAnchor');
+    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
 }
 
 // ── TABS ──
@@ -1364,6 +1919,32 @@ function switchTab(tab) {
     document.getElementById('cabinetScreen').classList.add('active');
     document.getElementById('tab-cabinet').classList.add('active');
   }
+}
+
+
+// ── TARIFFS ──
+function showTariffs() {
+  // From topic card — scroll to trial block and expand tariffs
+  switchTab('consult');
+  setTimeout(() => {
+    showTariffsInline();
+    const anchor = document.getElementById('trialAnchor');
+    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
+}
+
+function showTariffsInline() {
+  const collapse = document.getElementById('tariffCollapse');
+  const btn = document.getElementById('tariffToggleBtn');
+  const trialBtn = document.getElementById('tariffTrialBtn');
+  if (!collapse) return;
+  const isHidden = collapse.style.display === 'none';
+  collapse.style.display = isHidden ? 'block' : 'none';
+  if (trialBtn) trialBtn.style.display = isHidden ? 'block' : 'none';
+  const txt = document.getElementById('tariffToggleText');
+  const arrow = document.getElementById('tariffToggleArrow');
+  if (txt) txt.textContent = isHidden ? 'Скрыть тарифы' : 'Посмотреть тарифы и цены';
+  if (arrow) arrow.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
 }
 
 // ── TARIFF SELECTION ──
@@ -1494,18 +2075,7 @@ async function startTrial() {
 
   const btn = document.getElementById('openLeadFormBtn');
   btn.disabled = true;
-  btn.textContent = 'Запускаем...';
-
-  // Защита от пустого chat_id (если открыто не из Telegram)
-  if (!chat_id) {
-    btn.disabled = false;
-    btn.textContent = 'Начать 7 дней бесплатно →';
-    alert('Откройте Pulse через Telegram-бот @PulseReportAIBot, чтобы начать триал');
-    return;
-  }
-
-  const BRIEF_URL = 'https://forms.gle/kzasQhwH8kPHhEjb7';
-  const block = document.querySelector('.payment-block');
+  btn.textContent = 'Запускаем триал...';
 
   try {
     const res = await fetch('https://pulse-bot-production-f6d3.up.railway.app/start-trial', {
@@ -1515,109 +2085,41 @@ async function startTrial() {
     });
     const data = await res.json();
 
-    // === СИТУАЦИЯ 2: Заявка уже у нас, ждём бриф или триал идёт ===
-    if (data.already_pending) {
-      block.innerHTML = `
-        <div style="text-align:center;padding:24px 16px">
-          <div style="font-size:48px;margin-bottom:16px">📥</div>
-          <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px">Заявка уже у нас</div>
-          <div style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:20px">
-            Мы видим вашу заявку — нажимать ещё раз не нужно.<br><br>
-            <strong style="color:var(--text)">Если ещё не заполнили бриф</strong> — это последний шаг, чтобы запустить отчёты:
-          </div>
-          <a href="${BRIEF_URL}" target="_blank"
-            style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent,#7C3AED);color:#fff;border-radius:10px;padding:14px 16px;font-size:14px;font-weight:600;text-decoration:none;margin-bottom:12px">
-            📝 Заполнить бриф (5–7 минут)
-          </a>
-          <a href="https://t.me/PulseReportAIBot" target="_blank"
-            style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--surface-2,#f5f5f0);color:var(--text);border-radius:10px;padding:12px 16px;font-size:13px;font-weight:500;text-decoration:none">
-            Есть вопросы? Написать в Telegram
-          </a>
-        </div>`;
-      return;
-    }
-
-    // === СИТУАЦИЯ 3: Триал уже использован, второй раз не даём ===
-    if (data.already_used) {
-      block.innerHTML = `
-        <div style="text-align:center;padding:24px 16px">
-          <div style="font-size:48px;margin-bottom:16px">✓</div>
-          <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px">Вы уже пробовали Pulse</div>
-          <div style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:20px">
-            Бесплатный период даётся один раз.<br><br>
-            Хотите продолжить? Выберите подходящий тариф — подключим за 1–2 дня:
-          </div>
-          <div style="background:var(--surface-2,#f5f5f0);border-radius:12px;padding:14px;font-size:13px;color:var(--text2);margin-bottom:20px;text-align:left">
-            • <strong style="color:var(--text)">START</strong> — 7 000 ₽/мес<br>
-            • <strong style="color:var(--text)">BUSINESS</strong> — 15 000 ₽/мес<br>
-            • <strong style="color:var(--text)">PRO</strong> — 25 000 ₽/мес
-          </div>
-          <a href="https://t.me/PulseReportAIBot" target="_blank"
-            style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:#fff;border-radius:10px;padding:14px 16px;font-size:14px;font-weight:600;text-decoration:none">
-            Написать в Telegram чтобы продолжить
-          </a>
-        </div>`;
-      return;
-    }
-
-    // === Сетевая ошибка ===
-    if (data.error) {
+    // Проверяем дубль
+    if (data.already_exists) {
       btn.disabled = false;
       btn.textContent = 'Начать 7 дней бесплатно →';
-      alert('Не удалось создать заявку. Попробуйте через минуту или напишите нам в Telegram.');
+      alert('У вас уже есть активный триал или подписка Pulse 🎉');
       return;
     }
+  } catch(e) { console.log('Trial save error:', e); }
 
-  } catch(e) {
-    console.log('Trial save error:', e);
-    btn.disabled = false;
-    btn.textContent = 'Начать 7 дней бесплатно →';
-    alert('Сетевая ошибка. Попробуйте ещё раз через минуту.');
-    return;
-  }
-
-  // === СИТУАЦИЯ 1: Новая заявка успешно создана ===
+  // Логируем в Google Sheets
   logToSheets({ lead_status: 'trial', name, contact: '@' + username, niche: 'business', tariff: 'business' });
   ymGoal('trial_started');
 
+  // Показываем красивое подтверждение
+  const block = document.querySelector('.payment-block');
   block.innerHTML = `
     <div style="text-align:center;padding:24px 16px">
-      <div style="font-size:48px;margin-bottom:16px">✅</div>
-      <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px">Заявка принята</div>
-      <div style="font-size:13px;color:var(--text2);margin-bottom:20px">
-        Сообщение со ссылкой на бриф пришло сюда же,<br>в чат с @PulseReportAIBot
-      </div>
-
-      <div style="background:#FFF7ED;border:1px solid #FB923C;border-radius:12px;padding:16px;margin-bottom:20px;text-align:left">
-        <div style="font-size:14px;font-weight:700;color:#9A3412;margin-bottom:8px">⚠️ Важно — последний шаг</div>
-        <div style="font-size:13px;color:#7C2D12;line-height:1.5">
-          Триал начнётся <strong>после того как вы заполните бриф</strong> (5–7 минут).<br><br>
-          Без брифа мы не сможем настроить отчёт — нам нужно знать вашу нишу, метрики и где живут данные.
-        </div>
-      </div>
-
-      <a href="${BRIEF_URL}" target="_blank"
-        style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent,#7C3AED);color:#fff;border-radius:10px;padding:16px;font-size:15px;font-weight:700;text-decoration:none;margin-bottom:12px;box-shadow:0 4px 12px rgba(124,58,237,0.25)">
-        📝 Заполнить бриф сейчас →
-      </a>
-
-      <div style="font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:20px">
-        После заполнения мы лично подключим инструмент за 1–2 дня.<br>
-        Без созвонов, всё текстом.
-      </div>
-
-      <div style="background:var(--surface-2,#f5f5f0);border-radius:10px;padding:12px;font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:16px;text-align:left">
-        <strong style="color:var(--text)">Что входит в триал — тариф BUSINESS:</strong><br>
+      <div style="font-size:48px;margin-bottom:16px">🎉</div>
+      <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px">Триал запущен!</div>
+      <div style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:20px">
+        Вы получили <strong style="color:var(--text)">7 дней BUSINESS бесплатно</strong>.<br>
+        Мы свяжемся с вами сегодня чтобы настроить первый отчёт.<br><br>
+        Что входит в ваш триал:<br>
         📊 Ежедневный отчёт в Telegram в 09:00<br>
         🔔 5 умных алертов о просадках<br>
         💬 AI-аналитик по вашим данным<br>
-        🔌 До 3 источников данных<br>
-        <span style="color:var(--text);font-weight:600">💰 После триала — 15 000 ₽/мес</span>
+        🔌 До 3 источников данных
       </div>
-
+      <div style="background:var(--surface-2,#f5f5f0);border-radius:12px;padding:14px;font-size:13px;color:var(--text2);margin-bottom:20px">
+        После триала тариф BUSINESS — <strong style="color:var(--text)">15 000 ₽/мес</strong>.<br>
+        Можно выбрать START (7К) или PRO (25К) — решите после того как попробуете.
+      </div>
       <a href="https://t.me/PulseReportAIBot" target="_blank"
-        style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--surface-2,#f5f5f0);color:var(--text);border-radius:10px;padding:12px;font-size:13px;font-weight:500;text-decoration:none">
-        Есть вопросы? Написать в Telegram 👋
+        style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:#fff;border-radius:10px;padding:14px 16px;font-size:14px;font-weight:600;text-decoration:none">
+        Написать нам в Telegram 👋
       </a>
     </div>`;
 }
