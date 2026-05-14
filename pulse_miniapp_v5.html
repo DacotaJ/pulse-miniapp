@@ -1999,29 +1999,36 @@ function navigateToTrial() {
 }
 
 if (isClient || isAdminPreview) {
-  document.getElementById('clientBadge').classList.add('visible');
-  document.getElementById('onlineBadge').style.display = 'none';
-  document.getElementById('notAuth').style.display = 'none';
-  document.getElementById('cabinetContent').style.display = 'block';
+  // Ждём DOM чтобы все элементы точно были готовы
+  function initCabinet() {
+    document.getElementById('clientBadge').classList.add('visible');
+    document.getElementById('onlineBadge').style.display = 'none';
+    document.getElementById('notAuth').style.display = 'none';
+    document.getElementById('cabinetContent').style.display = 'block';
 
-  // В admin-preview автоматически переключаемся на кабинет
-  if (isAdminPreview) switchTab('cabinet');
+    generateReports();
+    generateChart();
 
-  generateReports();
-  generateChart();
+    // В admin-preview переключаемся на кабинет после рендера
+    if (isAdminPreview) switchTab('cabinet');
 
-  // Показываем блок оплаты если триал истёк (или в prevew с status=expired)
-  const clientStatus = isAdminPreview ? previewStatus : urlParams.get('status');
-  if (clientStatus === 'expired') {
-    const expiredBlock = document.getElementById('expiredPayBlock');
-    if (expiredBlock) expiredBlock.style.display = 'block';
-    // Меняем заголовок кабинета
-    const cabHeader = document.querySelector('.cabinet-header p');
-    if (cabHeader) cabHeader.textContent = 'Пробный период завершён — выберите тариф';
-    // Сразу скроллим к блоку оплаты
-    setTimeout(() => {
-      expiredBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 400);
+    // Показываем блок оплаты если триал истёк
+    const clientStatus = isAdminPreview ? previewStatus : urlParams.get('status');
+    if (clientStatus === 'expired') {
+      const expiredBlock = document.getElementById('expiredPayBlock');
+      if (expiredBlock) expiredBlock.style.display = 'block';
+      const cabHeader = document.querySelector('.cabinet-header p');
+      if (cabHeader) cabHeader.textContent = 'Пробный период завершён — выберите тариф';
+      setTimeout(() => {
+        expiredBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
+    }
+  } // end initCabinet
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCabinet);
+  } else {
+    initCabinet();
   }
 }
 
