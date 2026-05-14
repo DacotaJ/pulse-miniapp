@@ -1753,17 +1753,39 @@ if (window.Telegram?.WebApp) {
 // ── LANDING SCREEN ──
 // Показываем холодным пользователям (без client= в URL и без флага в sessionStorage)
 const urlParams = new URLSearchParams(window.location.search);
-const clientId = urlParams.get('client');
+
+// ── START_PARAM — Telegram передаёт параметры только через start_param ──
+// Форматы:
+//   startapp=ID                        → обычный клиент
+//   startapp=preview_pulse2026admin_expired  → превью expired
+//   startapp=preview_pulse2026admin_trial    → превью trial
+const startParam = window.Telegram?.WebApp?.initDataUnsafe?.start_param
+  || urlParams.get('startapp')  // fallback для браузерного тестирования
+  || '';
+
+const ADMIN_SECRET = 'pulse2026admin';
+
+// Парсим startParam
+let clientId = null;
+let isAdminPreview = false;
+let previewStatus = 'expired';
+
+if (startParam.startsWith('preview_')) {
+  // preview_pulse2026admin_expired или preview_pulse2026admin_trial
+  const parts = startParam.split('_');
+  // parts: ['preview', 'pulse2026admin', 'expired']
+  const secret = parts.slice(1, -1).join('_');
+  const status = parts[parts.length - 1];
+  if (secret === ADMIN_SECRET) {
+    isAdminPreview = true;
+    previewStatus = status || 'expired';
+  }
+} else if (startParam) {
+  clientId = startParam;
+}
+
 const isClient = !!clientId;
 const seenLanding = sessionStorage.getItem('pulse_seen_landing');
-
-// ── ADMIN PREVIEW ──
-// Доступ: ?preview=pulse2026admin
-// Позволяет проверить любой статус кабинета без реального триала
-const ADMIN_SECRET = 'pulse2026admin';
-const previewSecret = urlParams.get('preview');
-const previewStatus = urlParams.get('status') || 'expired'; // по умолчанию expired для проверки оплаты
-const isAdminPreview = previewSecret === ADMIN_SECRET;
 
 if (isAdminPreview) {
   // Скрываем лендинг, показываем кабинет с нужным статусом
