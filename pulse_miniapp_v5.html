@@ -1224,13 +1224,13 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
   <div class="ls-body">
     <div class="ls-tag">
       <div class="ls-tag-dot"></div>
-      Персональный AI-аналитик для владельца бизнеса
+      Бизнес работает, вы отдыхаете
     </div>
     <div class="ls-headline">
-      Каждое утро знаете<br>что происходит —<br><em>без CRM и Excel</em>
+      Pulse — это личный<br>аналитик вашего бизнеса
     </div>
     <div class="ls-sub">
-      Pulse сам забирает данные, находит просадки и пишет в Telegram. Спросите что угодно — ответит по вашим цифрам.
+      Сам собирает данные из ваших систем, находит точки роста и просадки — и каждое утро присылает готовый отчёт в Telegram. Больше не нужно открывать CRM, спрашивать менеджера или листать таблицы — Pulse делает это за вас, пока вы занимаетесь бизнесом.
     </div>
     <div class="ls-proof">
       <div class="ls-proof-item">
@@ -1793,8 +1793,29 @@ const clientId = urlParams.get('client');
 const isClient = !!clientId;
 const seenLanding = sessionStorage.getItem('pulse_seen_landing');
 
-// Если клиент с ID или уже видел экран — скрываем лендинг сразу
-if (isClient || seenLanding) {
+// ── ADMIN PREVIEW ──
+// Доступ: ?preview=pulse2026admin
+// Позволяет проверить любой статус кабинета без реального триала
+const ADMIN_SECRET = 'pulse2026admin';
+const previewSecret = urlParams.get('preview');
+const previewStatus = urlParams.get('status') || 'expired'; // по умолчанию expired для проверки оплаты
+const isAdminPreview = previewSecret === ADMIN_SECRET;
+
+if (isAdminPreview) {
+  // Скрываем лендинг, показываем кабинет с нужным статусом
+  document.getElementById('landingScreen').style.display = 'none';
+  // Показываем плашку что это превью
+  const previewBanner = document.createElement('div');
+  previewBanner.id = 'adminPreviewBanner';
+  previewBanner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:200;background:#7c3aed;color:#fff;font-size:11px;font-weight:600;text-align:center;padding:5px 12px;letter-spacing:0.03em;';
+  previewBanner.textContent = '🔐 РЕЖИМ ПРЕВЬЮ · статус: ' + previewStatus + ' · только для администратора';
+  document.body.appendChild(previewBanner);
+  // Добавляем отступ чтобы не перекрывало контент
+  document.querySelector('.header') && (document.querySelector('.header').style.marginTop = '26px');
+}
+
+// Если клиент с ID, admin preview, или уже видел экран — скрываем лендинг
+if (isClient || isAdminPreview || seenLanding) {
   document.getElementById('landingScreen').style.display = 'none';
 }
 
@@ -1818,16 +1839,20 @@ function navigateToTrial() {
   }, 450);
 }
 
-if (isClient) {
+if (isClient || isAdminPreview) {
   document.getElementById('clientBadge').classList.add('visible');
   document.getElementById('onlineBadge').style.display = 'none';
   document.getElementById('notAuth').style.display = 'none';
   document.getElementById('cabinetContent').style.display = 'block';
+
+  // В admin-preview автоматически переключаемся на кабинет
+  if (isAdminPreview) switchTab('cabinet');
+
   generateReports();
   generateChart();
 
-  // Показываем блок оплаты если триал истёк
-  const clientStatus = urlParams.get('status');
+  // Показываем блок оплаты если триал истёк (или в prevew с status=expired)
+  const clientStatus = isAdminPreview ? previewStatus : urlParams.get('status');
   if (clientStatus === 'expired') {
     const expiredBlock = document.getElementById('expiredPayBlock');
     if (expiredBlock) expiredBlock.style.display = 'block';
