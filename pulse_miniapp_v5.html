@@ -1370,6 +1370,58 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     font-weight: 600;
     margin-top: 1px;
   }
+
+  .suggest-block {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-bottom: 8px;
+  }
+  .suggest-intro {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .suggest-input {
+    width: 100%;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1.5px solid var(--border2);
+    border-radius: 10px;
+    font-size: 13px;
+    font-family: 'Geist', sans-serif;
+    color: var(--text);
+    resize: none;
+    outline: none;
+    transition: border-color 0.15s;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  .suggest-input:focus { border-color: var(--green); }
+  .suggest-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--text);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Geist', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .suggest-btn:active { opacity: 0.8; }
+  .suggest-btn:disabled { opacity: 0.5; }
+  .suggest-success {
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 0;
+  }
 </style>
 </head>
 <body>
@@ -1811,6 +1863,15 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
         </div>
       </div>
 
+      <!-- ПРЕДЛОЖИТЬ ИДЕЮ -->
+      <div class="section-label" style="margin-top:24px">💡 Есть идея?</div>
+      <div class="suggest-block" id="suggestBlock">
+        <div class="suggest-intro">Чего не хватает в вашем отчёте? Расскажите — реализуем лучшие идеи в следующем обновлении.</div>
+        <textarea id="suggestText" class="suggest-input" placeholder="Например: хочу видеть сравнение с прошлым месяцем, или добавьте виджет по источникам заявок..." rows="3"></textarea>
+        <button class="suggest-btn" onclick="sendSuggestion()">Отправить идею →</button>
+        <div id="suggestSuccess" style="display:none" class="suggest-success">✅ Спасибо! Мы получили вашу идею и рассмотрим её.</div>
+      </div>
+
       <!-- EXPIRED — PAYMENT BLOCK (показывается только при status=expired) -->
       <div id="expiredPayBlock" style="display:none;margin-top:8px">
         <div class="expired-banner">
@@ -2030,6 +2091,34 @@ if (isClient || isAdminPreview) {
   } else {
     initCabinet();
   }
+}
+
+
+// ── SUGGEST FEATURE ──
+async function sendSuggestion() {
+  const text = document.getElementById('suggestText').value.trim();
+  if (!text) { document.getElementById('suggestText').focus(); return; }
+
+  const btn = document.querySelector('.suggest-btn');
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+
+  const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
+  const username = tgUser ? ('@' + (tgUser.username || tgUser.first_name || 'клиент')) : '@клиент';
+
+  try {
+    await fetch('https://pulse-bot-production-f6d3.up.railway.app/suggest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, username })
+    });
+  } catch(e) { console.log('Suggest error:', e); }
+
+  // Показываем успех в любом случае
+  document.getElementById('suggestText').style.display = 'none';
+  btn.style.display = 'none';
+  document.getElementById('suggestSuccess').style.display = 'block';
+  ymGoal('suggest_sent');
 }
 
 // ── EXPIRED PAYMENT ──
