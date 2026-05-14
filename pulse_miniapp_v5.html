@@ -894,32 +894,12 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     pointer-events: none;
   }
 
-  .ls-top {
-    padding: 18px 20px 0;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-  .ls-logo-dot {
-    width: 8px; height: 8px;
-    background: var(--green);
-    border-radius: 50%;
-    animation: blink 2.5s infinite;
-  }
-  .ls-logo-name {
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--text);
-  }
-  .ls-logo-name span { color: var(--green); }
-
   .ls-body {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 20px 12px;
+    padding: 28px 20px 16px;
   }
 
   .ls-tag {
@@ -974,9 +954,9 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    font-size: 13.5px;
-    color: var(--text);
-    line-height: 1.45;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.5;
   }
   .ls-proof-icon {
     font-size: 15px;
@@ -987,7 +967,8 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
   .ls-cta {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 14px;
+    margin-top: 4px;
   }
   .ls-btn-primary {
     width: 100%;
@@ -1002,45 +983,36 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     cursor: pointer;
     letter-spacing: -0.2px;
     transition: opacity 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
   }
   .ls-btn-primary:active { opacity: 0.85; }
-
-  .ls-btn-secondary {
-    width: 100%;
-    padding: 14px;
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font-size: 14px;
+  .ls-btn-sub {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.65;
+    letter-spacing: 0;
+  }
+  .ls-link-secondary {
+    display: block;
+    text-align: center;
+    font-size: 13px;
     font-weight: 500;
-    font-family: 'Geist', sans-serif;
+    color: var(--text2);
     cursor: pointer;
-    transition: opacity 0.15s;
+    padding: 4px;
   }
-  .ls-btn-secondary:active { opacity: 0.75; }
-
-  .ls-free-badge {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #f0fdf4;
-    border: 1.5px solid var(--green-border);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-    margin-bottom: 18px;
-  }
-  .ls-free-left { display: flex; flex-direction: column; gap: 2px; }
-  .ls-free-title { font-size: 13px; font-weight: 700; color: var(--green); }
-  .ls-free-sub { font-size: 11.5px; color: #166534; opacity: 0.8; }
-  .ls-free-icon { font-size: 22px; }
+  .ls-link-secondary:active { color: var(--text); }
 
   .ls-footer-note {
     text-align: center;
     font-size: 11px;
     color: var(--text3);
-    margin-top: 12px;
+    margin-top: 16px;
     line-height: 1.5;
+    letter-spacing: 0.01em;
   }
 
   /* ── GREETING HERO ── */
@@ -1217,10 +1189,6 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
 
 <!-- LANDING SCREEN — для холодного трафика из рекламы -->
 <div id="landingScreen">
-  <div class="ls-top">
-    <div class="ls-logo-dot"></div>
-    <div class="ls-logo-name">Pulse<span>.</span></div>
-  </div>
   <div class="ls-body">
     <div class="ls-tag">
       <div class="ls-tag-dot"></div>
@@ -1230,34 +1198,30 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
       Pulse — это личный<br>аналитик вашего бизнеса
     </div>
     <div class="ls-sub">
-      Сам собирает данные из ваших систем, находит точки роста и просадки — и каждое утро присылает готовый отчёт в Telegram. Больше не нужно открывать CRM, спрашивать менеджера или листать таблицы — Pulse делает это за вас, пока вы занимаетесь бизнесом.
+      Следит за бизнесом 24/7 — каждое утро присылает готовый отчёт в Telegram.
     </div>
     <div class="ls-proof">
       <div class="ls-proof-item">
         <span class="ls-proof-icon">📊</span>
-        <span><strong>Отчёт в 09:00 каждый день.</strong> Продажи, заявки, аномалии — сами приходят к вам, не вы к ним</span>
+        <span>Отчёт в 09:00 — продажи, заявки и аномалии сами приходят к вам</span>
       </div>
       <div class="ls-proof-item">
         <span class="ls-proof-icon">🔔</span>
-        <span><strong>Алерты с суммой потерь в рублях.</strong> Узнаёте о проблеме сразу — не в конце месяца</span>
+        <span>Алерты с суммой потерь в рублях — узнаёте о проблеме сразу</span>
       </div>
       <div class="ls-proof-item">
         <span class="ls-proof-icon">💬</span>
-        <span><strong>«Почему упала конверсия?»</strong> — AI отвечает по вашим данным за 10 секунд</span>
+        <span>Задайте вопрос по своим данным — AI ответит за 10 секунд</span>
       </div>
-    </div>
-    <div class="ls-free-badge">
-      <div class="ls-free-left">
-        <div class="ls-free-title">Бесплатный старт</div>
-        <div class="ls-free-sub">7 дней · настройка 0 ₽ · делаем сами за 1–3 дня</div>
-      </div>
-      <div class="ls-free-icon">🎁</div>
     </div>
     <div class="ls-cta">
-      <button class="ls-btn-primary" onclick="navigateToTrial()">Попробовать бесплатно →</button>
-      <button class="ls-btn-secondary" onclick="dismissLanding('consult')">Узнать как это работает</button>
+      <button class="ls-btn-primary" onclick="navigateToTrial()">
+        Попробовать бесплатно →
+        <span class="ls-btn-sub">7 дней · настройка 0 ₽ · без карты</span>
+      </button>
+      <a class="ls-link-secondary" onclick="dismissLanding('consult')">Узнать как это работает</a>
     </div>
-    <div class="ls-footer-note">Без карты · amoCRM, Битрикс24, Sheets, банки · Ответим за 24 часа</div>
+    <div class="ls-footer-note">amoCRM · Битрикс24 · Google Sheets · банки</div>
   </div>
 </div>
 
