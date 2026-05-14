@@ -1183,6 +1183,193 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     transition: background 0.15s;
   }
   .contact-btn:active { background: var(--surface); }
+
+  /* ── REPORT DETAIL ── */
+  .report-hint {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 6px;
+    text-align: right;
+  }
+  .detail-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .detail-metric {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+  }
+  .dm-val { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: var(--text); }
+  .dm-val.red { color: #e53e3e; }
+  .dm-label { font-size: 11px; color: var(--text3); margin: 2px 0; }
+  .dm-vs { font-size: 11px; font-weight: 600; color: var(--text2); }
+  .dm-vs.red { color: #e53e3e; }
+
+  .detail-ai-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 20px;
+  }
+  .detail-ai-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text2);
+  }
+  .detail-ai-text {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .detail-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 20px 0 10px;
+  }
+
+  /* Менеджеры */
+  .mgr-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
+  .mgr-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .mgr-name { font-size: 14px; font-weight: 600; color: var(--text); min-width: 52px; }
+  .mgr-stats { display: flex; align-items: center; gap: 8px; }
+  .mgr-stat { font-size: 12px; color: var(--text2); }
+  .mgr-conv { font-size: 13px; font-weight: 700; padding: 2px 7px; border-radius: 6px; }
+  .mgr-conv.good { background: #f0fdf4; color: var(--green); }
+  .mgr-conv.ok { background: #fef9c3; color: #854d0e; }
+  .mgr-conv.bad { background: #fff1f2; color: #e53e3e; }
+  .mgr-trend { font-size: 14px; font-weight: 700; }
+  .mgr-trend.up { color: var(--green); }
+  .mgr-trend.down { color: #e53e3e; }
+  .mgr-trend.ok { color: var(--text3); }
+
+  /* Кассовый разрыв */
+  .cashflow-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .cash-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--text2); }
+  .cash-row.total { border-top: 1px solid var(--border); padding-top: 8px; font-weight: 700; color: var(--text); }
+  .cash-val { font-weight: 700; font-size: 14px; }
+  .cash-val.green { color: var(--green); }
+  .cash-val.red { color: #e53e3e; }
+  .cash-alert {
+    background: #fff1f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #e53e3e;
+    font-weight: 600;
+  }
+
+  /* Прогноз */
+  .forecast-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .fc-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--text2); }
+  .fc-val { font-weight: 700; color: var(--text); }
+  .fc-val.red { color: #e53e3e; }
+  .fc-val.green { color: var(--green); }
+
+  /* ── TARIFF TABLE ── */
+  .tariff-table-wrap {
+    overflow-x: auto;
+    margin: 0 -4px;
+    padding: 0 4px;
+  }
+  .tariff-table {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .tt-row {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .tt-row:last-child { border-bottom: none; }
+  .tt-row.tt-head {
+    background: var(--surface);
+  }
+  .tt-feature {
+    padding: 9px 10px;
+    color: var(--text2);
+    font-size: 11.5px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--border);
+  }
+  .tt-col {
+    padding: 9px 6px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--text2);
+    border-right: 1px solid var(--border);
+  }
+  .tt-col:last-child { border-right: none; }
+  .tt-col.tt-muted { font-size: 12px; color: var(--text3); font-weight: 600; }
+  .tt-col.tt-business { background: #f0fdf4; }
+  .tt-head .tt-col {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    padding: 10px 6px;
+  }
+  .tt-head .tt-business { background: #f0fdf4; color: var(--green); }
+  .tt-price {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text2);
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+  .tt-popular {
+    font-size: 9px;
+    color: var(--green);
+    font-weight: 600;
+    margin-top: 1px;
+  }
 </style>
 </head>
 <body>
@@ -1329,55 +1516,32 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <svg id="tariffToggleArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div id="tariffCollapse" style="display:none"><div class="tariff-options" id="tariffOptions">
-          <div class="tariff-opt selected" onclick="selectTariff(this, 'start')">
-            <div>
-              <div class="t-name">START</div>
-              <div class="t-desc t-desc-full">
-                Вы просыпаетесь — и уже знаете всё о вчерашнем дне. Заявки, продажи, выручка и главное: <strong>сколько денег потеряно на неотвеченных заявках</strong> — в рублях, не в процентах. Большинство клиентов окупают тариф за первую же неделю — просто находят деньги, которые уходили мимо.
-                <div class="t-tags">
-                  <span>📊 Отчёт каждое утро</span>
-                  <span>🔔 Алерт при просадке</span>
-                  <span>🔌 CRM или таблица</span>
-                  <span>⚡ Запуск за 1–3 дня</span>
-                  <span>🛠 Мы настраиваем сами</span>
-                </div>
+          <!-- ТАБЛИЦА ТАРИФОВ -->
+          <div class="tariff-table-wrap">
+            <div class="tariff-table">
+              <!-- Заголовки -->
+              <div class="tt-row tt-head">
+                <div class="tt-feature"></div>
+                <div class="tt-col tt-start">START<div class="tt-price">7 000 ₽</div></div>
+                <div class="tt-col tt-business">BUSINESS<div class="tt-price">15 000 ₽</div><div class="tt-popular">● хит</div></div>
+                <div class="tt-col tt-pro">PRO<div class="tt-price">25 000 ₽</div></div>
               </div>
+              <!-- Строки -->
+              <div class="tt-row"><div class="tt-feature">Утренний отчёт</div><div class="tt-col">✅</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Сравнение с нормой</div><div class="tt-col">✅</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Прогноз на завтра</div><div class="tt-col">✅</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Алерты</div><div class="tt-col tt-muted">до 2</div><div class="tt-col tt-muted">до 5</div><div class="tt-col tt-muted">∞</div></div>
+              <div class="tt-row"><div class="tt-feature">Источников данных</div><div class="tt-col tt-muted">1</div><div class="tt-col tt-muted">до 3</div><div class="tt-col tt-muted">∞</div></div>
+              <div class="tt-row"><div class="tt-feature">Причины аномалий</div><div class="tt-col">—</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Рейтинг менеджеров</div><div class="tt-col">—</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">AI-вопросы по данным</div><div class="tt-col">—</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Кассовый разрыв</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Долгосрочная память</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">CEO-дайджест в пн</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">AI приходит сам</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">PDF для инвесторов</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Еженедельный разбор</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
             </div>
-            <div class="t-price">7 000 ₽/мес</div>
-          </div>
-          <div class="tariff-opt" onclick="selectTariff(this, 'business')">
-            <div>
-              <div class="t-name">BUSINESS <span style="font-size:10px;color:var(--green);font-weight:500">● популярный</span></div>
-              <div class="t-desc t-desc-full">
-                Полная картина бизнеса каждое утро: продажи, расходы, задачи команды — в одном сообщении. Плюс <strong>AI-аналитик, который помнит ваши данные</strong>: спросите «почему упала конверсия в пятницу?» — получите ответ по вашим цифрам, не по шаблону. Найдите скрытые потери в первый месяц.
-                <div class="t-tags">
-                  <span>📊 Продажи + расходы + задачи</span>
-                  <span>🔔 5 умных алертов</span>
-                  <span>🔌 До 3 источников данных</span>
-                  <span>💬 AI отвечает на ваши вопросы</span>
-                  <span>📁 История всех отчётов</span>
-                  <span>🚀 Приоритетный запуск</span>
-                </div>
-              </div>
-            </div>
-            <div class="t-price">15 000 ₽/мес</div>
-          </div>
-          <div class="tariff-opt" onclick="selectTariff(this, 'pro')">
-            <div>
-              <div class="t-name">PRO</div>
-              <div class="t-desc t-desc-full">
-                AI не ждёт вопросов — <strong>сам приходит с выводами</strong>: «Конверсия упала во вторник — причина в рекламе, вот что поменять». Это не просто отчёт, это советник который работает 24/7 и никогда не устаёт. Несколько направлений, филиалов, команд — всё в одном месте. PDF для партнёров и инвесторов. Еженедельный разбор с командой Pulse лично.
-                <div class="t-tags">
-                  <span>🤖 AI сам находит проблемы</span>
-                  <span>📈 Конкретные рекомендации</span>
-                  <span>🏢 Несколько направлений</span>
-                  <span>📄 PDF для инвесторов</span>
-                  <span>📞 Созвон с командой каждую неделю</span>
-                  <span>♾️ Неограниченные источники</span>
-                </div>
-              </div>
-            </div>
-            <div class="t-price">25 000 ₽/мес</div>
           </div>
         </div><!-- /tariff-options -->
         </div><!-- /tariff-collapse -->
@@ -1662,21 +1826,21 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <div class="tariff-opt selected" onclick="selectExpiredTariff(this,'start')">
             <div>
               <div class="t-name">START</div>
-              <div class="t-desc">Отчёт каждое утро · 1 источник · 2 алерта</div>
+              <div class="t-desc">Отчёт · сравнение с нормой · прогноз · 1 источник · 2 алерта</div>
             </div>
             <div class="t-price">7 000 ₽/мес</div>
           </div>
           <div class="tariff-opt" onclick="selectExpiredTariff(this,'business')">
             <div>
-              <div class="t-name">BUSINESS <span style="font-size:10px;color:var(--green);font-weight:500">● популярный</span></div>
-              <div class="t-desc">Полная картина + AI-вопросы · до 3 источников · 5 алертов</div>
+              <div class="t-name">BUSINESS <span style="font-size:10px;color:var(--green);font-weight:500">● хит</span></div>
+              <div class="t-desc">+ причины аномалий · рейтинг менеджеров · AI-вопросы · до 3 источников</div>
             </div>
             <div class="t-price">15 000 ₽/мес</div>
           </div>
           <div class="tariff-opt" onclick="selectExpiredTariff(this,'pro')">
             <div>
               <div class="t-name">PRO</div>
-              <div class="t-desc">AI сам находит проблемы · неограниченно · PDF · разбор</div>
+              <div class="t-desc">+ кассовый разрыв · CEO-дайджест · AI приходит сам · PDF · разбор</div>
             </div>
             <div class="t-price">25 000 ₽/мес</div>
           </div>
@@ -1722,6 +1886,15 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
         </div>
       </div>
     </div>
+
+  <!-- REPORT DETAIL SCREEN -->
+  <div class="chat-container" id="reportDetailScreen" style="display:none">
+    <div class="chat-back" onclick="closeReportDetail()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span>История отчётов</span>
+    </div>
+    <div class="scroll" id="reportDetailContent" style="padding:16px 16px 32px"></div>
+  </div>
 
   </div>
 
@@ -2197,13 +2370,13 @@ const CONSULT_PROMPT = `Ты — AI-консультант продукта Puls
 ТАРИФЫ — рассказывай с максимальной ценностью, не сухими фактами:
 
 START — 7 000 ₽/мес:
-Вы просыпаетесь — и уже знаете всё о вчерашнем дне. Заявки, продажи, выручка и главное: сколько денег потеряно на неотвеченных заявках — в рублях, не в процентах. Один источник данных (CRM или таблица), до 2 алертов, запуск за 1–3 дня, мы всё настраиваем сами.
+Вы просыпаетесь — и уже знаете всё о вчерашнем дне. Утренний отчёт, сравнение с вашей нормой, прогноз на завтра — и сколько денег потеряно на неотвеченных заявках в рублях. Один источник данных, до 2 алертов, запуск за 1–3 дня. Большинство клиентов окупают тариф за первую неделю.
 
 BUSINESS — 15 000 ₽/мес (самый популярный):
-Полная картина бизнеса каждое утро: продажи, расходы, задачи команды — в одном сообщении. Плюс AI-аналитик, который помнит ваши данные: спросите «почему упала конверсия в пятницу?» — получите ответ по вашим цифрам, не по шаблону. До 3 источников данных, история всех отчётов, 5 умных алертов.
+Всё что в START плюс: причины аномалий с именами менеджеров, рейтинг команды по конверсии, AI-аналитик отвечает на вопросы по вашим данным. Спросите «почему упала конверсия в пятницу?» — получите ответ по вашим цифрам. До 3 источников, 5 алертов.
 
 PRO — 25 000 ₽/мес:
-AI не ждёт вопросов — сам приходит с выводами: «Конверсия упала во вторник — причина в рекламе, вот что поменять». Это не просто отчёт, это советник который работает 24/7 и никогда не устаёт. Несколько направлений, филиалов, команд — всё в одном месте. PDF для партнёров и инвесторов. Еженедельный живой разбор с командой Pulse.
+Всё что в BUSINESS плюс: контроль кассового разрыва, долгосрочная память (сравнение месяц к месяцу с причинами), CEO-дайджест каждый понедельник, AI приходит сам не дожидаясь вопроса, PDF для инвесторов, еженедельный живой разбор с командой Pulse. Неограниченные источники и направления.
 
 ИНТЕГРАЦИИ (все поддерживаются): amoCRM, Bitrix24, Google Sheets, Excel, Тинькофф, Сбер, любой банк через выписку, Яндекс.Метрика, Директ, Notion, Trello, ClickUp, любой REST/Webhook, 1С. Клиенту ничего не нужно делать — всё настраивает команда Pulse за 1–3 дня.
 
@@ -2450,19 +2623,208 @@ async function sendCabinetMessage() {
 }
 
 // ── DEMO DATA ──
-function generateReports() {
-  const reports = [
-    { date: '01.05.2026', leads: 18, sales: 6, revenue: '180К', unprocessed: 3, status: 'ok' },
-    { date: '30.04.2026', leads: 22, sales: 8, revenue: '240К', unprocessed: 2, status: 'ok' },
-    { date: '29.04.2026', leads: 15, sales: 4, revenue: '120К', unprocessed: 7, status: 'warn' },
-    { date: '28.04.2026', leads: 25, sales: 9, revenue: '270К', unprocessed: 1, status: 'ok' },
-    { date: '27.04.2026', leads: 19, sales: 5, revenue: '150К', unprocessed: 5, status: 'warn' },
-  ];
+const REPORT_DATA = [
+  {
+    date: '01.05.2026', leads: 18, sales: 6, revenue: '180К', revenueNum: 180000,
+    unprocessed: 3, status: 'ok', conversion: 33, avgCheck: 30000,
+    norm: { leads: 20, conversion: 34, revenue: 200000 },
+    managers: [
+      { name: 'Анна', leads: 8, sales: 4, conversion: 50, trend: 'up' },
+      { name: 'Игорь', leads: 6, sales: 1, conversion: 17, trend: 'down' },
+      { name: 'Мария', leads: 4, sales: 1, conversion: 25, trend: 'ok' },
+    ],
+    ai_insight: 'Игорь обработал 6 заявок, закрыл только 1 — конверсия 17% против нормы 34%. Три его заявки пришли после 17:00 и остались без ответа до утра. Рекомендация: поставьте дежурного на вечерний слот или настройте автоответ.',
+    forecast: { leads: '20–24', revenue: '~210К', risk: 'средний' },
+    cashflow: { income: 180000, expenses: 95000, balance: 85000, alert: false },
+  },
+  {
+    date: '30.04.2026', leads: 22, sales: 8, revenue: '240К', revenueNum: 240000,
+    unprocessed: 2, status: 'ok', conversion: 36, avgCheck: 30000,
+    norm: { leads: 20, conversion: 34, revenue: 200000 },
+    managers: [
+      { name: 'Анна', leads: 10, sales: 5, conversion: 50, trend: 'up' },
+      { name: 'Игорь', leads: 8, sales: 2, conversion: 25, trend: 'ok' },
+      { name: 'Мария', leads: 4, sales: 1, conversion: 25, trend: 'ok' },
+    ],
+    ai_insight: 'Лучший день за неделю — конверсия 36%, выручка выше нормы на 20%. Анна показывает стабильно высокий результат: 50% конверсия второй день подряд. Разберите её скрипт с командой.',
+    forecast: { leads: '18–22', revenue: '~195К', risk: 'низкий' },
+    cashflow: { income: 240000, expenses: 95000, balance: 145000, alert: false },
+  },
+  {
+    date: '29.04.2026', leads: 15, sales: 4, revenue: '120К', revenueNum: 120000,
+    unprocessed: 7, status: 'warn', conversion: 27, avgCheck: 30000,
+    norm: { leads: 20, conversion: 34, revenue: 200000 },
+    managers: [
+      { name: 'Анна', leads: 5, sales: 2, conversion: 40, trend: 'ok' },
+      { name: 'Игорь', leads: 7, sales: 1, conversion: 14, trend: 'down' },
+      { name: 'Мария', leads: 3, sales: 1, conversion: 33, trend: 'ok' },
+    ],
+    ai_insight: '7 заявок без ответа — рекорд за неделю. Игорь не работал с 12:00 до 16:00, именно в это время пришли 5 необработанных заявок. При вашем чеке 30К это 150К потенциальных потерь за один день.',
+    forecast: { leads: '19–23', revenue: '~185К', risk: 'высокий' },
+    cashflow: { income: 120000, expenses: 95000, balance: 25000, alert: true },
+  },
+  {
+    date: '28.04.2026', leads: 25, sales: 9, revenue: '270К', revenueNum: 270000,
+    unprocessed: 1, status: 'ok', conversion: 36, avgCheck: 30000,
+    norm: { leads: 20, conversion: 34, revenue: 200000 },
+    managers: [
+      { name: 'Анна', leads: 11, sales: 5, conversion: 45, trend: 'up' },
+      { name: 'Игорь', leads: 9, sales: 3, conversion: 33, trend: 'up' },
+      { name: 'Мария', leads: 5, sales: 1, conversion: 20, trend: 'down' },
+    ],
+    ai_insight: 'Рекордный день месяца. Понедельник стабильно ваш лучший день — +32% к среднему. Игорь наконец показал нормальный результат. Обратите внимание на Марию — конверсия упала до 20%.',
+    forecast: { leads: '21–25', revenue: '~215К', risk: 'низкий' },
+    cashflow: { income: 270000, expenses: 95000, balance: 175000, alert: false },
+  },
+  {
+    date: '27.04.2026', leads: 19, sales: 5, revenue: '150К', revenueNum: 150000,
+    unprocessed: 5, status: 'warn', conversion: 26, avgCheck: 30000,
+    norm: { leads: 20, conversion: 34, revenue: 200000 },
+    managers: [
+      { name: 'Анна', leads: 8, sales: 3, conversion: 38, trend: 'ok' },
+      { name: 'Игорь', leads: 7, sales: 1, conversion: 14, trend: 'down' },
+      { name: 'Мария', leads: 4, sales: 1, conversion: 25, trend: 'ok' },
+    ],
+    ai_insight: 'Пятница — традиционно слабый день, но конверсия упала сильнее обычного. Игорь снова аутсайдер: 14% при норме 34%. Пять заявок без ответа пришли в период 16:00–18:00.',
+    forecast: { leads: '22–26', revenue: '~200К', risk: 'средний' },
+    cashflow: { income: 150000, expenses: 95000, balance: 55000, alert: false },
+  },
+];
 
+
+// ── REPORT DETAIL ──
+function openReportDetail(idx) {
+  const r = REPORT_DATA[idx];
+  const screen = document.getElementById('reportDetailScreen');
+  const cont = document.getElementById('reportDetailContent');
+
+  const convDiff = r.conversion - r.norm.conversion;
+  const convColor = convDiff >= 0 ? 'var(--green)' : '#e53e3e';
+  const convSign = convDiff >= 0 ? '+' : '';
+  const revDiff = Math.round((r.revenueNum - r.norm.revenue) / r.norm.revenue * 100);
+  const revColor = revDiff >= 0 ? 'var(--green)' : '#e53e3e';
+  const revSign = revDiff >= 0 ? '+' : '';
+
+  const managersHTML = r.managers.map(m => `
+    <div class="mgr-row">
+      <div class="mgr-name">${m.name}</div>
+      <div class="mgr-stats">
+        <span class="mgr-stat">${m.leads} заявок</span>
+        <span class="mgr-stat">${m.sales} продаж</span>
+        <span class="mgr-conv ${m.conversion >= 34 ? 'good' : m.conversion >= 25 ? 'ok' : 'bad'}">${m.conversion}%</span>
+        <span class="mgr-trend ${m.trend}">${m.trend === 'up' ? '↑' : m.trend === 'down' ? '↓' : '→'}</span>
+      </div>
+    </div>`).join('');
+
+  const cashAlert = r.cashflow.alert
+    ? `<div class="cash-alert">⚠ Низкий остаток — риск кассового разрыва</div>` : '';
+
+  cont.innerHTML = `
+    <div class="rd-label">Отчёт · ${r.date}</div>
+
+    <!-- КЛЮЧЕВЫЕ МЕТРИКИ -->
+    <div class="detail-metrics">
+      <div class="detail-metric">
+        <div class="dm-val">${r.leads}</div>
+        <div class="dm-label">Заявок</div>
+        <div class="dm-vs">норма ${r.norm.leads}</div>
+      </div>
+      <div class="detail-metric">
+        <div class="dm-val" style="color:${convColor}">${r.conversion}%</div>
+        <div class="dm-label">Конверсия</div>
+        <div class="dm-vs" style="color:${convColor}">${convSign}${convDiff}% к норме</div>
+      </div>
+      <div class="detail-metric">
+        <div class="dm-val" style="color:${revColor}">${r.revenue}</div>
+        <div class="dm-label">Выручка</div>
+        <div class="dm-vs" style="color:${revColor}">${revSign}${revDiff}% к норме</div>
+      </div>
+      <div class="detail-metric">
+        <div class="dm-val ${r.unprocessed > 4 ? 'red' : ''}">${r.unprocessed}</div>
+        <div class="dm-label">Без ответа</div>
+        <div class="dm-vs ${r.unprocessed > 4 ? 'red' : ''}">
+          ${r.unprocessed > 4 ? '⚠ выше нормы' : '✓ в норме'}
+        </div>
+      </div>
+    </div>
+
+    <!-- AI ВЫВОД -->
+    <div class="detail-ai-block">
+      <div class="detail-ai-header">
+        <div class="rd-avatar small">AI</div>
+        <span>Анализ Pulse</span>
+      </div>
+      <div class="detail-ai-text">${r.ai_insight}</div>
+    </div>
+
+    <!-- РЕЙТИНГ МЕНЕДЖЕРОВ -->
+    <div class="detail-section-title">👥 Рейтинг менеджеров</div>
+    <div class="mgr-list">${managersHTML}</div>
+
+    <!-- КАССОВЫЙ РАЗРЫВ -->
+    <div class="detail-section-title">💰 Кассовый разрыв</div>
+    <div class="cashflow-block">
+      <div class="cash-row">
+        <span>Поступления</span>
+        <span class="cash-val green">+${(r.cashflow.income/1000).toFixed(0)}К ₽</span>
+      </div>
+      <div class="cash-row">
+        <span>Расходы</span>
+        <span class="cash-val red">−${(r.cashflow.expenses/1000).toFixed(0)}К ₽</span>
+      </div>
+      <div class="cash-row total">
+        <span>Остаток дня</span>
+        <span class="cash-val ${r.cashflow.balance < 50000 ? 'red' : 'green'}">${(r.cashflow.balance/1000).toFixed(0)}К ₽</span>
+      </div>
+      ${cashAlert}
+    </div>
+
+    <!-- ПРОГНОЗ -->
+    <div class="detail-section-title">⚡ Прогноз на следующий день</div>
+    <div class="forecast-block">
+      <div class="fc-row"><span>Заявок</span><span class="fc-val">${r.forecast.leads}</span></div>
+      <div class="fc-row"><span>Выручка</span><span class="fc-val">${r.forecast.revenue}</span></div>
+      <div class="fc-row"><span>Риск</span>
+        <span class="fc-val ${r.forecast.risk === 'высокий' ? 'red' : r.forecast.risk === 'низкий' ? 'green' : ''}">${r.forecast.risk}</span>
+      </div>
+    </div>
+
+    <!-- AI ВОПРОСЫ -->
+    <div class="detail-section-title">💬 Спросить AI про этот день</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+      <div class="quick-item" onclick="closeReportDetail(); startCabinetChat('Почему конверсия была ${r.conversion}% в этот день? Что можно улучшить?')">
+        <span>Почему такая конверсия?</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+      <div class="quick-item" onclick="closeReportDetail(); startCabinetChat('Как улучшить работу менеджеров по данным за ${r.date}?')">
+        <span>Как улучшить работу команды?</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+      <div class="quick-item" onclick="closeReportDetail(); startCabinetChat('Дай прогноз на ближайшую неделю на основе данных за ${r.date}.')">
+        <span>Прогноз на неделю</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+  `;
+
+  screen.style.display = 'flex';
+  screen.style.flexDirection = 'column';
+  cont.scrollTop = 0;
+}
+
+function closeReportDetail() {
+  document.getElementById('reportDetailScreen').style.display = 'none';
+}
+
+function generateReports() {
   const list = document.getElementById('reportList');
-  reports.forEach(r => {
+  REPORT_DATA.forEach((r, idx) => {
     const div = document.createElement('div');
     div.className = 'report-item';
+    div.onclick = () => openReportDetail(idx);
+    const convDiff = r.conversion - r.norm.conversion;
+    const convColor = convDiff >= 0 ? 'green' : 'red';
+    const convSign = convDiff >= 0 ? '+' : '';
     div.innerHTML = `
       <div class="report-top">
         <span class="report-date">${r.date}</span>
@@ -2473,7 +2835,8 @@ function generateReports() {
         <div class="metric"><span class="m-val">${r.sales}</span><span class="m-label">продаж</span></div>
         <div class="metric"><span class="m-val">${r.revenue}</span><span class="m-label">выручка</span></div>
         <div class="metric ${r.unprocessed > 4 ? 'alert' : ''}"><span class="m-val">${r.unprocessed}</span><span class="m-label">без ответа</span></div>
-      </div>`;
+      </div>
+      <div class="report-hint">Нажмите для детального анализа →</div>`;
     list.appendChild(div);
   });
 }
