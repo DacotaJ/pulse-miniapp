@@ -2605,6 +2605,20 @@ CRM и продажи: amoCRM, Битрикс24, RetailCRM, МойСклад, Go
 // ── ТРЕКИНГ СОБЫТИЙ ──────────────────────────────────────────
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzu1dR9jtk3Aq7aukhGIQWe4jcSPMiOf5YGmBnTw1ZUbzKQmnboWQiZeLERbzNIu2y-/exec';
 
+function getSessionId() {
+  // Берём client_id из URL (если пришёл через Telegram) или генерируем анонимный
+  const params = new URLSearchParams(window.location.search);
+  const startapp = params.get('startapp') || '';
+  if (startapp && !startapp.startsWith('preview_')) return startapp;
+  // Анонимный session — храним в sessionStorage чтобы склеить события одного визита
+  let sid = sessionStorage.getItem('pulse_sid');
+  if (!sid) {
+    sid = 'anon_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
+    sessionStorage.setItem('pulse_sid', sid);
+  }
+  return sid;
+}
+
 function trackEvent(event, screen, value) {
   try {
     const params = new URLSearchParams(window.location.search);
@@ -2617,6 +2631,7 @@ function trackEvent(event, screen, value) {
         event: event,
         screen: screen || 'landing',
         value: value || '',
+        user_id: getSessionId(),
         utm_source: params.get('utm_source') || '',
         utm_medium: params.get('utm_medium') || '',
         utm_campaign: params.get('utm_campaign') || '',
