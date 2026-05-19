@@ -1551,17 +1551,17 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <div class="t-title">Без CRM и Excel</div>
           <div class="t-sub">Как Pulse заменяет утро</div>
         </div>
-        <div class="topic-card" onclick="showTariffs()">
+        <div class="topic-card" onclick="trackEvent('клик_карточка','landing','тарифы'); showTariffs()">
           <span class="t-icon">💳</span>
           <div class="t-title">Сколько стоит</div>
           <div class="t-sub">Тарифы от 7 000 ₽</div>
         </div>
-        <div class="topic-card" onclick="startConsultChat('У меня офлайн-бизнес: кофейня, магазин или салон. Как Pulse поможет мне видеть выручку, средний чек и что тянет вниз?', 'offline')">
+        <div class="topic-card" onclick="trackEvent('клик_карточка','landing','офлайн'); startConsultChat('У меня офлайн-бизнес: кофейня, магазин или салон. Как Pulse поможет мне видеть выручку, средний чек и что тянет вниз?', 'offline')">
           <span class="t-icon">☕</span>
           <div class="t-title">Офлайн-бизнес</div>
           <div class="t-sub">Кофейня, магазин, салон</div>
         </div>
-        <div class="topic-card" onclick="startConsultChat('У меня несколько бизнесов или направлений. Как Pulse даёт картину по всем сразу?', 'multi')">
+        <div class="topic-card" onclick="trackEvent('клик_карточка','landing','мультибизнес'); startConsultChat('У меня несколько бизнесов или направлений. Как Pulse даёт картину по всем сразу?', 'multi')">
           <span class="t-icon">🗂️</span>
           <div class="t-title">Несколько бизнесов</div>
           <div class="t-sub">Один дайджест по всем</div>
@@ -2249,6 +2249,7 @@ async function openExpiredPayment() {
 
 // ── SCROLL TO TRIAL ──
 function scrollToTrial() {
+  trackEvent('нажал_попробовать', 'landing', '');
   switchTab('consult');
   setTimeout(() => {
     const anchor = document.getElementById('trialAnchor');
@@ -2278,6 +2279,7 @@ function switchTab(tab) {
 
 // ── TARIFFS ──
 function showTariffs() {
+  trackEvent('просмотр_тарифов', 'landing', '');
   // From topic card — scroll to trial block and expand tariffs
   switchTab('consult');
   setTimeout(() => {
@@ -2416,6 +2418,7 @@ function logToSheets(data) {
 }
 
 async function startTrial() {
+  trackEvent('отправил_форму_триал', 'landing', '');
   const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
   const chat_id = tgUser ? String(tgUser.id || '') : '';
   const username = tgUser ? (tgUser.username || '') : '';
@@ -2524,6 +2527,9 @@ if (window.Telegram?.WebApp) {
   });
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  trackEvent('открыл_миниапп', 'landing', '');
+});
 document.addEventListener('DOMContentLoaded', clearAllChats);
 
 const CONSULT_PROMPT = `Ты — AI-консультант продукта Pulse. Pulse — это AI-аналитик и личный бизнес-советник для владельцев малого и среднего бизнеса. Не сервис отчётов — а советник, который работает 24/7 на данных клиента и с которым можно разговаривать.
@@ -2595,6 +2601,31 @@ CRM и продажи: amoCRM, Битрикс24, RetailCRM, МойСклад, Go
 — «Не нужно» → потери никуда не денутся за 3 месяца
 
 Когда рассказываешь про тарифы — говори живо и убедительно, с акцентом на деньги которые клиент найдёт и время которое сэкономит. Не перечисляй функции списком — объясняй ценность. Отвечай коротко и по делу. Задавай один вопрос в конце. Используй **жирный** для важного. Отвечай на русском.`;
+
+// ── ТРЕКИНГ СОБЫТИЙ ──────────────────────────────────────────
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzu1dR9jtk3Aq7aukhGIQWe4jcSPMiOf5YGmBnTw1ZUbzKQmnboWQiZeLERbzNIu2y-/exec';
+
+function trackEvent(event, screen, value) {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'event',
+        event: event,
+        screen: screen || 'landing',
+        value: value || '',
+        utm_source: params.get('utm_source') || '',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || '',
+        referrer: document.referrer || '',
+        user_agent: navigator.userAgent || ''
+      })
+    }).catch(() => {});
+  } catch(e) {}
+}
 
 function switchIntTab(btn, panel) {
   document.querySelectorAll('.int-tab').forEach(t => t.classList.remove('active'));
@@ -2718,6 +2749,7 @@ function formatText(text) {
 }
 
 async function sendMessage() {
+  trackEvent('задал_вопрос_ai', 'consultant', '');
   if (consultLoading) return;
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
