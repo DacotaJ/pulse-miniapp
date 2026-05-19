@@ -227,43 +227,6 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
   .int-icon { font-size: 16px; }
   .int-name { font-size: 13px; font-weight: 500; color: var(--text); flex: 1; }
   .int-check { font-size: 12px; color: var(--green); font-family: 'Geist Mono', monospace; }
-  .int-sub { font-size: 11px; color: var(--text3); flex: 1; margin-left: 2px; }
-  .int-name { font-size: 13px; font-weight: 500; color: var(--text); min-width: 120px; }
-
-  /* INT TABS */
-  .int-tabs {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .int-tabs::-webkit-scrollbar { display: none; }
-  .int-tab {
-    flex-shrink: 0;
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text2);
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .int-tab.active {
-    background: var(--green);
-    color: #fff;
-    border-color: var(--green);
-  }
-  .int-panel {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 24px;
-  }
-  .int-panel.active { display: flex; }
 
   /* QUICK LIST */
   .quick-list {
@@ -1052,6 +1015,218 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     letter-spacing: 0.01em;
   }
 
+  /* ── LANDING MENU (модерация Telegram Ads) ── */
+  .ls-menu {
+    margin-top: 22px;
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+  }
+  .ls-menu-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .ls-menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .ls-menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    text-align: left;
+    width: 100%;
+    font-family: 'Geist', sans-serif;
+  }
+  .ls-menu-item:active {
+    background: var(--surface2);
+    border-color: var(--border2);
+  }
+  .ls-menu-icon { font-size: 18px; }
+  .ls-menu-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.1px;
+  }
+  .ls-menu-desc {
+    font-size: 11px;
+    color: var(--text2);
+    line-height: 1.35;
+  }
+
+  /* Info-страница (вторичный экран после клика по меню) */
+  .ls-info-page {
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    z-index: 101;
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .ls-info-page.active { display: flex; }
+  .ls-info-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    background: #fff;
+    position: sticky;
+    top: 0;
+  }
+  .ls-info-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: 16px;
+    color: var(--text);
+  }
+  .ls-info-back:active { background: var(--surface2); }
+  .ls-info-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.2px;
+  }
+  .ls-info-body {
+    flex: 1;
+    padding: 20px 16px 80px;
+  }
+  .ls-info-body h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.4px;
+    margin-bottom: 12px;
+  }
+  .ls-info-body h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+  .ls-info-body p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text2);
+    margin-bottom: 12px;
+  }
+  .ls-info-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+  }
+  .ls-info-body li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text2);
+    margin-bottom: 7px;
+  }
+  .ls-info-body li::before {
+    content: '•';
+    position: absolute;
+    left: 4px;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .ls-info-cta {
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--green-light);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+  }
+  .ls-info-cta-text {
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .ls-info-cta-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--text);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Geist', sans-serif;
+    cursor: pointer;
+    letter-spacing: -0.1px;
+  }
+  .ls-info-cta-btn:active { opacity: 0.85; }
+  .ls-info-tariffs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .ls-info-tariff {
+    padding: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+  .ls-info-tariff-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+  .ls-info-tariff-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .ls-info-tariff-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+  .ls-faq-item {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ls-faq-item:last-child { border-bottom: none; }
+  .ls-faq-q {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .ls-faq-a {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.55;
+  }
+
   /* ── GREETING HERO ── */
   .greeting-tag {
     display: inline-flex;
@@ -1344,69 +1519,60 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
   .fc-val.green { color: var(--green); }
 
   /* ── TARIFF TABLE ── */
-  .tariff-table-wrap {
-    overflow-x: auto;
-    margin: 0 -4px;
-    padding: 0 4px;
-  }
-  .tariff-table {
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    font-size: 12px;
-  }
-  .tt-row {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr 1fr;
-    border-bottom: 1px solid var(--border);
-  }
+  /* ── ТАБЛИЦА ТАРИФОВ — один в один с сайтом ── */
+  .tariff-table-wrap { overflow-x: auto; margin: 0 -4px; padding: 0 4px; }
+  .tariff-table { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; font-size: 12px; }
+
+  /* Сетка строки */
+  .tt-row { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; border-bottom: 1px solid #e5e7eb; }
   .tt-row:last-child { border-bottom: none; }
-  .tt-row.tt-head {
-    background: var(--surface);
-  }
-  .tt-feature {
-    padding: 9px 10px;
-    color: var(--text2);
-    font-size: 11.5px;
-    display: flex;
-    align-items: center;
-    border-right: 1px solid var(--border);
-  }
-  .tt-col {
-    padding: 9px 6px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    color: var(--text2);
-    border-right: 1px solid var(--border);
-  }
-  .tt-col:last-child { border-right: none; }
-  .tt-col.tt-muted { font-size: 12px; color: var(--text3); font-weight: 600; }
-  .tt-col.tt-business { background: #f0fdf4; }
-  .tt-head .tt-col {
-    font-size: 12px;
+
+  /* Шапка */
+  .tt-row.tt-head { background: #fff; }
+  .tt-head .tt-col { font-size: 13px; font-weight: 700; color: #111827; padding: 14px 6px; background: #fff; }
+  .tt-head .tt-col.tt-business { background: #f0fdf4; color: #16a34a; }
+  .tt-head .tt-col.tt-start { background: #fff; }
+  .tt-head .tt-col.tt-pro { background: #fff; }
+  /* Шапочные ячейки — отдельный класс чтобы не перебивался строчными */
+  .tt-head-col { padding: 14px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #111827; border-right: 1px solid #e5e7eb; }
+  .tt-head-col:last-child { border-right: none; }
+  .tt-head-col.tt-start { background: #fff; color: #111827; }
+  .tt-head-col.tt-business { background: #f0fdf4; color: #16a34a; }
+  .tt-head-col.tt-pro { background: #fff; color: #111827; }
+
+  /* Строка-разделитель группы */
+  .tt-row.tt-group { background: #fff; }
+  .tt-group-label {
+    grid-column: 1 / -1;
+    padding: 7px 12px;
+    font-size: 10.5px;
     font-weight: 700;
-    color: var(--text);
-    padding: 10px 6px;
+    color: #374151;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
   }
-  .tt-head .tt-business { background: #f0fdf4; color: var(--green); }
-  .tt-price {
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--text2);
-    margin-top: 2px;
-    white-space: nowrap;
-  }
-  .tt-popular {
-    font-size: 9px;
-    color: var(--green);
-    font-weight: 600;
-    margin-top: 1px;
-  }
+
+  /* Название фичи (левая колонка) */
+  .tt-feature { padding: 10px 12px; color: #374151; font-size: 12px; display: flex; align-items: center; border-right: 1px solid #e5e7eb; background: #f0fdf4; }
+
+  /* Значение */
+  .tt-col { padding: 10px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 13px; color: #374151; border-right: 1px solid #e5e7eb; background: #fff; }
+  .tt-col:last-child { border-right: none; }
+
+  /* BUSINESS колонка — зелёный фон везде кроме шапки (она отдельно выше) */
+  .tt-col.tt-business { background: #fff !important; }
+  .tt-col.tt-start { background: #f0fdf4 !important; }
+  .tt-col.tt-pro { background: #f0fdf4 !important; }
+
+  /* Числа (до 2, до 5, ∞) — чёрные жирные как на сайте */
+  .tt-col.tt-muted { font-weight: 700; color: #111827 !important; font-size: 12px; }
+
+  /* Цена */
+  .tt-price { font-size: 10.5px; font-weight: 500; color: #6b7280; margin-top: 3px; white-space: nowrap; }
+
+  /* Метка популярный */
+  .tt-popular { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; color: #16a34a; font-weight: 600; margin-top: 4px; }
+  .tt-popular::before { content: ''; width: 6px; height: 6px; background: #16a34a; border-radius: 50%; display: inline-block; }
 
   .suggest-block {
     background: var(--surface);
@@ -1497,7 +1663,204 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
       </button>
       <a class="ls-link-secondary" onclick="dismissLanding('consult')">Узнать как это работает</a>
     </div>
-    <div class="ls-footer-note">iiko · amoCRM · Тинькофф · YCLIENTS · Битрикс24 · и ещё 15+</div>
+
+    <!-- Меню разделов — модерация Telegram Ads требует вариативности -->
+    <div class="ls-menu">
+      <div class="ls-menu-label">Узнать подробнее</div>
+      <div class="ls-menu-grid">
+        <button class="ls-menu-item" onclick="openInfo('about')">
+          <span class="ls-menu-icon">🏢</span>
+          <span class="ls-menu-title">О компании</span>
+          <span class="ls-menu-desc">Кто мы и что делаем</span>
+        </button>
+        <button class="ls-menu-item" onclick="openInfo('how')">
+          <span class="ls-menu-icon">⚙️</span>
+          <span class="ls-menu-title">Как работает</span>
+          <span class="ls-menu-desc">3 шага до отчёта</span>
+        </button>
+        <button class="ls-menu-item" onclick="openInfo('tariffs')">
+          <span class="ls-menu-icon">💼</span>
+          <span class="ls-menu-title">Тарифы</span>
+          <span class="ls-menu-desc">3 варианта подписки</span>
+        </button>
+        <button class="ls-menu-item" onclick="openInfo('faq')">
+          <span class="ls-menu-icon">❓</span>
+          <span class="ls-menu-title">FAQ</span>
+          <span class="ls-menu-desc">Частые вопросы</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="ls-footer-note">amoCRM · Битрикс24 · Google Sheets · банки</div>
+  </div>
+</div>
+
+<!-- Инфо-страницы (открываются поверх лендинга при клике на меню) -->
+<div class="ls-info-page" id="infoAbout">
+  <div class="ls-info-header">
+    <button class="ls-info-back" onclick="closeInfo()" aria-label="Назад">←</button>
+    <div class="ls-info-title">О компании</div>
+  </div>
+  <div class="ls-info-body">
+    <h2>Pulse — AI-аналитик для бизнеса</h2>
+    <p>Pulse — это сервис деловой аналитики для владельцев малого и среднего бизнеса. Мы помогаем собственникам видеть, что происходит в их бизнесе, без сложных дашбордов и BI-систем.</p>
+
+    <h3>Что мы делаем</h3>
+    <p>Каждое утро в 09:00 Pulse присылает в Telegram сводку по ключевым показателям: продажи, заявки, расходы, аномалии. Если что-то идёт не так — приходит алерт с суммой потерь в рублях.</p>
+
+    <h3>Для кого</h3>
+    <ul>
+      <li>Владельцы малого и среднего бизнеса</li>
+      <li>Компании с командой от 3 до 50 человек</li>
+      <li>Сферы: услуги, e-commerce, агентства, общепит, производство</li>
+    </ul>
+
+    <h3>С какими источниками работаем</h3>
+    <ul>
+      <li>amoCRM, Битрикс24, другие CRM</li>
+      <li>Google Sheets, Excel, 1С</li>
+      <li>Банковские выписки (Тинькофф, Сбер и другие)</li>
+      <li>Яндекс.Метрика, Яндекс.Директ</li>
+    </ul>
+
+    <div class="ls-info-cta">
+      <div class="ls-info-cta-text">Подключение бесплатное, делает наша команда за 1–3 дня. Первые 7 дней — без оплаты.</div>
+      <button class="ls-info-cta-btn" onclick="closeInfo(); navigateToTrial();">Попробовать бесплатно</button>
+    </div>
+  </div>
+</div>
+
+<div class="ls-info-page" id="infoHow">
+  <div class="ls-info-header">
+    <button class="ls-info-back" onclick="closeInfo()" aria-label="Назад">←</button>
+    <div class="ls-info-title">Как работает Pulse</div>
+  </div>
+  <div class="ls-info-body">
+    <h2>3 шага до утреннего отчёта</h2>
+
+    <h3>Шаг 1. Заявка и бриф</h3>
+    <p>Заполняете короткий бриф — расскажете о бизнесе, источниках данных и метриках, которые важны. Это занимает 5–7 минут.</p>
+
+    <h3>Шаг 2. Подключение</h3>
+    <p>Наша команда подключает источники данных (CRM, банк, таблицы). От вас нужен только доступ на чтение. Срок — 1–3 рабочих дня.</p>
+
+    <h3>Шаг 3. Утренний отчёт</h3>
+    <p>Каждое утро в 09:00 в Telegram приходит готовая сводка. Видите выручку, конверсию, аномалии. Можете задать AI вопрос по своим данным.</p>
+
+    <h3>Что внутри отчёта</h3>
+    <ul>
+      <li>Главные цифры за вчерашний день</li>
+      <li>Сравнение с прошлой неделей</li>
+      <li>Аномалии: что пошло не так и сколько это стоит</li>
+      <li>Точки роста: где можно прибавить</li>
+      <li>Конкретная рекомендация на сегодня</li>
+    </ul>
+
+    <div class="ls-info-cta">
+      <div class="ls-info-cta-text">7 дней бесплатно — без карты, без подписки. Просто посмотрите как это работает на ваших данных.</div>
+      <button class="ls-info-cta-btn" onclick="closeInfo(); navigateToTrial();">Попробовать бесплатно</button>
+    </div>
+  </div>
+</div>
+
+<div class="ls-info-page" id="infoTariffs">
+  <div class="ls-info-header">
+    <button class="ls-info-back" onclick="closeInfo()" aria-label="Назад">←</button>
+    <div class="ls-info-title">Тарифы</div>
+  </div>
+  <div class="ls-info-body">
+    <h2>Три тарифа под разный размер бизнеса</h2>
+    <p>На всех тарифах первые 7 дней — бесплатно. Настройка под ключ — без оплаты. Без привязки карты на старте.</p>
+
+    <div class="tariff-table-wrap" style="margin-top:16px;margin-bottom:16px">
+      <div class="tariff-table">
+        <!-- Шапка -->
+        <div class="tt-row tt-head">
+          <div class="tt-feature"></div>
+          <div class="tt-head-col tt-start">START<div class="tt-price">7 000 ₽/мес</div></div>
+          <div class="tt-head-col tt-business">BUSINESS<div class="tt-price">15 000 ₽/мес</div><div class="tt-popular">популярный</div></div>
+          <div class="tt-head-col tt-pro">PRO<div class="tt-price">25 000 ₽/мес</div></div>
+        </div>
+        <!-- Группа 1 -->
+        <div class="tt-row tt-group"><div class="tt-group-label">Базовая аналитика</div></div>
+        <div class="tt-row"><div class="tt-feature">Утренний отчёт в Telegram</div><div class="tt-col tt-start">✅</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+        <div class="tt-row"><div class="tt-feature">Сравнение с вашей нормой</div><div class="tt-col tt-start">✅</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+        <div class="tt-row"><div class="tt-feature">Прогноз на завтра</div><div class="tt-col tt-start">✅</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+        <div class="tt-row"><div class="tt-feature">Алерты</div><div class="tt-col tt-start tt-muted">до 2</div><div class="tt-col tt-business tt-muted">до 5</div><div class="tt-col tt-pro tt-muted">∞</div></div>
+        <div class="tt-row"><div class="tt-feature">Источников данных</div><div class="tt-col tt-start tt-muted">1</div><div class="tt-col tt-business tt-muted">до 3</div><div class="tt-col tt-pro tt-muted">∞</div></div>
+        <!-- Группа 2 -->
+        <div class="tt-row tt-group"><div class="tt-group-label">Глубокий анализ</div></div>
+        <div class="tt-row"><div class="tt-feature">Причины аномалий</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+        <div class="tt-row"><div class="tt-feature">Рейтинг менеджеров</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+        <div class="tt-row"><div class="tt-feature">AI-вопросы по данным</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+        <!-- Группа 3 -->
+        <div class="tt-row tt-group"><div class="tt-group-label">PRO-возможности</div></div>
+        <div class="tt-row"><div class="tt-feature">Кассовый разрыв</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+        <div class="tt-row"><div class="tt-feature">Долгосрочная память</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+        <div class="tt-row"><div class="tt-feature">CEO-дайджест в пн</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+        <div class="tt-row"><div class="tt-feature">AI приходит сам</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+        <div class="tt-row"><div class="tt-feature">PDF для инвесторов</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+        <div class="tt-row"><div class="tt-feature">Еженедельный разбор</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+
+      </div>
+    </div>
+
+    <h3>Кому какой подходит</h3>
+    <ul>
+      <li><strong>START</strong> — малый бизнес до 5 сотрудников, до 100 заявок в месяц. Один источник данных. Нужен утренний отчёт и базовые алерты.</li>
+      <li><strong>BUSINESS</strong> — 5–20 сотрудников, есть отдел продаж. Нужна полная картина (продажи + расходы + задачи) и AI-вопросы по своим данным. Самый популярный тариф.</li>
+      <li><strong>PRO</strong> — несколько направлений, филиалов, команд. AI работает на упреждение, PDF для инвесторов, еженедельный разбор с командой Pulse.</li>
+    </ul>
+
+    <div class="ls-info-cta">
+      <div class="ls-info-cta-text">Не уверены какой тариф ваш? Начните с пробного периода — определим вместе на ваших данных.</div>
+      <button class="ls-info-cta-btn" onclick="closeInfo(); navigateToTrial();">Попробовать бесплатно</button>
+    </div>
+  </div>
+</div>
+
+<div class="ls-info-page" id="infoFaq">
+  <div class="ls-info-header">
+    <button class="ls-info-back" onclick="closeInfo()" aria-label="Назад">←</button>
+    <div class="ls-info-title">Частые вопросы</div>
+  </div>
+  <div class="ls-info-body">
+    <h2>FAQ</h2>
+
+    <div class="ls-faq-item">
+      <div class="ls-faq-q">Сколько стоит подключение?</div>
+      <div class="ls-faq-a">Настройка — 0 ₽, её делает наша команда за 1–3 рабочих дня. Подписка от 7 000 ₽/мес, первые 7 дней бесплатно без привязки карты.</div>
+    </div>
+
+    <div class="ls-faq-item">
+      <div class="ls-faq-q">Безопасны ли мои данные?</div>
+      <div class="ls-faq-a">Pulse получает доступ только на чтение. Данные используются исключительно для формирования вашего личного отчёта и не передаются третьим лицам.</div>
+    </div>
+
+    <div class="ls-faq-item">
+      <div class="ls-faq-q">Нужны ли технические знания?</div>
+      <div class="ls-faq-a">Нет. От вас нужен только доступ к источникам данных. Всё подключение делает наша команда. Вы получаете готовый отчёт в Telegram.</div>
+    </div>
+
+    <div class="ls-faq-item">
+      <div class="ls-faq-q">Можно ли отказаться?</div>
+      <div class="ls-faq-a">Да, в любой момент. В пробный период — просто не оплачивайте по окончании 7 дней. После оплаты — отмена в любой момент через личный кабинет.</div>
+    </div>
+
+    <div class="ls-faq-item">
+      <div class="ls-faq-q">У меня нет CRM. Это работает?</div>
+      <div class="ls-faq-a">Да. Если данных нет систематически — мы дадим простой шаблон Google Sheets с 4–6 колонками. Заполняется за 5 минут в день.</div>
+    </div>
+
+    <div class="ls-faq-item">
+      <div class="ls-faq-q">Что если AI ошибётся?</div>
+      <div class="ls-faq-a">Pulse не принимает решения за вас, он показывает факты по вашим реальным данным. Все цифры можно проверить в источнике. AI — инструмент, не замена вашему здравому смыслу.</div>
+    </div>
+
+    <div class="ls-info-cta">
+      <div class="ls-info-cta-text">Остались вопросы? Попробуйте бесплатно 7 дней — это лучший способ оценить пользу для вашего бизнеса.</div>
+      <button class="ls-info-cta-btn" onclick="closeInfo(); navigateToTrial();">Попробовать бесплатно</button>
+    </div>
   </div>
 </div>
 
@@ -1529,7 +1892,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           AI-аналитик для владельца бизнеса
         </div>
         <h1>Каждое утро — полная картина бизнеса в Telegram</h1>
-        <p>Pulse сам собирает данные из ваших источников — кассы, банка, таблиц — находит просадки и алертит с суммой потерь в рублях. Спросите что угодно — ответит по вашим цифрам.</p>
+        <p>Pulse сам собирает данные из CRM и банков, находит просадки и алертит с суммой потерь в рублях. Спросите что угодно — ответит по вашим цифрам.</p>
         <button class="trial-hero-btn" onclick="scrollToTrial()">Попробовать бесплатно — настроим сами →</button>
         <div class="trial-hero-note">7 дней · настройка 0 ₽ · без карты</div>
       </div>
@@ -1551,56 +1914,21 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <div class="t-title">Без CRM и Excel</div>
           <div class="t-sub">Как Pulse заменяет утро</div>
         </div>
-        <div class="topic-card" onclick="trackEvent('клик_карточка','landing','тарифы'); showTariffs()">
+        <div class="topic-card" onclick="showTariffs()">
           <span class="t-icon">💳</span>
           <div class="t-title">Сколько стоит</div>
           <div class="t-sub">Тарифы от 7 000 ₽</div>
         </div>
-        <div class="topic-card" onclick="trackEvent('клик_карточка','landing','офлайн'); startConsultChat('У меня офлайн-бизнес: кофейня, магазин или салон. Как Pulse поможет мне видеть выручку, средний чек и что тянет вниз?', 'offline')">
-          <span class="t-icon">☕</span>
-          <div class="t-title">Офлайн-бизнес</div>
-          <div class="t-sub">Кофейня, магазин, салон</div>
-        </div>
-        <div class="topic-card" onclick="trackEvent('клик_карточка','landing','мультибизнес'); startConsultChat('У меня несколько бизнесов или направлений. Как Pulse даёт картину по всем сразу?', 'multi')">
-          <span class="t-icon">🗂️</span>
-          <div class="t-title">Несколько бизнесов</div>
-          <div class="t-sub">Один дайджест по всем</div>
-        </div>
       </div>
 
-      <div class="section-label">Подключаем ваш бизнес</div>
-      <div class="int-tabs">
-        <button class="int-tab active" onclick="switchIntTab(this,'online')">Онлайн</button>
-        <button class="int-tab" onclick="switchIntTab(this,'offline')">Офлайн / Касса</button>
-        <button class="int-tab" onclick="switchIntTab(this,'finance')">Банки</button>
-
+      <div class="section-label">Интеграции</div>
+      <div class="integrations-list">
+        <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">amoCRM</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Bitrix24</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Google Sheets</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Notion</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Любой REST/Webhook</span><span class="int-check">✓ подключаем</span></div>
       </div>
-
-      <div class="int-panel active" id="int-online">
-        <div class="int-item"><span class="int-icon">🎯</span><span class="int-name">amoCRM</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">🎯</span><span class="int-name">Битрикс24</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">🎯</span><span class="int-name">RetailCRM</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">📊</span><span class="int-name">Google Sheets / Excel</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">📣</span><span class="int-name">Яндекс.Метрика / Директ</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">📋</span><span class="int-name">Notion / Trello / ClickUp</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Любой REST / Webhook</span><span class="int-check">✓ подключаем</span></div>
-      </div>
-
-      <div class="int-panel" id="int-offline">
-        <div class="int-item"><span class="int-icon">☕</span><span class="int-name">Poster</span><span class="int-sub">кофейни, фастфуд</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">💇</span><span class="int-name">YCLIENTS</span><span class="int-sub">салоны, барбершопы</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">🏪</span><span class="int-name">МойСклад</span><span class="int-sub">розница, склад</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">🗂️</span><span class="int-name">Касса / 1С</span><span class="int-sub">iiko, r_keeper, Эвотор — через выгрузку</span><span class="int-check">✓ уточним</span></div>
-        <div class="int-item"><span class="int-icon">📊</span><span class="int-name">Google Sheets</span><span class="int-sub">если данных нет — дадим шаблон</span><span class="int-check">✓ подключаем</span></div>
-      </div>
-
-      <div class="int-panel" id="int-finance">
-        <div class="int-item"><span class="int-icon">🏦</span><span class="int-name">Тинькофф Бизнес</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">🏦</span><span class="int-name">Альфа-Банк / Точка</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">🏦</span><span class="int-name">Любой банк</span><span class="int-sub">выписка CSV/XLS — работаем с любым</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">📒</span><span class="int-name">1С:Бухгалтерия</span><span class="int-sub">через выгрузку</span><span class="int-check">✓ подключаем</span></div>
-      </div>
-
 
       <div class="section-label">Быстрые вопросы</div>
       <div class="quick-list">
@@ -1612,7 +1940,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <span>Дорого. Как это окупается?</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </div>
-        <div class="quick-item" onclick="startConsultChat('Помоги посчитать сколько я теряю в своём бизнесе каждый месяц из-за того что не вижу картину каждый день. Спроси у меня тип бизнеса и цифры.')">
+        <div class="quick-item" onclick="startConsultChat('Помоги посчитать сколько я теряю на необработанных заявках в моём бизнесе.')">
           <span>Посчитать мои потери</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </div>
@@ -1639,37 +1967,37 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <span id="tariffToggleText">Посмотреть тарифы и цены</span>
           <svg id="tariffToggleArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6"/></svg>
         </button>
-        <div id="tariffCollapse" style="display:none"><div class="tariff-options" id="tariffOptions">
-          <!-- ТАБЛИЦА ТАРИФОВ -->
-          <div class="tariff-table-wrap">
+        <div id="tariffCollapse" style="display:none">
+          <div class="tariff-options">
+            <div class="tariff-table-wrap">
             <div class="tariff-table">
-              <!-- Заголовки -->
               <div class="tt-row tt-head">
                 <div class="tt-feature"></div>
-                <div class="tt-col tt-start">START<div class="tt-price">7 000 ₽</div></div>
-                <div class="tt-col tt-business">BUSINESS<div class="tt-price">15 000 ₽</div><div class="tt-popular">● хит</div></div>
-                <div class="tt-col tt-pro">PRO<div class="tt-price">25 000 ₽</div></div>
+                <div class="tt-head-col tt-start">START<div class="tt-price">7 000 ₽</div></div>
+                <div class="tt-head-col tt-business">BUSINESS<div class="tt-price">15 000 ₽</div><div class="tt-popular">популярный</div></div>
+                <div class="tt-head-col tt-pro">PRO<div class="tt-price">25 000 ₽</div></div>
               </div>
-              <!-- Строки -->
-              <div class="tt-row"><div class="tt-feature">Утренний отчёт</div><div class="tt-col">✅</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">Сравнение с нормой</div><div class="tt-col">✅</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">Прогноз на завтра</div><div class="tt-col">✅</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">Алерты</div><div class="tt-col tt-muted">до 2</div><div class="tt-col tt-muted">до 5</div><div class="tt-col tt-muted">∞</div></div>
-              <div class="tt-row"><div class="tt-feature">Источников данных</div><div class="tt-col tt-muted">1</div><div class="tt-col tt-muted">до 3</div><div class="tt-col tt-muted">∞</div></div>
-              <div class="tt-row"><div class="tt-feature">Причины аномалий</div><div class="tt-col">—</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">Рейтинг менеджеров</div><div class="tt-col">—</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">AI-вопросы по данным</div><div class="tt-col">—</div><div class="tt-col">✅</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">Кассовый разрыв</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">Долгосрочная память</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">CEO-дайджест в пн</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">AI приходит сам</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">PDF для инвесторов</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">Еженедельный разбор</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
-              <div class="tt-row"><div class="tt-feature">Мультибизнес-режим</div><div class="tt-col">—</div><div class="tt-col">—</div><div class="tt-col">✅</div></div>
+              <div class="tt-row tt-group"><div class="tt-group-label">Базовая аналитика</div></div>
+              <div class="tt-row"><div class="tt-feature">Утренний отчёт</div><div class="tt-col tt-start">✅</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Сравнение с нормой</div><div class="tt-col tt-start">✅</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Прогноз на завтра</div><div class="tt-col tt-start">✅</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Алерты</div><div class="tt-col tt-start tt-muted">до 2</div><div class="tt-col tt-business tt-muted">до 5</div><div class="tt-col tt-pro tt-muted">∞</div></div>
+              <div class="tt-row"><div class="tt-feature">Источников данных</div><div class="tt-col tt-start tt-muted">1</div><div class="tt-col tt-business tt-muted">до 3</div><div class="tt-col tt-pro tt-muted">∞</div></div>
+              <div class="tt-row tt-group"><div class="tt-group-label">Глубокий анализ</div></div>
+              <div class="tt-row"><div class="tt-feature">Причины аномалий</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Рейтинг менеджеров</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">AI-вопросы по данным</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">✅</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row tt-group"><div class="tt-group-label">PRO-возможности</div></div>
+              <div class="tt-row"><div class="tt-feature">Кассовый разрыв</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Долгосрочная память</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">CEO-дайджест в пн</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">AI приходит сам</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">PDF для инвесторов</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
+              <div class="tt-row"><div class="tt-feature">Еженедельный разбор</div><div class="tt-col tt-start">—</div><div class="tt-col tt-business">—</div><div class="tt-col tt-pro">✅</div></div>
             </div>
           </div>
-        </div><!-- /tariff-options -->
-        </div><!-- /tariff-collapse -->
+          </div>
+        </div>
         <div style="margin-top:16px;text-align:center">
           <div style="font-size:12px;color:var(--text2);margin-bottom:8px">Остались вопросы? Пишите — ответим быстро 👇</div>
           <a href="https://t.me/dacotaj" target="_blank" class="contact-btn">
@@ -1974,7 +2302,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <div class="tariff-opt" onclick="selectExpiredTariff(this,'pro')">
             <div>
               <div class="t-name">PRO</div>
-              <div class="t-desc">+ мультибизнес · кассовый разрыв · CEO-дайджест · AI приходит сам · PDF · разбор</div>
+              <div class="t-desc">+ кассовый разрыв · CEO-дайджест · AI приходит сам · PDF · разбор</div>
             </div>
             <div class="t-price">25 000 ₽/мес</div>
           </div>
@@ -2101,7 +2429,7 @@ if (isAdminPreview) {
   const previewBanner = document.createElement('div');
   previewBanner.id = 'adminPreviewBanner';
   previewBanner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:200;background:#7c3aed;color:#fff;font-size:11px;font-weight:600;text-align:center;padding:5px 12px;letter-spacing:0.03em;';
-  previewBanner.innerHTML = '🔐 РЕЖИМ ПРЕВЬЮ · статус: ' + previewStatus + ' &nbsp;|&nbsp; <button onclick="adminResetStorage()" style="background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;cursor:pointer;">🔄 Сбросить localStorage</button>';
+  previewBanner.textContent = '🔐 РЕЖИМ ПРЕВЬЮ · статус: ' + previewStatus + ' · только для администратора';
   document.body.appendChild(previewBanner);
   // Добавляем отступ чтобы не перекрывало контент
   document.querySelector('.header') && (document.querySelector('.header').style.marginTop = '26px');
@@ -2118,6 +2446,20 @@ function dismissLanding(tab) {
   el.classList.add('hidden');
   setTimeout(() => { el.style.display = 'none'; }, 420);
   if (tab) switchTab(tab);
+}
+
+function openInfo(section) {
+  ymGoal('landing_info_' + section);
+  const pageId = 'info' + section.charAt(0).toUpperCase() + section.slice(1);
+  const page = document.getElementById(pageId);
+  if (page) {
+    page.classList.add('active');
+    page.scrollTop = 0;
+  }
+}
+
+function closeInfo() {
+  document.querySelectorAll('.ls-info-page').forEach(p => p.classList.remove('active'));
 }
 
 function navigateToTrial() {
@@ -2249,7 +2591,6 @@ async function openExpiredPayment() {
 
 // ── SCROLL TO TRIAL ──
 function scrollToTrial() {
-  trackEvent('нажал_попробовать', 'landing', '');
   switchTab('consult');
   setTimeout(() => {
     const anchor = document.getElementById('trialAnchor');
@@ -2279,24 +2620,14 @@ function switchTab(tab) {
 
 // ── TARIFFS ──
 function showTariffs() {
-  trackEvent('просмотр_тарифов', 'landing', '');
-  // From topic card — scroll to trial block and expand tariffs
-  switchTab('consult');
-  setTimeout(() => {
-    showTariffsInline();
-    const anchor = document.getElementById('trialAnchor');
-    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 80);
+  showTariffsInline();
 }
 
 function showTariffsInline() {
   const collapse = document.getElementById('tariffCollapse');
-  const btn = document.getElementById('tariffToggleBtn');
-  const trialBtn = document.getElementById('tariffTrialBtn');
   if (!collapse) return;
   const isHidden = collapse.style.display === 'none';
   collapse.style.display = isHidden ? 'block' : 'none';
-  if (trialBtn) trialBtn.style.display = isHidden ? 'block' : 'none';
   const txt = document.getElementById('tariffToggleText');
   const arrow = document.getElementById('tariffToggleArrow');
   if (txt) txt.textContent = isHidden ? 'Скрыть тарифы' : 'Посмотреть тарифы и цены';
@@ -2399,26 +2730,29 @@ function buildRdChart() {
 }
 
 // ── GOOGLE SHEETS ЛОГИРОВАНИЕ ──
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx32IjSQmcOyKI-V7_m18nSkubyGDc_7BBZbpB837F3-d0A9bGNU3xwzMw_TRtbl89s/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzu1dR9jtk3Aq7aukhGIQWe4jcSPMiOf5YGmBnTw1ZUbzKQmnboWQiZeLERbzNIu2y-/exec';
 
 function logToSheets(data) {
-  const payload = {
+  const payload = JSON.stringify({
     ...data,
     created_at: new Date().toISOString(),
     lead_source: 'miniapp',
     page_title: 'Pulse Mini App'
-  };
-  fetch(SHEETS_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(payload),
-    keepalive: true
-  }).catch(() => {});
+  });
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon(SHEETS_URL, new Blob([payload], { type: 'application/json' }));
+  } else {
+    setTimeout(() => {
+      fetch(SHEETS_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload
+      }).catch(() => {});
+    }, 0);
+  }
 }
 
 async function startTrial() {
-  trackEvent('отправил_форму_триал', 'landing', '');
   const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
   const chat_id = tgUser ? String(tgUser.id || '') : '';
   const username = tgUser ? (tgUser.username || '') : '';
@@ -2527,23 +2861,6 @@ if (window.Telegram?.WebApp) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  const params = new URLSearchParams(window.location.search);
-  const startapp = params.get('startapp') || '';
-  const isPreview = startapp.startsWith('preview_');
-  const isClient = startapp && !isPreview;
-  const seenLanding = localStorage.getItem('pulse_seen_landing');
-
-  // Если уже видел лендинг и это не клиент и не превью — сразу на консультанта
-  if (seenLanding && !isClient && !isPreview) {
-    trackEvent('повторное_открытие', 'landing', '');
-    // Переключаем на консультанта без анимации
-    setTimeout(() => switchTab('consult'), 100);
-  } else {
-    localStorage.setItem('pulse_seen_landing', '1');
-    trackEvent('открыл_миниапп', 'landing', '');
-  }
-});
 document.addEventListener('DOMContentLoaded', clearAllChats);
 
 const CONSULT_PROMPT = `Ты — AI-консультант продукта Pulse. Pulse — это AI-аналитик и личный бизнес-советник для владельцев малого и среднего бизнеса. Не сервис отчётов — а советник, который работает 24/7 на данных клиента и с которым можно разговаривать.
@@ -2565,36 +2882,11 @@ BUSINESS — 15 000 ₽/мес (самый популярный):
 Всё что в START плюс: причины аномалий с именами менеджеров, рейтинг команды по конверсии, AI-аналитик отвечает на вопросы по вашим данным. Спросите «почему упала конверсия в пятницу?» — получите ответ по вашим цифрам. До 3 источников, 5 алертов.
 
 PRO — 25 000 ₽/мес:
-Всё что в BUSINESS плюс: контроль кассового разрыва, долгосрочная память (сравнение месяц к месяцу с причинами), CEO-дайджест каждый понедельник, AI приходит сам не дожидаясь вопроса, PDF для инвесторов, еженедельный живой разбор с командой Pulse, **Мультибизнес-режим** — один дайджест по всем направлениям, переключатель по бизнесам в приложении. Неограниченные источники и направления.
+Всё что в BUSINESS плюс: контроль кассового разрыва, долгосрочная память (сравнение месяц к месяцу с причинами), CEO-дайджест каждый понедельник, AI приходит сам не дожидаясь вопроса, PDF для инвесторов, еженедельный живой разбор с командой Pulse. Неограниченные источники и направления.
 
-PRO — 25 000 ₽/мес (мультибизнес):
-Всё что в BUSINESS плюс: мультибизнес-режим (один дайджест по всем направлениям, переключатель по бизнесам в приложении), контроль кассового разрыва, долгосрочная память, CEO-дайджест каждый понедельник, AI приходит сам, PDF для инвесторов, еженедельный разбор. Для серийных предпринимателей с несколькими бизнесами — это единственный способ держать всё в одном месте.
+ИНТЕГРАЦИИ (все поддерживаются): amoCRM, Bitrix24, Google Sheets, Excel, Тинькофф, Сбер, любой банк через выписку, Яндекс.Метрика, Директ, Notion, Trello, ClickUp, любой REST/Webhook, 1С. Клиенту ничего не нужно делать — всё настраивает команда Pulse за 1–3 дня.
 
-ИНТЕГРАЦИИ (реально подключаем):
-CRM и продажи: amoCRM, Битрикс24, RetailCRM, МойСклад, Google Sheets, Excel.
-Кассы и офлайн: Poster, YCLIENTS — через API. iiko, r_keeper, Эвотор, 1С — через выгрузку (клиент даёт файл, мы настраиваем). Если данных нет совсем — даём шаблон Google Sheets, 5 минут в день.
-Банки: Тинькофф Бизнес — через API. Сбер, Альфа, Точка и любой другой банк — через выписку CSV/XLS.
-Реклама: Яндекс.Метрика, Яндекс.Директ — через API.
-Задачи: Notion, Trello, ClickUp — через API.
-Прочее: REST/Webhook (если источник сам отправляет данные), Telegram.
-Если источника нет в списке — уточняем индивидуально: скорее всего сделаем через выгрузку или API. Клиенту ничего не нужно делать — всё настраивает команда Pulse за 1–3 дня.
-
-ПРИОРИТЕТНЫЕ НИШИ (по исследованию мая 2026): интернет-магазины, фитнес-центры, сервисные франшизы, онлайн-школы, клиники, агентства недвижимости, сервисный бизнес, маркетинговые агентства, кофейни и кафе, розничные магазины, барбершопы и салоны, серийные предприниматели с несколькими бизнесами.
-
-ОФЛАЙН-БИЗНЕС (кофейня, магазин, салон, барбершоп, студия):
-Если клиент — офлайн-точка, НЕ используй слова: заявки, лиды, конверсия, менеджеры, воронка.
-Используй: выручка, средний чек, чеки, смена, позиция меню, загрузка, трафик.
-Главные боли офлайна: не знает что тянет выручку вниз (позиция, товар, мастер); узнаёт о провальной смене в конце дня; расходы растут незаметно — кассовый разрыв как сюрприз; нет картины без похода в кассу.
-Источники для офлайна: Poster и YCLIENTS через API; iiko, r_keeper, Эвотор, 1С — через выгрузку; банк через выписку; Google Sheets если данных нет.
-Если данных нет — предложи шаблон Sheets от Pulse (5 минут в день).
-При расчёте потерь для офлайна считай: «Если выручка в провальный день на X ₽ ниже нормы — это X × кол-во таких дней в месяц».
-
-МУЛЬТИБИЗНЕС (несколько направлений или бизнесов):
-Если клиент — серийный предприниматель или у него несколько направлений, объясняй PRO через Мультибизнес-режим:
-— Утром один дайджест по всем бизнесам: 🟢 скупка ↑ · 🟡 студия 60% загрузки · 🔴 кофейня средний чек падает
-— Хочет детали — пишет AI: «покажи подробно по студии» — получает отчёт только по ней
-— В приложении — переключатель по каждому бизнесу одним тапом
-Это не 5 разных отчётов. Это одна картина по всему портфелю каждое утро.
+ПРИОРИТЕТНЫЕ НИШИ (по исследованию мая 2026): интернет-магазины, фитнес-центры, сервисные франшизы, онлайн-школы, клиники, агентства недвижимости, сервисный бизнес, маркетинговые агентства.
 
 ВАЖНО — что НЕ говорить:
 — Не упоминай конкретных «кейсов» с именами и суммами (типа «недвижимость нашла 480К») — у нас сейчас идут пилотные подключения, реальные кейсы появятся скоро
@@ -2615,95 +2907,6 @@ CRM и продажи: amoCRM, Битрикс24, RetailCRM, МойСклад, Go
 — «Не нужно» → потери никуда не денутся за 3 месяца
 
 Когда рассказываешь про тарифы — говори живо и убедительно, с акцентом на деньги которые клиент найдёт и время которое сэкономит. Не перечисляй функции списком — объясняй ценность. Отвечай коротко и по делу. Задавай один вопрос в конце. Используй **жирный** для важного. Отвечай на русском.`;
-
-// ── ТРЕКИНГ СОБЫТИЙ ──────────────────────────────────────────
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzu1dR9jtk3Aq7aukhGIQWe4jcSPMiOf5YGmBnTw1ZUbzKQmnboWQiZeLERbzNIu2y-/exec';
-
-function getSessionId() {
-  // Берём client_id из URL (если пришёл через Telegram) или генерируем анонимный
-  const params = new URLSearchParams(window.location.search);
-  const startapp = params.get('startapp') || '';
-  if (startapp && !startapp.startsWith('preview_')) return startapp;
-  // Анонимный session — храним в sessionStorage чтобы склеить события одного визита
-  let sid = sessionStorage.getItem('pulse_sid');
-  if (!sid) {
-    sid = 'anon_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
-    sessionStorage.setItem('pulse_sid', sid);
-  }
-  return sid;
-}
-
-function trackEvent(event, screen, value) {
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const payload = JSON.stringify({
-      type: 'event',
-      event: event,
-      screen: screen || 'landing',
-      value: value || '',
-      user_id: getSessionId(),
-      utm_source: params.get('utm_source') || '',
-      utm_medium: params.get('utm_medium') || '',
-      utm_campaign: params.get('utm_campaign') || '',
-      referrer: document.referrer || '',
-      user_agent: navigator.userAgent || ''
-    });
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(APPS_SCRIPT_URL, new Blob([payload], { type: 'application/json' }));
-    } else {
-      setTimeout(() => {
-        fetch(APPS_SCRIPT_URL, {
-          method: 'POST', mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: payload
-        }).catch(() => {});
-      }, 0);
-    }
-  } catch(e) {}
-}
-
-let _logoTapCount = 0;
-let _logoTapTimer = null;
-
-function handleLogoTap() {
-  _logoTapCount++;
-  clearTimeout(_logoTapTimer);
-  _logoTapTimer = setTimeout(() => { _logoTapCount = 0; }, 2000);
-  
-  if (_logoTapCount >= 5) {
-    _logoTapCount = 0;
-    localStorage.removeItem('pulse_seen_landing');
-    localStorage.removeItem('pulse_sid');
-    sessionStorage.removeItem('pulse_seen_landing');
-    sessionStorage.removeItem('pulse_sid');
-    sessionStorage.removeItem('pulse_opened');
-    if (window.Telegram?.WebApp) {
-      window.Telegram.WebApp.showAlert('✅ Сброшено! Закрой и открой мини-апп заново.', () => {
-        window.Telegram.WebApp.close();
-      });
-    } else {
-      alert('✅ Сброшено! Перезагрузи страницу.');
-      location.reload();
-    }
-  }
-}
-
-function adminResetStorage() {
-  localStorage.removeItem('pulse_seen_landing');
-  localStorage.removeItem('pulse_sid');
-  sessionStorage.removeItem('pulse_seen_landing');
-  sessionStorage.removeItem('pulse_sid');
-  sessionStorage.removeItem('pulse_opened');
-  alert('✅ localStorage сброшен! Теперь открой мини-апп заново.');
-}
-
-function switchIntTab(btn, panel) {
-  document.querySelectorAll('.int-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.int-panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  const el = document.getElementById('int-' + panel);
-  if (el) el.classList.add('active');
-}
 
 function startConsultChat(text, topicKey) {
   if (topicKey) ymGoal('topic_' + topicKey);
@@ -2819,7 +3022,6 @@ function formatText(text) {
 }
 
 async function sendMessage() {
-  trackEvent('задал_вопрос_ai', 'consultant', '');
   if (consultLoading) return;
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
@@ -3164,6 +3366,34 @@ function generateChart() {
     col.appendChild(label);
     bars.appendChild(col);
   });
+}
+
+let _logoTapCount = 0;
+let _logoTapTimer = null;
+function handleLogoTap() {
+  _logoTapCount++;
+  clearTimeout(_logoTapTimer);
+  _logoTapTimer = setTimeout(() => { _logoTapCount = 0; }, 2000);
+  if (_logoTapCount >= 5) {
+    _logoTapCount = 0;
+    localStorage.removeItem('pulse_seen_landing');
+    sessionStorage.removeItem('pulse_seen_landing');
+    sessionStorage.removeItem('pulse_opened');
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.showAlert('✅ Сброшено! Закрой и открой мини-апп заново.', () => {
+        window.Telegram.WebApp.close();
+      });
+    } else {
+      alert('✅ Сброшено! Перезагрузи страницу.');
+      location.reload();
+    }
+  }
+}
+function adminResetStorage() {
+  localStorage.removeItem('pulse_seen_landing');
+  sessionStorage.removeItem('pulse_seen_landing');
+  sessionStorage.removeItem('pulse_opened');
+  alert('✅ localStorage сброшен! Закрой и открой мини-апп заново.');
 }
 </script>
 </body>
