@@ -12,7 +12,7 @@ ym(108524299,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true});
 function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
 </script>
 <!-- /Yandex.Metrika -->
-<script src="https://yookassa.ru/checkout-widget/v1/checkout-widget.js"></script>
+<script src="https://yookassa.ru/checkout-widget/v1/checkout-widget.js" defer></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
 
@@ -893,6 +893,10 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     opacity: 0;
     transform: translateY(-12px);
     pointer-events: none;
+  }
+  #landingScreen.gone {
+    display: none !important;
+    pointer-events: none !important;
   }
 
   .ls-body {
@@ -2436,7 +2440,7 @@ if (seenLanding) {
 
 if (isAdminPreview) {
   // Скрываем лендинг, показываем кабинет с нужным статусом
-  document.getElementById('landingScreen').style.display = 'none';
+  document.getElementById('landingScreen').classList.add('gone');
   // Показываем плашку что это превью
   const previewBanner = document.createElement('div');
   previewBanner.id = 'adminPreviewBanner';
@@ -2449,7 +2453,8 @@ if (isAdminPreview) {
 
 // Если клиент с ID, admin preview, или уже видел экран — скрываем лендинг
 if (isClient || isAdminPreview || seenLanding) {
-  document.getElementById('landingScreen').style.display = 'none';
+  const el = document.getElementById('landingScreen');
+  el.classList.add('gone');
 }
 
 function dismissLanding(tab) {
@@ -2457,7 +2462,7 @@ function dismissLanding(tab) {
   if (tab) logToSheets({ type: 'event', event: 'клик_карточка_лендинг', screen: 'landing', value: tab });
   const el = document.getElementById('landingScreen');
   el.classList.add('hidden');
-  setTimeout(() => { el.style.display = 'none'; }, 420);
+  setTimeout(() => { el.classList.add('gone'); }, 420);
   if (tab) switchTab(tab);
 }
 
@@ -2479,7 +2484,10 @@ function closeInfo() {
 function navigateToTrial() {
   ymGoal('landing_trial_click');
   logToSheets({ type: 'event', event: 'нажал_попробовать', screen: 'landing', value: 'trial_btn' });
-  dismissLanding(null);
+  const el = document.getElementById('landingScreen');
+  localStorage.setItem('pulse_seen_landing', '1');
+  el.classList.add('hidden');
+  setTimeout(() => { el.classList.add('gone'); }, 420);
   setTimeout(() => {
     switchTab('consult');
     setTimeout(() => {
