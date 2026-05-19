@@ -1503,7 +1503,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
 
 <!-- HEADER -->
 <div class="header">
-  <div class="logo">
+  <div class="logo" id="adminLogoTap" onclick="handleLogoTap()">
     <div class="logo-dot"></div>
     <span class="logo-name">Pulse<span>.</span>AI</span>
   </div>
@@ -2660,6 +2660,32 @@ function trackEvent(event, screen, value) {
       }, 0);
     }
   } catch(e) {}
+}
+
+let _logoTapCount = 0;
+let _logoTapTimer = null;
+
+function handleLogoTap() {
+  _logoTapCount++;
+  clearTimeout(_logoTapTimer);
+  _logoTapTimer = setTimeout(() => { _logoTapCount = 0; }, 2000);
+  
+  if (_logoTapCount >= 5) {
+    _logoTapCount = 0;
+    localStorage.removeItem('pulse_seen_landing');
+    localStorage.removeItem('pulse_sid');
+    sessionStorage.removeItem('pulse_seen_landing');
+    sessionStorage.removeItem('pulse_sid');
+    sessionStorage.removeItem('pulse_opened');
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.showAlert('✅ Сброшено! Закрой и открой мини-апп заново.', () => {
+        window.Telegram.WebApp.close();
+      });
+    } else {
+      alert('✅ Сброшено! Перезагрузи страницу.');
+      location.reload();
+    }
+  }
 }
 
 function adminResetStorage() {
