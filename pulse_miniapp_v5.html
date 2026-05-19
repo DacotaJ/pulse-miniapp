@@ -2101,7 +2101,7 @@ if (isAdminPreview) {
   const previewBanner = document.createElement('div');
   previewBanner.id = 'adminPreviewBanner';
   previewBanner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:200;background:#7c3aed;color:#fff;font-size:11px;font-weight:600;text-align:center;padding:5px 12px;letter-spacing:0.03em;';
-  previewBanner.textContent = '🔐 РЕЖИМ ПРЕВЬЮ · статус: ' + previewStatus + ' · только для администратора';
+  previewBanner.innerHTML = '🔐 РЕЖИМ ПРЕВЬЮ · статус: ' + previewStatus + ' &nbsp;|&nbsp; <button onclick="adminResetStorage()" style="background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;cursor:pointer;">🔄 Сбросить localStorage</button>';
   document.body.appendChild(previewBanner);
   // Добавляем отступ чтобы не перекрывало контент
   document.querySelector('.header') && (document.querySelector('.header').style.marginTop = '26px');
@@ -2660,6 +2660,15 @@ function trackEvent(event, screen, value) {
       }, 0);
     }
   } catch(e) {}
+}
+
+function adminResetStorage() {
+  localStorage.removeItem('pulse_seen_landing');
+  localStorage.removeItem('pulse_sid');
+  sessionStorage.removeItem('pulse_seen_landing');
+  sessionStorage.removeItem('pulse_sid');
+  sessionStorage.removeItem('pulse_opened');
+  alert('✅ localStorage сброшен! Теперь открой мини-апп заново.');
 }
 
 function switchIntTab(btn, panel) {
