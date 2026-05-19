@@ -2422,6 +2422,13 @@ if (startParam.startsWith('preview_')) {
 const isClient = !!clientId;
 const seenLanding = localStorage.getItem('pulse_seen_landing');
 
+// Трекинг открытия
+if (seenLanding) {
+  logToSheets({ type: 'event', event: 'повторное_открытие', screen: 'consult', value: '' });
+} else {
+  logToSheets({ type: 'event', event: 'открыл_миниапп', screen: 'landing', value: '' });
+}
+
 if (isAdminPreview) {
   // Скрываем лендинг, показываем кабинет с нужным статусом
   document.getElementById('landingScreen').style.display = 'none';
@@ -2442,6 +2449,7 @@ if (isClient || isAdminPreview || seenLanding) {
 
 function dismissLanding(tab) {
   localStorage.setItem('pulse_seen_landing', '1');
+  if (tab) logToSheets({ type: 'event', event: 'клик_карточка_лендинг', screen: 'landing', value: tab });
   const el = document.getElementById('landingScreen');
   el.classList.add('hidden');
   setTimeout(() => { el.style.display = 'none'; }, 420);
@@ -2450,6 +2458,7 @@ function dismissLanding(tab) {
 
 function openInfo(section) {
   ymGoal('landing_info_' + section);
+  logToSheets({ type: 'event', event: 'клик_инфо_меню', screen: 'landing', value: section });
   const pageId = 'info' + section.charAt(0).toUpperCase() + section.slice(1);
   const page = document.getElementById(pageId);
   if (page) {
@@ -2464,6 +2473,7 @@ function closeInfo() {
 
 function navigateToTrial() {
   ymGoal('landing_trial_click');
+  logToSheets({ type: 'event', event: 'нажал_попробовать', screen: 'landing', value: 'trial_btn' });
   dismissLanding(null);
   setTimeout(() => {
     switchTab('consult');
