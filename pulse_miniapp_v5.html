@@ -2406,10 +2406,17 @@ function logToSheets(data) {
       page_title: 'Pulse Mini App'
     });
     const blob = new Blob([payload], { type: 'text/plain' });
-    if (navigator.sendBeacon && navigator.sendBeacon(SHEETS_URL, blob)) return;
-    fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', body: blob }).catch(() => {});
-  } catch(e) {}
+    // DEBUG — временно, покажет результат
+    fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', body: blob })
+      .then(() => { if(window._pulseDebug) alert('✅ Отправлено: ' + (data.event || data.lead_status || '?')); })
+      .catch(e => { if(window._pulseDebug) alert('❌ Ошибка: ' + e); });
+  } catch(e) {
+    if(window._pulseDebug) alert('❌ catch: ' + e);
+  }
 }
+
+// Включить дебаг: 5 раз тапни по логотипу Pulse
+window._pulseDebug = true; // DEBUG ВКЛЮЧЁН — убрать после теста
 
 // ── LANDING SCREEN ──
 // Показываем холодным пользователям (без client= в URL и без флага в sessionStorage)
