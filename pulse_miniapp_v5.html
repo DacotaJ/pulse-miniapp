@@ -2394,6 +2394,23 @@ if (window.Telegram?.WebApp) {
   Telegram.WebApp.expand();
 }
 
+// ── GOOGLE SHEETS ЛОГИРОВАНИЕ — определяем первым чтобы все вызовы работали ──
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzvZgvbJ8vrj3VAZIN8F0v9I-0rAzLaq4KN0llgWKR3c_Jx8hWpzESr5tkj9qZIICM/exec';
+
+function logToSheets(data) {
+  try {
+    const payload = JSON.stringify({
+      ...data,
+      created_at: new Date().toISOString(),
+      lead_source: 'miniapp',
+      page_title: 'Pulse Mini App'
+    });
+    const blob = new Blob([payload], { type: 'text/plain' });
+    if (navigator.sendBeacon && navigator.sendBeacon(SHEETS_URL, blob)) return;
+    fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', body: blob }).catch(() => {});
+  } catch(e) {}
+}
+
 // ── LANDING SCREEN ──
 // Показываем холодным пользователям (без client= в URL и без флага в sessionStorage)
 const urlParams = new URLSearchParams(window.location.search);
@@ -2462,7 +2479,7 @@ function dismissLanding(tab) {
 
 function openInfo(section) {
   ymGoal('landing_info_' + section);
-  logToSheets({ type: 'event', event: 'клик_инфо_меню', screen: 'landing', value: section });
+  try { logToSheets({ type: 'event', event: 'клик_инфо_меню', screen: 'landing', value: section }); } catch(e) {}
   const pageId = 'info' + section.charAt(0).toUpperCase() + section.slice(1);
   const page = document.getElementById(pageId);
   if (page) {
@@ -2746,23 +2763,7 @@ function buildRdChart() {
   });
 }
 
-// ── GOOGLE SHEETS ЛОГИРОВАНИЕ ──
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzvZgvbJ8vrj3VAZIN8F0v9I-0rAzLaq4KN0llgWKR3c_Jx8hWpzESr5tkj9qZIICM/exec';
 
-function logToSheets(data) {
-  const payload = JSON.stringify({
-    ...data,
-    created_at: new Date().toISOString(),
-    lead_source: 'miniapp',
-    page_title: 'Pulse Mini App'
-  });
-  // text/plain не требует CORS preflight — работает в Telegram WebView
-  const blob = new Blob([payload], { type: 'text/plain' });
-  try {
-    if (navigator.sendBeacon && navigator.sendBeacon(SHEETS_URL, blob)) return;
-  } catch(e) {}
-  fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', body: blob }).catch(() => {});
-}
 
 // Трекинг открытия (после определения logToSheets)
 try {
@@ -2926,13 +2927,13 @@ function startConsultChat(text, topicKey) {
   else ymGoal('chat_open');
   usedTopicKey = topicKey || null;
   const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
-  logToSheets({
+  try { logToSheets({
     lead_status: 'demo_click',
     niche: topicKey || 'unknown',
     topic: text.substring(0, 50),
     name: tgUser ? (tgUser.first_name || '') : '',
     contact: tgUser ? ('@' + (tgUser.username || tgUser.id || '')) : ''
-  });
+  }); } catch(e) {}
 
   // Пример отчёта — всегда показываем визуальный демо
   if (text === 'SHOW_REPORT_DEMO' || topicKey === 'report') {
