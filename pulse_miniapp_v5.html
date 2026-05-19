@@ -2756,17 +2756,12 @@ function logToSheets(data) {
     lead_source: 'miniapp',
     page_title: 'Pulse Mini App'
   });
-  if (navigator.sendBeacon) {
-    navigator.sendBeacon(SHEETS_URL, new Blob([payload], { type: 'application/json' }));
-  } else {
-    setTimeout(() => {
-      fetch(SHEETS_URL, {
-        method: 'POST', mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: payload
-      }).catch(() => {});
-    }, 0);
-  }
+  // text/plain не требует CORS preflight — работает в Telegram WebView
+  const blob = new Blob([payload], { type: 'text/plain' });
+  try {
+    if (navigator.sendBeacon && navigator.sendBeacon(SHEETS_URL, blob)) return;
+  } catch(e) {}
+  fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', body: blob }).catch(() => {});
 }
 
 // Трекинг открытия (после определения logToSheets)
