@@ -2869,18 +2869,10 @@ function clearAllChats() {
   if (home) home.style.display = 'block';
 }
 
-// Принудительная перезагрузка при открытии через Telegram
+// Сброс чата при возврате в мини-апп через Telegram (без перезагрузки страницы)
 if (window.Telegram?.WebApp) {
-  const lastOpen = sessionStorage.getItem('pulse_opened');
-  if (lastOpen) {
-    sessionStorage.removeItem('pulse_opened');
-    window.location.reload(true);
-  } else {
-    sessionStorage.setItem('pulse_opened', '1');
-  }
   window.Telegram.WebApp.onEvent('activated', () => {
-    sessionStorage.removeItem('pulse_opened');
-    window.location.reload(true);
+    clearAllChats();
   });
 }
 
