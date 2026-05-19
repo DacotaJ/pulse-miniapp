@@ -2092,7 +2092,7 @@ if (startParam.startsWith('preview_')) {
 }
 
 const isClient = !!clientId;
-const seenLanding = sessionStorage.getItem('pulse_seen_landing');
+const seenLanding = localStorage.getItem('pulse_seen_landing');
 
 if (isAdminPreview) {
   // Скрываем лендинг, показываем кабинет с нужным статусом
@@ -2113,7 +2113,7 @@ if (isClient || isAdminPreview || seenLanding) {
 }
 
 function dismissLanding(tab) {
-  sessionStorage.setItem('pulse_seen_landing', '1');
+  localStorage.setItem('pulse_seen_landing', '1');
   const el = document.getElementById('landingScreen');
   el.classList.add('hidden');
   setTimeout(() => { el.style.display = 'none'; }, 420);
@@ -2532,7 +2532,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const startapp = params.get('startapp') || '';
   const isPreview = startapp.startsWith('preview_');
   const isClient = startapp && !isPreview;
-  const seenLanding = sessionStorage.getItem('pulse_seen_landing');
+  const seenLanding = localStorage.getItem('pulse_seen_landing');
 
   // Если уже видел лендинг и это не клиент и не превью — сразу на консультанта
   if (seenLanding && !isClient && !isPreview) {
@@ -2540,7 +2540,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Переключаем на консультанта без анимации
     setTimeout(() => switchTab('consult'), 100);
   } else {
-    sessionStorage.setItem('pulse_seen_landing', '1');
+    localStorage.setItem('pulse_seen_landing', '1');
     trackEvent('открыл_миниапп', 'landing', '');
   }
 });
@@ -2636,23 +2636,29 @@ function getSessionId() {
 function trackEvent(event, screen, value) {
   try {
     const params = new URLSearchParams(window.location.search);
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type: 'event',
-        event: event,
-        screen: screen || 'landing',
-        value: value || '',
-        user_id: getSessionId(),
-        utm_source: params.get('utm_source') || '',
-        utm_medium: params.get('utm_medium') || '',
-        utm_campaign: params.get('utm_campaign') || '',
-        referrer: document.referrer || '',
-        user_agent: navigator.userAgent || ''
-      })
-    }).catch(() => {});
+    const payload = JSON.stringify({
+      type: 'event',
+      event: event,
+      screen: screen || 'landing',
+      value: value || '',
+      user_id: getSessionId(),
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      referrer: document.referrer || '',
+      user_agent: navigator.userAgent || ''
+    });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(APPS_SCRIPT_URL, new Blob([payload], { type: 'application/json' }));
+    } else {
+      setTimeout(() => {
+        fetch(APPS_SCRIPT_URL, {
+          method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: payload
+        }).catch(() => {});
+      }, 0);
+    }
   } catch(e) {}
 }
 
