@@ -2528,7 +2528,21 @@ if (window.Telegram?.WebApp) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  trackEvent('открыл_миниапп', 'landing', '');
+  const params = new URLSearchParams(window.location.search);
+  const startapp = params.get('startapp') || '';
+  const isPreview = startapp.startsWith('preview_');
+  const isClient = startapp && !isPreview;
+  const seenLanding = sessionStorage.getItem('pulse_seen_landing');
+
+  // Если уже видел лендинг и это не клиент и не превью — сразу на консультанта
+  if (seenLanding && !isClient && !isPreview) {
+    trackEvent('повторное_открытие', 'landing', '');
+    // Переключаем на консультанта без анимации
+    setTimeout(() => switchTab('consult'), 100);
+  } else {
+    sessionStorage.setItem('pulse_seen_landing', '1');
+    trackEvent('открыл_миниапп', 'landing', '');
+  }
 });
 document.addEventListener('DOMContentLoaded', clearAllChats);
 
