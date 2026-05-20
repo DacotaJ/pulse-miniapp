@@ -2399,24 +2399,24 @@ const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzvZgvbJ8vrj3VAZIN8F
 
 function logToSheets(data) {
   try {
+    const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
     const payload = JSON.stringify({
       ...data,
+      user_id: data.user_id || (tgUser ? String(tgUser.id || '') : ''),
+      contact: data.contact || (tgUser ? ('@' + (tgUser.username || tgUser.id || '')) : ''),
+      name: data.name || (tgUser ? (tgUser.first_name || '') : ''),
       created_at: new Date().toISOString(),
       lead_source: 'miniapp',
       page_title: 'Pulse Mini App'
     });
     const blob = new Blob([payload], { type: 'text/plain' });
-    // DEBUG — временно, покажет результат
-    fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', body: blob })
-      .then(() => { if(window._pulseDebug) alert('✅ Отправлено: ' + (data.event || data.lead_status || '?')); })
-      .catch(e => { if(window._pulseDebug) alert('❌ Ошибка: ' + e); });
-  } catch(e) {
-    if(window._pulseDebug) alert('❌ catch: ' + e);
-  }
+    if (navigator.sendBeacon && navigator.sendBeacon(SHEETS_URL, blob)) return;
+    fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', body: blob }).catch(() => {});
+  } catch(e) {}
 }
 
 // Включить дебаг: 5 раз тапни по логотипу Pulse
-window._pulseDebug = true; // DEBUG ВКЛЮЧЁН — убрать после теста
+window._pulseDebug = false;
 
 // ── LANDING SCREEN ──
 // Показываем холодным пользователям (без client= в URL и без флага в sessionStorage)
