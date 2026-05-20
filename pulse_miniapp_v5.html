@@ -214,6 +214,10 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     margin-bottom: 24px;
   }
 
+  .int-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+  .int-tab { flex: 1; padding: 7px 4px; border: 1.5px solid var(--border); border-radius: 10px; background: #fff; font-size: 12px; font-weight: 600; color: var(--text3); cursor: pointer; transition: all .2s; }
+  .int-tab.active { border-color: var(--primary); color: var(--primary); background: #f0f0ff; }
+  .int-sub { font-size: 11px; color: var(--text3); margin-left: 2px; }
   .int-item {
     display: flex;
     align-items: center;
@@ -1856,8 +1860,8 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     </div>
 
     <div class="ls-faq-item">
-      <div class="ls-faq-q">У меня нет CRM. Это работает?</div>
-      <div class="ls-faq-a">Да. Если данных нет систематически — мы дадим простой шаблон Google Sheets с 4–6 колонками. Заполняется за 5 минут в день.</div>
+      <div class="ls-faq-q">У меня нет CRM / я офлайн-бизнес. Это работает?</div>
+      <div class="ls-faq-a">Да. Pulse работает с кассами (Poster, iiko, Эвотор), банковскими выписками и Google Sheets. Кофейня, магазин, салон — подключим к тому что есть. Если данных нет совсем — дадим простой шаблон Sheets, 5 минут в день.</div>
     </div>
 
     <div class="ls-faq-item">
@@ -1900,7 +1904,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           AI-аналитик для владельца бизнеса
         </div>
         <h1>Каждое утро — полная картина бизнеса в Telegram</h1>
-        <p>Pulse сам собирает данные из CRM и банков, находит просадки и алертит с суммой потерь в рублях. Спросите что угодно — ответит по вашим цифрам.</p>
+        <p>Pulse сам собирает данные из ваших источников — CRM, касса, банк, таблицы — находит просадки и алертит с суммой потерь в рублях. Спросите что угодно — ответит по вашим цифрам.</p>
         <button class="trial-hero-btn" onclick="scrollToTrial()">Попробовать бесплатно — настроим сами →</button>
         <div class="trial-hero-note">7 дней · настройка 0 ₽ · без карты</div>
       </div>
@@ -1912,7 +1916,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <div class="t-title">Что придёт утром</div>
           <div class="t-sub">Посмотреть живой отчёт</div>
         </div>
-        <div class="topic-card" onclick="startConsultChat('Помоги посчитать сколько я теряю на необработанных заявках.', 'losses')">
+        <div class="topic-card" onclick="startConsultChat('Помоги посчитать сколько я теряю в своём бизнесе каждый месяц. Спроси у меня тип бизнеса и основные цифры — посчитаем в рублях.', 'losses')">
           <span class="t-icon">💸</span>
           <div class="t-title">Сколько уходит сейчас</div>
           <div class="t-sub">Посчитать в рублях</div>
@@ -1927,15 +1931,44 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <div class="t-title">Сколько стоит</div>
           <div class="t-sub">Тарифы от 7 000 ₽</div>
         </div>
+        <div class="topic-card" onclick="startConsultChat('У меня офлайн-бизнес: кофейня, магазин или салон. Как Pulse поможет мне видеть выручку, средний чек и что тянет вниз?', 'offline')">
+          <span class="t-icon">☕</span>
+          <div class="t-title">Офлайн-бизнес</div>
+          <div class="t-sub">Кофейня, магазин, салон</div>
+        </div>
+        <div class="topic-card" onclick="startConsultChat('У меня несколько бизнесов или направлений. Как Pulse поможет видеть всё в одном месте?', 'multi')">
+          <span class="t-icon">🗂️</span>
+          <div class="t-title">Несколько бизнесов</div>
+          <div class="t-sub">Один дайджест по всем</div>
+        </div>
       </div>
 
       <div class="section-label">Интеграции</div>
-      <div class="integrations-list">
+      <div class="int-tabs">
+        <button class="int-tab active" onclick="switchIntTab('online', this)">Онлайн</button>
+        <button class="int-tab" onclick="switchIntTab('offline', this)">Офлайн</button>
+        <button class="int-tab" onclick="switchIntTab('banks', this)">Банки</button>
+      </div>
+      <div class="integrations-list" id="int-online">
         <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">amoCRM</span><span class="int-check">✓ подключаем</span></div>
         <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Bitrix24</span><span class="int-check">✓ подключаем</span></div>
         <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Google Sheets</span><span class="int-check">✓ подключаем</span></div>
-        <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Notion</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Notion / Trello</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Яндекс.Метрика</span><span class="int-check">✓ подключаем</span></div>
         <div class="int-item"><span class="int-icon">🔗</span><span class="int-name">Любой REST/Webhook</span><span class="int-check">✓ подключаем</span></div>
+      </div>
+      <div class="integrations-list" id="int-offline" style="display:none">
+        <div class="int-item"><span class="int-icon">🏪</span><span class="int-name">Poster</span><span class="int-sub">API</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">💆</span><span class="int-name">YCLIENTS</span><span class="int-sub">API</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">🍽️</span><span class="int-name">iiko / r_keeper</span><span class="int-sub">через выгрузку</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">🧾</span><span class="int-name">Эвотор / 1С</span><span class="int-sub">через выгрузку</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">📊</span><span class="int-name">Нет данных совсем</span><span class="int-sub">шаблон Sheets от Pulse</span><span class="int-check">✓ поможем</span></div>
+      </div>
+      <div class="integrations-list" id="int-banks" style="display:none">
+        <div class="int-item"><span class="int-icon">🏦</span><span class="int-name">Тинькофф Бизнес</span><span class="int-sub">API</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">🏦</span><span class="int-name">Сбер / Альфа / Точка</span><span class="int-sub">выписка CSV</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">🏦</span><span class="int-name">Любой банк</span><span class="int-sub">выписка CSV/XLS</span><span class="int-check">✓ подключаем</span></div>
+        <div class="int-item"><span class="int-icon">📒</span><span class="int-name">1С:Бухгалтерия</span><span class="int-sub">через выгрузку</span><span class="int-check">✓ подключаем</span></div>
       </div>
 
       <div class="section-label">Быстрые вопросы</div>
@@ -2138,7 +2171,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
               <span>💳 Посмотреть тарифы и цены</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
             </div>
-            <div class="quick-item" onclick="closeReportDemo(); startConsultChat('Помоги посчитать сколько я теряю на необработанных заявках.', 'losses')">
+            <div class="quick-item" onclick="closeReportDemo(); startConsultChat('Помоги посчитать сколько я теряю в своём бизнесе каждый месяц. Спроси у меня тип бизнеса и основные цифры — посчитаем в рублях.', 'losses')">
               <span>💸 Посчитать мои потери</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
             </div>
@@ -2311,7 +2344,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <div class="tariff-opt" onclick="selectExpiredTariff(this,'pro')">
             <div>
               <div class="t-name">PRO</div>
-              <div class="t-desc">+ кассовый разрыв · CEO-дайджест · AI приходит сам · PDF · разбор</div>
+              <div class="t-desc">+ мультибизнес · кассовый разрыв · CEO-дайджест · AI приходит сам · PDF · разбор</div>
             </div>
             <div class="t-price">25 000 ₽/мес</div>
           </div>
@@ -2473,6 +2506,15 @@ if (isAdminPreview) {
 if (isClient || isAdminPreview || seenLanding) {
   const el = document.getElementById('landingScreen');
   el.classList.add('gone');
+}
+
+function switchIntTab(tab, btn) {
+  ['online','offline','banks'].forEach(t => {
+    const el = document.getElementById('int-' + t);
+    if (el) el.style.display = t === tab ? 'block' : 'none';
+  });
+  document.querySelectorAll('.int-tab').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
 }
 
 function dismissLanding(tab) {
