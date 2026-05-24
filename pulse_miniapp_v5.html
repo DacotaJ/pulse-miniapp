@@ -2551,10 +2551,7 @@ function navigateToTrial() {
   setTimeout(() => { el.classList.add('gone'); }, 420);
   setTimeout(() => {
     switchTab('consult');
-    setTimeout(() => {
-      const anchor = document.getElementById('trialAnchor');
-      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    // Скролл убран намеренно: юзер попадает наверх консультанта и сам листает
   }, 450);
 }
 
