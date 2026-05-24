@@ -2673,10 +2673,7 @@ async function openExpiredPayment() {
 // ── SCROLL TO TRIAL ──
 function scrollToTrial() {
   switchTab('consult');
-  setTimeout(() => {
-    const anchor = document.getElementById('trialAnchor');
-    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 80);
+  // Скролл убран: юзер попадает наверх консультанта и сам листает
 }
 
 // Псевдоним для кнопки hero на главном экране
