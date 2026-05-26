@@ -4063,6 +4063,205 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
   }
   .fab-contact.is-hidden { display: none !important; }
 
+
+  /* Баннер «Ваш отчёт сохранён» — крупный, в шапке консультанта */
+  .cs-saved-report-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #FCFBF6 0%, #F5F0E5 100%);
+    border: 1px solid rgba(139,46,31,0.18);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 0 rgba(20,17,15,0.04);
+  }
+  .cs-saved-report-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #FAF7F0;
+    border: 1px solid rgba(20,17,15,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .cs-saved-report-text {
+    flex: 1;
+    min-width: 0;
+  }
+  .cs-saved-report-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #14110F;
+    line-height: 1.25;
+    margin-bottom: 2px;
+  }
+  .cs-saved-report-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: #6B645B;
+    line-height: 1.35;
+  }
+  .cs-saved-report-btn {
+    flex-shrink: 0;
+    background: #8B2E1F;
+    color: #FAF7F0;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 0.18s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .cs-saved-report-btn:active {
+    transform: translateY(1px);
+  }
+
+
+  /* CTA на тарифных карточках */
+  .tariff-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: #FCFBF8;
+    color: #14110F;
+    border: 1px solid rgba(20,17,15,0.12);
+    border-radius: 8px;
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.18s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tariff-cta:active {
+    transform: translateY(1px);
+    background: #F5F0E5;
+  }
+  .tariff-cta--primary {
+    background: #8B2E1F;
+    color: #FAF7F0;
+    border-color: #8B2E1F;
+    box-shadow: 0 4px 12px -4px rgba(139,46,31,0.3);
+  }
+  .tariff-cta--primary:active {
+    background: #7a2719;
+  }
+  .tariff-cta-arrow {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+  }
+
+
+  /* Мини-тарифы в step4 — короткий путь к выбору */
+  .mini-tariffs {
+    margin: 22px 0 18px;
+    padding: 16px;
+    background: #FCFBF8;
+    border: 1px solid rgba(20,17,15,0.08);
+    border-radius: 14px;
+  }
+  .mini-tariffs-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #6B645B;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .mini-tariffs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .mini-tariff {
+    background: #fff;
+    border: 1px solid rgba(20,17,15,0.1);
+    border-radius: 10px;
+    padding: 12px 8px 10px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    font-family: 'Geist', sans-serif;
+    transition: all 0.18s;
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 92px;
+  }
+  .mini-tariff:active {
+    transform: translateY(1px);
+    border-color: #8B2E1F;
+    background: rgba(139,46,31,0.04);
+  }
+  .mini-tariff--popular {
+    border-color: #8B2E1F;
+    background: linear-gradient(180deg, rgba(139,46,31,0.04) 0%, #fff 100%);
+  }
+  .mt-pop {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #8B2E1F;
+    color: #FAF7F0;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .mt-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #14110F;
+  }
+  .mt-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: #8B2E1F;
+    letter-spacing: -0.01em;
+  }
+  .mt-price span {
+    font-weight: 400;
+    color: #6B645B;
+    font-size: 10px;
+  }
+  .mt-desc {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 10px;
+    color: #6B645B;
+    line-height: 1.25;
+    margin-top: 2px;
+  }
+  .mini-tariffs-note {
+    text-align: center;
+    margin-top: 12px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: #6B645B;
+  }
+
 /* ═══════════ КОНЕЦ V13 ═══════════ */
 </style>
 </head>
@@ -4159,7 +4358,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
         <span>Доступ к данным — <b>только на чтение</b> · никуда не передаём</span>
       </div>
       <div class="trust-pilot">
-        Сервис на этапе <b>пилотных подключений</b>. Первых клиентов подключает <b>лично основатель</b>. Если за 7 дней не увидите пользы — отключим без вопросов и без оплаты.
+        Сервис на этапе <b>пилотных подключений</b>. Первых клиентов подключает <b>лично основательница</b>. Если за 7 дней не увидите пользы — отключим без вопросов и без оплаты.
       </div>
     </div>
   </div>
@@ -5022,8 +5221,32 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
       <div class="founder-avatar">Е</div>
       <div class="founder-text">
         «Подключаю лично — текстом в Telegram, без созвонов. Если за 7 дней не увидите пользы — отключу без вопросов и без оплаты».
-        <div class="founder-signature">— <em>Евгения</em>, основатель Pulse</div>
+        <div class="founder-signature">— <em>Евгения</em>, основательница Pulse</div>
       </div>
+    </div>
+
+    <!-- Мини-тарифы — короткий путь к выбору тарифа -->
+    <div class="mini-tariffs">
+      <div class="mini-tariffs-label">Или выберите тариф сразу</div>
+      <div class="mini-tariffs-grid">
+        <button class="mini-tariff" onclick="chooseTariff('start')">
+          <div class="mt-name">Start</div>
+          <div class="mt-price">7 000 ₽<span>/мес</span></div>
+          <div class="mt-desc">базовый отчёт</div>
+        </button>
+        <button class="mini-tariff mini-tariff--popular" onclick="chooseTariff('business')">
+          <div class="mt-pop">популярный</div>
+          <div class="mt-name">Business</div>
+          <div class="mt-price">15 000 ₽<span>/мес</span></div>
+          <div class="mt-desc">+ команда, AI-чат</div>
+        </button>
+        <button class="mini-tariff" onclick="chooseTariff('pro')">
+          <div class="mt-name">Pro</div>
+          <div class="mt-price">25 000 ₽<span>/мес</span></div>
+          <div class="mt-desc">всё + кастом</div>
+        </button>
+      </div>
+      <div class="mini-tariffs-note">Первые 7 дней — бесплатно на любом. Карту не просим.</div>
     </div>
 
     <button class="final-cta" onclick="startTrialFlow()">
@@ -5117,14 +5340,23 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     <div class="tariff-card">
       <div class="tariff-head"><div class="tariff-name">Start</div><div class="tariff-price">7 000 ₽/мес</div></div>
       <div class="tariff-desc">Утренний отчёт + базовые алерты. 1 источник данных, до 2 алертов. Для малого бизнеса до 5 человек.</div>
+      <button class="tariff-cta" onclick="chooseTariff('start')">
+        Начать с тарифа Start <span class="tariff-cta-arrow">→</span>
+      </button>
     </div>
     <div class="tariff-card popular">
       <div class="tariff-head"><div class="tariff-name">Business</div><div class="tariff-price">15 000 ₽/мес</div></div>
       <div class="tariff-desc">Всё что в Start + причины аномалий с именами менеджеров, рейтинг команды по конверсии, AI отвечает на вопросы по вашим данным. До 3 источников, 5 алертов.</div>
+      <button class="tariff-cta tariff-cta--primary" onclick="chooseTariff('business')">
+        Начать с тарифа Business <span class="tariff-cta-arrow">→</span>
+      </button>
     </div>
     <div class="tariff-card">
       <div class="tariff-head"><div class="tariff-name">Pro</div><div class="tariff-price">25 000 ₽/мес</div></div>
       <div class="tariff-desc">Контроль кассового разрыва, AI приходит сам не дожидаясь вопроса, мультибизнес-режим, PDF для инвесторов, еженедельный разбор с командой. Без ограничений.</div>
+      <button class="tariff-cta" onclick="chooseTariff('pro')">
+        Начать с тарифа Pro <span class="tariff-cta-arrow">→</span>
+      </button>
     </div>
 
     <div class="info-footer-cta">
@@ -5202,10 +5434,15 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     <!-- HOME VIEW -->
     <div class="scroll" id="consultHome">
 
-      <!-- 1. «Назад к примеру» — ссылка вверху -->
-      <button class="cs-back-link" onclick="returnToLanding()">
-        ←&nbsp;&nbsp;К примеру отчёта
-      </button>
+      <!-- 1. Баннер «Ваш отчёт сохранён» — крупный, виден сразу -->
+      <div class="cs-saved-report-banner" id="csSavedBanner" style="display:none">
+        <div class="cs-saved-report-icon">📊</div>
+        <div class="cs-saved-report-text">
+          <div class="cs-saved-report-title">Ваш персональный отчёт сохранён</div>
+          <div class="cs-saved-report-sub">Можно вернуться к нему в любой момент</div>
+        </div>
+        <button class="cs-saved-report-btn" onclick="returnToLanding()">Открыть →</button>
+      </div>
 
       <!-- 2. Приветствие — общее ИЛИ персональное (заполняется JS-ом из ответов квиза) -->
       <div id="csGreeting" class="cs-greeting">
@@ -5282,7 +5519,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
         </div>
         <div class="cs-guarantee">
           <span class="cs-guarantee-check">✓</span>
-          <div><strong>Подключает лично основатель</strong> · текст в Telegram</div>
+          <div><strong>Подключает лично основательница</strong> · текст в Telegram</div>
         </div>
         <div class="cs-guarantee">
           <span class="cs-guarantee-check">✓</span>
@@ -5298,7 +5535,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
       <div class="cs-founder">
         <div class="cs-founder-avatar">Е</div>
         <div class="cs-founder-text">
-          <div class="cs-founder-name">Евгения · основатель Pulse</div>
+          <div class="cs-founder-name">Евгения · основательницаница Pulse</div>
           <div class="cs-founder-role">Бриф уйдёт лично мне в Telegram</div>
         </div>
       </div>
@@ -6341,11 +6578,15 @@ function returnToLanding() {
     landing.style.display = 'block';
   }
 
-  // Если был квиз — вернёмся к шагу 4 (персональный пример), иначе к шагу 1
+  // Если был квиз — вернёмся к шагу 4 (персональный пример) с сохранённым отчётом
   // Используем глобальную переменную answers из v13
   setTimeout(() => {
     try {
       if (typeof answers !== 'undefined' && answers[1] && answers[2] && answers[3]) {
+        // ВАЖНО: сначала сгенерировать содержимое step4, потом показать
+        if (typeof buildPersonalReport === 'function') {
+          try { buildPersonalReport(); } catch(e) { console.warn('buildPersonalReport failed:', e); }
+        }
         if (typeof goStep === 'function') goStep(4);
       } else {
         if (typeof goStep === 'function') goStep(1);
@@ -6363,6 +6604,48 @@ function returnToLanding() {
 }
 
 // ─── Открыть бриф (Google Form) ───
+// ─── Выбор тарифа из карточки → бриф с привязкой к тарифу ───
+function chooseTariff(tariff) {
+  // tariff: 'start' | 'business' | 'pro'
+  const TARIFFS = {
+    start:    { name: 'Start',    price: '7 000 ₽/мес' },
+    business: { name: 'Business', price: '15 000 ₽/мес' },
+    pro:      { name: 'Pro',      price: '25 000 ₽/мес' }
+  };
+  const info = TARIFFS[tariff];
+  if (!info) return;
+
+  // Сохраняем выбранный тариф для последующих экранов
+  window._chosenTariff = tariff;
+  try { sessionStorage.setItem('pulse_chosen_tariff', tariff); } catch(e) {}
+
+  // Логируем выбор тарифа
+  try {
+    if (window.logToSheets) window.logToSheets({
+      type: 'event',
+      event: 'выбрал_тариф',
+      screen: window._currentScreen || 'landing_v13',
+      value: tariff
+    });
+  } catch(e) {}
+  try { if (window.ymGoal) window.ymGoal('tariff_choose_' + tariff); } catch(e) {}
+
+  // Обновляем заголовок briefPostScreen — он покажет выбранный тариф
+  setTimeout(() => {
+    const titleEl = document.querySelector('#briefPostScreen h2');
+    if (titleEl) {
+      titleEl.innerHTML = 'Бриф открыт · тариф <em style="color:#8B2E1F; font-style:italic">' + info.name + '</em>';
+    }
+    const subEl = document.querySelector('#briefPostScreen p[style*="margin:0 16px 18px"]');
+    if (subEl) {
+      subEl.innerHTML = 'Заполните форму (5 минут) — и Евгения свяжется с вами лично в Telegram. Расскажу как подключим <strong>' + info.name + ' за ' + info.price + '</strong>.';
+    }
+  }, 100);
+
+  // Открываем форму
+  openBrief();
+}
+
 function openBrief() {
   try {
     if (window.logToSheets) window.logToSheets({ type:'event', event:'клик_бриф', screen:'consult', value:'open_form' });
@@ -6438,17 +6721,28 @@ function openContactEugenia() {
 })();
 
 function openTelegramBot() {
+  // Если был выбран тариф — передаём его в /start через start_param
+  let botUrl = PULSE_TG_BOT;
+  let chosenTariff = null;
   try {
-    if (window.logToSheets) window.logToSheets({ type:'event', event:'клик_открыть_бот', screen:'brief_post', value:PULSE_TG_BOT });
+    chosenTariff = window._chosenTariff || sessionStorage.getItem('pulse_chosen_tariff');
   } catch(e) {}
+  if (chosenTariff) {
+    botUrl = PULSE_TG_BOT + '?start=tariff_' + chosenTariff;
+  }
+
+  try {
+    if (window.logToSheets) window.logToSheets({ type:'event', event:'клик_открыть_бот', screen:'brief_post', value: chosenTariff ? 'tariff:' + chosenTariff : 'no_tariff' });
+  } catch(e) {}
+  try { if (window.ymGoal) window.ymGoal('fab_open_bot' + (chosenTariff ? '_' + chosenTariff : '')); } catch(e) {}
   try {
     if (window.Telegram?.WebApp?.openTelegramLink) {
-      window.Telegram.WebApp.openTelegramLink(PULSE_TG_BOT);
+      window.Telegram.WebApp.openTelegramLink(botUrl);
     } else {
-      window.open(PULSE_TG_BOT, '_blank');
+      window.open(botUrl, '_blank');
     }
   } catch(e) {
-    window.open(PULSE_TG_BOT, '_blank');
+    window.open(botUrl, '_blank');
   }
 }
 
@@ -6468,11 +6762,16 @@ function reopenBrief() {
 // ─── Персональное приветствие в консультанте если был квиз ───
 function updatePersonalGreeting() {
   const greeting = document.getElementById('csGreeting');
+  const banner = document.getElementById('csSavedBanner');
   if (!greeting) return;
   // Берём ответы из глобальной answers (определена в v13)
   let nicheLabel, painLabel, scaleLabel;
   try {
-    if (typeof answers === 'undefined' || !answers[1]) return;
+    if (typeof answers === 'undefined' || !answers[1]) {
+      // Квиза не было — скрываем баннер
+      if (banner) banner.style.display = 'none';
+      return;
+    }
     const nicheMap = {
       online: 'онлайн / услуги / агентство',
       retail: 'розница / общепит',
@@ -6503,8 +6802,10 @@ function updatePersonalGreeting() {
     <div class="cs-greeting-label">Готов к подключению</div>
     <h1 class="cs-greeting-title">Вижу: <em>${nicheLabel}</em>, масштаб ${scaleLabel}.</h1>
     <p class="cs-greeting-sub">Главная боль — <strong>${painLabel}</strong>. Pulse это решит. Спросите что угодно по подключению или сразу заполните бриф.</p>
-    <div class="cs-greeting-link" onclick="returnToLanding()">← Вернуться и пересмотреть пример</div>
   `;
+  
+  // Показываем баннер «Ваш отчёт сохранён»
+  if (banner) banner.style.display = 'flex';
 }
 
 // ═══════════ КОНЕЦ блока консультанта ═══════════
