@@ -3594,6 +3594,40 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
   .quiz-progress { display: flex; gap: 6px; margin-bottom: 24px; }
   .quiz-progress .pip { height: 3px; flex: 1; background: var(--rule); border-radius: 2px; transition: background 0.3s; }
   .quiz-progress .pip.done { background: var(--accent); }
+  .quiz-intro {
+    margin-bottom: 18px;
+    padding: 16px 18px;
+    background: var(--paper-soft, #FCFBF8);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+  }
+  .quiz-intro-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--ink, #14110F);
+    margin-bottom: 4px;
+  }
+  .quiz-intro-sub {
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--muted, #6B645B);
+  }
+  .quiz-intro-sub em {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--oxblood, #8B2E1F);
+  }
+  .quiz-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--oxblood, #8B2E1F);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
   .quiz-q { font-family: 'Fraunces', serif; font-weight: 500; font-size: 26px; line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 6px; }
   .quiz-hint { font-size: 13px; color: var(--muted); margin-bottom: 22px; font-style: italic; font-family: 'Fraunces', serif; }
   .quiz-options { display: flex; flex-direction: column; gap: 10px; }
@@ -4572,7 +4606,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
   <!-- ── ШАГ 2: Демо ─────────────────────── -->
   <div class="step" id="step2">
     <button class="back-link" onclick="clickBack(1)">‹ К началу</button>
-    <p class="demo-intro">Вот <b>как это выглядит</b> у владельца кофейни на 2 точки в Москве — настоящий формат, реальная логика.</p>
+    <p class="demo-intro">Вот <b>как это выглядит</b> у владельца агентства услуг — заявки, менеджеры, выручка. Настоящий формат, реальная логика.</p>
 
     <div class="typing-dots" id="typingDots" style="display:none"><span></span><span></span><span></span></div>
 
@@ -4586,19 +4620,19 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
       </div>
       <div class="tg-body">
         <div class="tg-headrow">
-          <div class="tg-biz">Кофейня «Чашка» · 2 точки</div>
+          <div class="tg-biz">Студия «Вектор» · услуги</div>
           <div class="tg-period">за пт · 21 фев</div>
         </div>
 
         <div class="tg-stats">
           <div class="tg-stat"><div class="v">142 800 ₽</div><div class="l">Выручка</div><div class="d down">−18% к норме</div></div>
           <div class="tg-stat"><div class="v">38 400 ₽</div><div class="l">Прибыль</div><div class="d down">−31%</div></div>
-          <div class="tg-stat"><div class="v">312</div><div class="l">Чеков</div><div class="d down">−9%</div></div>
-          <div class="tg-stat"><div class="v">458 ₽</div><div class="l">Средний чек</div><div class="d down">−10%</div></div>
+          <div class="tg-stat"><div class="v">18</div><div class="l">Заявок</div><div class="d down">−9%</div></div>
+          <div class="tg-stat"><div class="v">22%</div><div class="l">Конверсия</div><div class="d down">−10%</div></div>
         </div>
 
-        <div class="tg-insight bad"><div class="ico">⚠</div><div class="t"><strong>Просадка:</strong> смена Анны (Петровка), средний чек −18%. Потери ≈ <strong>23 400 ₽</strong>.</div></div>
-        <div class="tg-insight good"><div class="ico">↑</div><div class="t"><strong>Точка роста:</strong> +1 бариста на пик пт = <strong>+18 000 ₽/нед</strong>.</div></div>
+        <div class="tg-insight bad"><div class="ico">⚠</div><div class="t"><strong>Просадка:</strong> менеджер Анна, конверсия −18%. Потери ≈ <strong>23 400 ₽</strong>.</div></div>
+        <div class="tg-insight good"><div class="ico">↑</div><div class="t"><strong>Точка роста:</strong> ответ на заявки до 15 мин = <strong>+18 000 ₽/нед</strong>.</div></div>
 
         <button class="tg-cta-open" onclick="document.getElementById('cabinetPreview').scrollIntoView({behavior:'smooth',block:'start'})">
           Открыть полную аналитику в кабинете
@@ -4640,7 +4674,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
     <div class="cabinet-preview" id="cabinetPreview">
       <div class="cabinet-head">
         <div class="cabinet-head-title">Личный кабинет Pulse</div>
-        <div class="cabinet-head-meta">Кофейня «Чашка»</div>
+        <div class="cabinet-head-meta">Студия «Вектор»</div>
       </div>
       <div class="cab-tabs">
         <button class="cab-tab active" onclick="switchCabTab(this, 'cab-summary')">Сводка</button>
@@ -4699,15 +4733,15 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
             <div class="tg-forecast-label">Суббота · базовый</div>
             <div class="tg-forecast-val">~ 175 000 ₽</div>
           </div>
-          <div class="tg-forecast-rec">→ Если <strong>+1 бариста</strong> на пик пт<span class="gain">~193к ₽</span></div>
-          <div class="tg-forecast-rec">→ Если <strong>разобрать смену Анны</strong><span class="gain">~187к ₽</span></div>
+          <div class="tg-forecast-rec">→ Если <strong>отвечать на заявки &lt;15 мин</strong><span class="gain">~193к ₽</span></div>
+          <div class="tg-forecast-rec">→ Если <strong>разобрать работу Анны</strong><span class="gain">~187к ₽</span></div>
         </div>
 
         <div class="tg-section-label">Stress · что если?</div>
         <div class="stress-test">
-          <div class="stress-q">Что будет если уволится Михаил — наш лучший бариста?</div>
+          <div class="stress-q">Что будет если уволится Михаил — наш лучший менеджер?</div>
           <div class="stress-a">
-            Михаил даёт <strong>+18% к среднему чеку</strong> и держит пятничный пик. Без него выручка точки <span class="impact">−47 000 ₽/мес</span>. <strong>Решение:</strong> закрепить бонусную схему и обучить Дарью пиковым часам сейчас.
+            Михаил даёт <strong>+18% к конверсии</strong> и держит крупных клиентов. Без него выручка <span class="impact">−47 000 ₽/мес</span>. <strong>Решение:</strong> закрепить бонусную схему и подключить Дарью к ключевым клиентам сейчас.
           </div>
         </div>
 
@@ -4855,7 +4889,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
         <div class="stress-test">
           <div class="stress-q">Что если сезонный спад марта повторится как в прошлом году?</div>
           <div class="stress-a">
-            В марте 2025 выручка упала на 22%. При текущих расходах март-апрель <strong>уйдёт в минус ≈ 180 000 ₽/мес</strong> <span class="impact">риск кассового разрыва</span>. <strong>Решение:</strong> запустить сезонное меню до 1 марта, сократить смены на 12% в будни до 14:00.
+            В марте 2025 выручка упала на 22%. При текущих расходах март-апрель <strong>уйдёт в минус ≈ 180 000 ₽/мес</strong> <span class="impact">риск кассового разрыва</span>. <strong>Решение:</strong> запустить сезонную акцию до 1 марта, сократить расходы на 12% в низкий сезон.
           </div>
         </div>
 
@@ -4865,26 +4899,26 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
       <!-- Таб 3: Команда и AI -->
       <div class="cab-panel" id="cab-insights">
         <div class="tg-section-label">AI заметил · 5 инсайтов за вчера</div>
-        <div class="tg-insight bad"><div class="ico">01</div><div class="t"><strong>Просадка:</strong> смена Анны (Петровка), средний чек −18%. Потери ≈ <strong>23 400 ₽</strong>.</div></div>
-        <div class="tg-insight bad"><div class="ico">02</div><div class="t"><strong>Тренд:</strong> капучино −22% третий день подряд. Возможна проблема с молоком или зерном.</div></div>
-        <div class="tg-insight bad"><div class="ico">03</div><div class="t"><strong>Расходы:</strong> аренда+зарплаты за месяц на <strong>27 000 ₽ выше</strong> бюджета. Корень — переработки в пик пт.</div></div>
-        <div class="tg-insight good"><div class="ico">04</div><div class="t"><strong>Точка роста:</strong> +1 бариста на пик пт = <strong>+18 000 ₽/нед</strong>.</div></div>
-        <div class="tg-insight good"><div class="ico">05</div><div class="t"><strong>Новинка:</strong> раф миндальный за 4 дня вышел в топ-3. Включить в постоянное меню.</div></div>
+        <div class="tg-insight bad"><div class="ico">01</div><div class="t"><strong>Просадка:</strong> менеджер Анна, конверсия −18%. Потери ≈ <strong>23 400 ₽</strong>.</div></div>
+        <div class="tg-insight bad"><div class="ico">02</div><div class="t"><strong>Тренд:</strong> заявки с сайта −22% третий день подряд. Возможна проблема с формой или рекламой.</div></div>
+        <div class="tg-insight bad"><div class="ico">03</div><div class="t"><strong>Расходы:</strong> ФОТ за месяц на <strong>27 000 ₽ выше</strong> бюджета. Корень — переработки в конце месяца.</div></div>
+        <div class="tg-insight good"><div class="ico">04</div><div class="t"><strong>Точка роста:</strong> ответ на заявки &lt;15 мин = <strong>+18 000 ₽/нед</strong>.</div></div>
+        <div class="tg-insight good"><div class="ico">05</div><div class="t"><strong>Услуга:</strong> экспресс-пакет за 4 дня вышел в топ-3. Продвигать активнее.</div></div>
 
         <div class="tg-section-label">Эффективность команды · карточка каждого</div>
 
         <div class="team-alert">
           <div class="ta-icon">⚠</div>
-          <div>Сотрудников требующих внимания: <strong>1 из 4</strong>. Это Анна (Петровка) — третий день в красной зоне. Pulse рекомендует разбор смены до 22 фев.</div>
+          <div>Сотрудников требующих внимания: <strong>1 из 4</strong>. Это Анна — третий день в красной зоне. Pulse рекомендует разбор работы до 22 фев.</div>
         </div>
 
         <div class="emp-card lead">
           <div class="emp-head">
-            <div><span class="emp-name">Михаил</span><span class="emp-meta">· Кузнецкий · 14 смен / мес</span></div>
+            <div><span class="emp-name">Михаил</span><span class="emp-meta">· 38 сделок / мес</span></div>
             <div class="emp-status lead">Лидер</div>
           </div>
           <div class="emp-metrics">
-            <div class="emp-metric"><div class="em-v">542 ₽</div><div class="em-l">Ср. чек</div><div class="em-d up">+18%</div></div>
+            <div class="emp-metric"><div class="em-v">38 200 ₽</div><div class="em-l">Ср. сделка</div><div class="em-d up">+18%</div></div>
             <div class="emp-metric"><div class="em-v">218к ₽</div><div class="em-l">Выручка/нед</div><div class="em-d up">+12%</div></div>
             <div class="emp-metric"><div class="em-v">14.2 ₽</div><div class="em-l">Выручка / ₽ ЗП</div><div class="em-d up">+9%</div></div>
           </div>
@@ -4892,16 +4926,16 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
             <span class="emp-trend-label">30 дн</span>
             <div class="emp-trend-bar" style="height:40%"></div><div class="emp-trend-bar" style="height:55%"></div><div class="emp-trend-bar" style="height:50%"></div><div class="emp-trend-bar high" style="height:70%"></div><div class="emp-trend-bar" style="height:60%"></div><div class="emp-trend-bar high" style="height:75%"></div><div class="emp-trend-bar high" style="height:82%"></div><div class="emp-trend-bar high" style="height:88%"></div><div class="emp-trend-bar high" style="height:78%"></div><div class="emp-trend-bar" style="height:65%"></div><div class="emp-trend-bar high" style="height:90%"></div><div class="emp-trend-bar high" style="height:85%"></div><div class="emp-trend-bar high" style="height:92%"></div><div class="emp-trend-bar today high" style="height:95%"></div>
           </div>
-          <div class="emp-note">Стабильный рост по среднему чеку 6 недель подряд. <b>Удержать любой ценой</b> — закрепить бонусную схему.</div>
+          <div class="emp-note">Стабильный рост по конверсии 6 недель подряд. <b>Удержать любой ценой</b> — закрепить бонусную схему.</div>
         </div>
 
         <div class="emp-card">
           <div class="emp-head">
-            <div><span class="emp-name">Дарья</span><span class="emp-meta">· Кузнецкий · 12 смен / мес</span></div>
+            <div><span class="emp-name">Дарья</span><span class="emp-meta">· 31 сделка / мес</span></div>
             <div class="emp-status norm">В норме</div>
           </div>
           <div class="emp-metrics">
-            <div class="emp-metric"><div class="em-v">487 ₽</div><div class="em-l">Ср. чек</div><div class="em-d up">+6%</div></div>
+            <div class="emp-metric"><div class="em-v">31 500 ₽</div><div class="em-l">Ср. сделка</div><div class="em-d up">+6%</div></div>
             <div class="emp-metric"><div class="em-v">189к ₽</div><div class="em-l">Выручка/нед</div><div class="em-d up">+3%</div></div>
             <div class="emp-metric"><div class="em-v">12.8 ₽</div><div class="em-l">Выручка / ₽ ЗП</div><div class="em-d up">+2%</div></div>
           </div>
@@ -4909,16 +4943,16 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
             <span class="emp-trend-label">30 дн</span>
             <div class="emp-trend-bar" style="height:45%"></div><div class="emp-trend-bar" style="height:50%"></div><div class="emp-trend-bar" style="height:48%"></div><div class="emp-trend-bar" style="height:55%"></div><div class="emp-trend-bar" style="height:52%"></div><div class="emp-trend-bar" style="height:60%"></div><div class="emp-trend-bar" style="height:58%"></div><div class="emp-trend-bar" style="height:62%"></div><div class="emp-trend-bar" style="height:65%"></div><div class="emp-trend-bar" style="height:68%"></div><div class="emp-trend-bar" style="height:64%"></div><div class="emp-trend-bar" style="height:70%"></div><div class="emp-trend-bar" style="height:67%"></div><div class="emp-trend-bar today" style="height:72%"></div>
           </div>
-          <div class="emp-note">Растёт стабильно. <b>Передать пиковые часы Михаила</b> — потенциал увеличить ср. чек ещё на 8%.</div>
+          <div class="emp-note">Растёт стабильно. <b>Передать часть клиентов Михаила</b> — потенциал увеличить конверсию ещё на 8%.</div>
         </div>
 
         <div class="emp-card">
           <div class="emp-head">
-            <div><span class="emp-name">Сергей</span><span class="emp-meta">· Петровка · 13 смен / мес</span></div>
+            <div><span class="emp-name">Сергей</span><span class="emp-meta">· 34 сделки / мес</span></div>
             <div class="emp-status norm">В норме</div>
           </div>
           <div class="emp-metrics">
-            <div class="emp-metric"><div class="em-v">442 ₽</div><div class="em-l">Ср. чек</div><div class="em-d">база</div></div>
+            <div class="emp-metric"><div class="em-v">28 900 ₽</div><div class="em-l">Ср. сделка</div><div class="em-d">база</div></div>
             <div class="emp-metric"><div class="em-v">168к ₽</div><div class="em-l">Выручка/нед</div><div class="em-d down">−2%</div></div>
             <div class="emp-metric"><div class="em-v">11.4 ₽</div><div class="em-l">Выручка / ₽ ЗП</div><div class="em-d">база</div></div>
           </div>
@@ -4926,16 +4960,16 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
             <span class="emp-trend-label">30 дн</span>
             <div class="emp-trend-bar" style="height:55%"></div><div class="emp-trend-bar" style="height:60%"></div><div class="emp-trend-bar" style="height:58%"></div><div class="emp-trend-bar" style="height:62%"></div><div class="emp-trend-bar" style="height:55%"></div><div class="emp-trend-bar" style="height:57%"></div><div class="emp-trend-bar" style="height:60%"></div><div class="emp-trend-bar" style="height:58%"></div><div class="emp-trend-bar" style="height:55%"></div><div class="emp-trend-bar" style="height:60%"></div><div class="emp-trend-bar" style="height:52%"></div><div class="emp-trend-bar" style="height:58%"></div><div class="emp-trend-bar" style="height:55%"></div><div class="emp-trend-bar today" style="height:54%"></div>
           </div>
-          <div class="emp-note">Ровный, без явных провалов. Подходит для разворота на новые позиции меню.</div>
+          <div class="emp-note">Ровный, без явных провалов. Подходит для работы с новыми направлениями услуг.</div>
         </div>
 
         <div class="emp-card warn">
           <div class="emp-head">
-            <div><span class="emp-name">Анна</span><span class="emp-meta">· Петровка · 14 смен / мес</span></div>
+            <div><span class="emp-name">Анна</span><span class="emp-meta">· 29 сделок / мес</span></div>
             <div class="emp-status warn">Просадка</div>
           </div>
           <div class="emp-metrics">
-            <div class="emp-metric"><div class="em-v">378 ₽</div><div class="em-l">Ср. чек</div><div class="em-d down">−18%</div></div>
+            <div class="emp-metric"><div class="em-v">22 400 ₽</div><div class="em-l">Ср. сделка</div><div class="em-d down">−18%</div></div>
             <div class="emp-metric"><div class="em-v">132к ₽</div><div class="em-l">Выручка/нед</div><div class="em-d down">−14%</div></div>
             <div class="emp-metric"><div class="em-v">9.1 ₽</div><div class="em-l">Выручка / ₽ ЗП</div><div class="em-d down">−12%</div></div>
           </div>
@@ -4943,17 +4977,17 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
             <span class="emp-trend-label">30 дн</span>
             <div class="emp-trend-bar" style="height:60%"></div><div class="emp-trend-bar" style="height:62%"></div><div class="emp-trend-bar" style="height:58%"></div><div class="emp-trend-bar" style="height:55%"></div><div class="emp-trend-bar" style="height:60%"></div><div class="emp-trend-bar" style="height:52%"></div><div class="emp-trend-bar" style="height:55%"></div><div class="emp-trend-bar" style="height:48%"></div><div class="emp-trend-bar" style="height:50%"></div><div class="emp-trend-bar" style="height:45%"></div><div class="emp-trend-bar low" style="height:40%"></div><div class="emp-trend-bar low" style="height:42%"></div><div class="emp-trend-bar low" style="height:38%"></div><div class="emp-trend-bar today low" style="height:35%"></div>
           </div>
-          <div class="emp-note"><b>Третий день в красной зоне.</b> Средний чек упал на 18% — возможна проблема с обучением или мотивацией. Pulse рекомендует разбор смены до 22 фев.</div>
+          <div class="emp-note"><b>Третий день в красной зоне.</b> Конверсия упала на 18% — возможна проблема с обучением или мотивацией. Pulse рекомендует разбор работы до 22 фев.</div>
         </div>
 
-        <div class="tg-section-label">Топ-3 позиции за неделю</div>
+        <div class="tg-section-label">Топ-3 услуги за неделю</div>
         <div class="tg-top-list">
-          <div class="tg-top-row"><div class="tg-top-rank">01</div><div class="tg-top-name"><b>Капучино</b> 350 мл</div><div class="tg-top-val">142к ₽</div><div class="tg-top-delta down">−22%</div></div>
-          <div class="tg-top-row"><div class="tg-top-rank">02</div><div class="tg-top-name"><b>Латте</b> 350 мл</div><div class="tg-top-val">118к ₽</div><div class="tg-top-delta down">−8%</div></div>
-          <div class="tg-top-row"><div class="tg-top-rank">03</div><div class="tg-top-name"><b>Раф миндальный</b></div><div class="tg-top-val">87к ₽</div><div class="tg-top-delta up">+34%</div></div>
+          <div class="tg-top-row"><div class="tg-top-rank">01</div><div class="tg-top-name"><b>Консалтинг</b> пакет</div><div class="tg-top-val">142к ₽</div><div class="tg-top-delta down">−22%</div></div>
+          <div class="tg-top-row"><div class="tg-top-rank">02</div><div class="tg-top-name"><b>Внедрение</b> под ключ</div><div class="tg-top-val">118к ₽</div><div class="tg-top-delta down">−8%</div></div>
+          <div class="tg-top-row"><div class="tg-top-rank">03</div><div class="tg-top-name"><b>Экспресс-пакет</b></div><div class="tg-top-val">87к ₽</div><div class="tg-top-delta up">+34%</div></div>
         </div>
 
-        <div class="tg-section-label">Воронка: от первого визита к постоянному</div>
+        <div class="tg-section-label">Воронка: от заявки к клиенту</div>
         <div class="funnel">
           <div class="funnel-row">
             <div class="funnel-stage" data-width="100">Первый визит</div>
@@ -4982,7 +5016,7 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           </div>
         </div>
         <div class="unit-econ-conclusion" style="margin-bottom: 12px">
-          <b>Узкое место:</b> переход «вернулся → постоянный» — теряете каждого <strong>третьего</strong>. Pulse рекомендует SMS-напоминание через 10 дней после второго визита, средний рост 8–14%.
+          <b>Узкое место:</b> переход «заявка → клиент» — теряете каждого <strong>третьего</strong>. Pulse рекомендует follow-up через 2 дня после заявки, средний рост 8–14%.
         </div>
 
         <div class="tg-section-label">Спросите по своим данным · пример</div>
@@ -5014,18 +5048,18 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           </div>
         </div>
         <div class="unit-econ-conclusion" style="margin-bottom: 12px">
-          <b>Узкое место:</b> переход «вернулся → постоянный» — теряете каждого <strong>третьего</strong>. Pulse рекомендует SMS-напоминание через 10 дней после второго визита, средний рост 8–14%.
+          <b>Узкое место:</b> переход «заявка → клиент» — теряете каждого <strong>третьего</strong>. Pulse рекомендует follow-up через 2 дня после заявки, средний рост 8–14%.
         </div>
 
         <div class="tg-section-label">Спросите по своим данным · пример</div>
         <div class="ai-chat-preview">
           <div class="ai-chat-msg user">
             <div class="ai-chat-msg-author">Вы</div>
-            Почему капучино упал? Это бариста или продукт?
+            Почему заявки падают? Это менеджеры или источник?
           </div>
           <div class="ai-chat-msg ai">
             <div class="ai-chat-msg-author">Pulse AI</div>
-            Анализ показывает — <strong>продукт</strong>. Капучино падает у всех бариста (−22% в среднем), но особенно сильно у Анны (−31%). Латте на том же молоке упал на 8%. <strong>Скорее всего поставка молока</strong> от 19 фев. Рекомендую запросить новую партию у поставщика и зафиксировать данные за следующие 3 дня.
+            Анализ показывает — <strong>источник</strong>. Заявки падают со всех каналов (−22% в среднем), но особенно с сайта (−31%). Реклама даёт на 8% меньше. <strong>Скорее всего изменения на сайте</strong> от 19 фев. Рекомендую проверить форму заявки и зафиксировать данные за следующие 3 дня.
           </div>
         </div>
 
@@ -5134,25 +5168,25 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
           <div class="ceo-section">
             <div class="ceo-section-label">Что выросло</div>
             <ul>
-              <li><strong>Раф миндальный</strong> — 87к ₽ выручки, рост 34%. Стоит делать постоянной позицией</li>
-              <li><strong>Точка Кузнецкий</strong> — +12% выручки, средний чек 512 ₽. Михаил вытягивает</li>
-              <li><strong>Утренние часы</strong> 8–10 — впервые загрузка &gt;80% в будни</li>
+              <li><strong>Экспресс-пакет</strong> — 87к ₽ выручки, рост 34%. Стоит продвигать активнее</li>
+              <li><strong>Менеджер Михаил</strong> — +12% выручки, ср. сделка 38к ₽. Вытягивает команду</li>
+              <li><strong>Утренние заявки</strong> — впервые конверсия &gt;80% по тёплым лидам</li>
             </ul>
           </div>
           <div class="ceo-section">
             <div class="ceo-section-label">Что упало</div>
             <ul>
-              <li><strong>Капучино</strong> −22% — третий день. Скорее всего поставка молока от 19 фев</li>
-              <li><strong>Точка Петровка</strong> — выручка −8%, корень — смена Анны. Нужна ротация или обучение</li>
-              <li><strong>Пятничный пик</strong> — отказы из-за очереди, теряем ≈18к ₽/нед</li>
+              <li><strong>Заявки с сайта</strong> −22% — третий день. Скорее всего изменения на сайте от 19 фев</li>
+              <li><strong>Менеджер Анна</strong> — конверсия −8%, нужна ротация или обучение</li>
+              <li><strong>Медленный ответ</strong> на заявки — теряем ≈18к ₽/нед на остывших лидах</li>
             </ul>
           </div>
           <div class="ceo-section">
             <div class="ceo-section-label">Решения на эту неделю</div>
             <ul>
-              <li>Запросить новую партию молока, зафиксировать данные за 3 дня</li>
-              <li>Поставить +1 человека на пятничный пик 18–21</li>
-              <li>Назначить разбор смены с Анной до 22 фев</li>
+              <li>Проверить форму заявки на сайте, зафиксировать данные за 3 дня</li>
+              <li>Настроить ответ на заявки в течение 15 минут</li>
+              <li>Назначить разбор работы с Анной до 22 фев</li>
             </ul>
           </div>
           <div class="ceo-section">
@@ -5279,6 +5313,13 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
   <!-- ── ШАГ 3: Опросник ─────────────── -->
   <div class="step" id="step3">
     <button class="back-link" onclick="clickBack(2)">‹ Назад</button>
+
+    <div class="quiz-intro">
+      <div class="quiz-intro-title">3 коротких вопроса</div>
+      <div class="quiz-intro-sub">Меньше минуты — и я покажу <em>ваш персональный отчёт</em></div>
+    </div>
+
+    <div class="quiz-counter" id="quizCounter">Вопрос 1 из 3 · ~20 секунд</div>
     <div class="quiz-progress">
       <div class="pip done" id="pip1"></div>
       <div class="pip" id="pip2"></div>
@@ -5287,10 +5328,10 @@ function ymGoal(goal){ try{ ym(108524299,'reachGoal',goal); }catch(e){} }
 
     <div class="quiz-block active" id="q1">
       <h2 class="quiz-q">Какой у вас бизнес?</h2>
-      <div class="quiz-hint">Это нужно чтобы посчитать <em>в правильных метриках</em></div>
+      <div class="quiz-hint">Просто выберите что ближе — <em>один тап</em></div>
       <div class="quiz-options">
         <button class="quiz-opt" onclick="answerQ(1, 'online')"><span><span class="opt-main">Услуги, агентство, онлайн</span><span class="opt-sub">CRM, заявки, менеджеры</span></span><span class="opt-arrow">›</span></button>
-        <button class="quiz-opt" onclick="answerQ(1, 'retail')"><span><span class="opt-main">Розница, общепит, кофейня</span><span class="opt-sub">касса, чеки, смены, средний чек</span></span><span class="opt-arrow">›</span></button>
+        <button class="quiz-opt" onclick="answerQ(1, 'retail')"><span><span class="opt-main">Розница, общепит, кафе</span><span class="opt-sub">касса, чеки, средний чек</span></span><span class="opt-arrow">›</span></button>
         <button class="quiz-opt" onclick="answerQ(1, 'salon')"><span><span class="opt-main">Салон, барбершоп, клиника</span><span class="opt-sub">записи, мастера, загрузка</span></span><span class="opt-arrow">›</span></button>
         <button class="quiz-opt" onclick="answerQ(1, 'multi')"><span><span class="opt-main">Несколько направлений сразу</span><span class="opt-sub">или маркетплейсы, или микс</span></span><span class="opt-arrow">›</span></button>
       </div>
@@ -7828,7 +7869,19 @@ function adminResetStorage() {
   function clickShowExample(from) { track('клик_показать_пример', 'из_' + (sectionNames[from] || from)); goStep(2); }
   function clickSkipToTariffs() { track('клик_сразу_тарифы', 'из_демо'); goStep('tariffs'); }
   function clickShowTariffsFromVerdict() { track('клик_тарифы_из_вердикта', ''); goStep('tariffs'); }
-  function clickChangeAnswers() { track('клик_изменить_ответы', ''); goStep(3); }
+  function clickChangeAnswers() {
+    track('клик_изменить_ответы', '');
+    // Сброс квиза на первый вопрос
+    for (var i = 1; i <= 3; i++) {
+      var block = document.getElementById('q' + i);
+      if (block) block.style.display = (i === 1) ? 'block' : 'none';
+      var pip = document.getElementById('pip' + i);
+      if (pip) { if (i === 1) pip.classList.add('done'); else pip.classList.remove('done'); }
+    }
+    var counter = document.getElementById('quizCounter');
+    if (counter) counter.textContent = 'Вопрос 1 из 3 · ~20 секунд';
+    goStep(3);
+  }
 
   function animateTelegramArrival() {
     const dots = document.getElementById('typingDots');
@@ -7865,6 +7918,13 @@ function adminResetStorage() {
     if (num < 3) {
       document.getElementById('q' + num).style.display = 'none';
       document.getElementById('q' + (num + 1)).style.display = 'block';
+      // Обновляем счётчик «Вопрос N из 3»
+      var counter = document.getElementById('quizCounter');
+      if (counter) {
+        var next = num + 1;
+        var secs = next === 2 ? '~15 секунд' : '~10 секунд';
+        counter.textContent = 'Вопрос ' + next + ' из 3 · ' + secs;
+      }
     } else {
       track('завершил_квиз', JSON.stringify(answers));
       buildPersonalReport();
@@ -7996,9 +8056,9 @@ function adminResetStorage() {
         ],
         memberLabels: ['Ср. чек', 'Выручка/нед', 'Выручка / ₽ ЗП'],
         topProducts: [
-          { name: 'Капучино 350 мл', val: '142к ₽', delta: '−22%', dCls: 'down' },
-          { name: 'Латте 350 мл', val: '118к ₽', delta: '−8%', dCls: 'down' },
-          { name: 'Раф миндальный', val: '87к ₽', delta: '+34%', dCls: 'up' }
+          { name: 'Консалтинг пакет', val: '142к ₽', delta: '−22%', dCls: 'down' },
+          { name: 'Внедрение под ключ', val: '118к ₽', delta: '−8%', dCls: 'down' },
+          { name: 'Экспресс-пакет', val: '87к ₽', delta: '+34%', dCls: 'up' }
         ],
         funnel: [
           { stage: 'Первый визит', w: 100, n: 1240, c: '100%' },
@@ -8008,9 +8068,9 @@ function adminResetStorage() {
           { stage: 'Активный 3+ мес', w: 21, n: 260, c: '21%' }
         ],
         funnelNote: 'Узкое место — «вернулся → постоянный». Теряете каждого третьего. Pulse рекомендует SMS-напоминание через 10 дней после второго визита, рост 8–14%.',
-        chatQ: 'Почему капучино упал? Это бариста или продукт?',
-        chatA: 'Анализ показывает — <strong>продукт</strong>. Капучино падает у всех бариста (−22%), особенно у Анны (−31%). Латте на том же молоке упал на 8%. <strong>Скорее всего поставка молока</strong> от 19 фев. Запросите новую партию и зафиксируйте данные за 3 дня.',
-        ceoTopics: { up: ['Раф миндальный за 4 дня в топ-3', 'Точка Кузнецкий — +12%', 'Утренние часы — впервые загрузка &gt;80%'], down: ['Капучино −22% — третий день', 'Точка Петровка −8%, корень — смена Анны', 'Пятничный пик — отказы из-за очереди, ≈18к ₽/нед'] },
+        chatQ: 'Почему заявки падают? Это менеджеры или источник?',
+        chatA: 'Анализ показывает — <strong>источник</strong>. Заявки падают со всех каналов (−22%), особенно с сайта (−31%). Реклама даёт на 8% меньше. <strong>Скорее всего изменения на сайте</strong> от 19 фев. Проверьте форму заявки и зафиксируйте данные за 3 дня.',
+        ceoTopics: { up: ['Экспресс-пакет за 4 дня в топ-3', 'Менеджер Михаил — +12%', 'Тёплые лиды — впервые конверсия &gt;80%'], down: ['Заявки с сайта −22% — третий день', 'Менеджер Анна −8%', 'Медленный ответ — теряем ≈18к ₽/нед'] },
         cashflowDays: 19, lossEst: Math.round(sc.revenue / 30 * 0.18)
       },
       salon: {
@@ -8153,7 +8213,7 @@ function adminResetStorage() {
 
   function fmt(n) { return new Intl.NumberFormat('ru-RU').format(n); }
 
-  // ─── ДАННЫЕ ПО ДНЯМ ДЛЯ ДЕМО-КАБИНЕТА (кофейня) ───
+  // ─── ДАННЫЕ ПО ДНЯМ ДЛЯ ДЕМО-КАБИНЕТА (агентство услуг) ───
   const DEMO_DAYS = [
     // 0: Сегодня (сб 22) — прогноз
     { rev: '~ 175 000 ₽', dRev: '+22% к норме', dRevCls: 'up', profit: '~ 52 500 ₽', dProfit: '+18%', dProfitCls: 'up', margin: '30.0%', dMargin: 'база', dMarginCls: '', days: '5.5 дня', dDays: 'внимание', dDaysCls: 'down' },
