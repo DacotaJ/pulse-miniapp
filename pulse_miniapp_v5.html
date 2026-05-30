@@ -6265,36 +6265,6 @@ function logToSheets(data) {
   } catch(e) {}
 }
 
-// ── УВЕДОМЛЕНИЕ ЕВГЕНИИ О ВАЖНЫХ ДЕЙСТВИЯХ ЛИДА ─────────
-// Шлёт мгновенный сигнал в бот → бот пишет Евгении в Telegram
-function notifyLead(eventType, extra) {
-  try {
-    const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
-    // Не шлём уведомление если это админ-превью или клиент в кабинете
-    if (typeof isAdminPreview !== 'undefined' && isAdminPreview) return;
-    if (typeof clientId !== 'undefined' && clientId) return;
-
-    const payload = {
-      event: eventType,
-      user_id: tgUser?.id ? String(tgUser.id) : '',
-      username: tgUser?.username || '',
-      first_name: tgUser?.first_name || '',
-      last_name: tgUser?.last_name || '',
-      lang: tgUser?.language_code || '',
-      source: window._trafficSource || '',
-      tariff: (extra && extra.tariff) || '',
-      details: (extra && extra.details) || '',
-      ts: new Date().toISOString()
-    };
-    fetch('https://pulse-bot-production-f6d3.up.railway.app/notify-lead', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(() => {});
-  } catch(e) {}
-}
-window.notifyLead = notifyLead;
 
 // Включить дебаг: 5 раз тапни по логотипу Pulse
 window._pulseDebug = false;
@@ -7011,7 +6981,6 @@ function chooseTariff(tariff) {
   } catch(e) {}
   try { if (window.ymGoal) window.ymGoal('tariff_choose_' + tariff); } catch(e) {}
   // 🔥 Мгновенное уведомление Евгении
-  try { notifyLead('выбрал_тариф', { tariff: tariff }); } catch(e) {}
 
   // Обновляем заголовок briefPostScreen — он покажет выбранный тариф
   setTimeout(() => {
@@ -7032,11 +7001,6 @@ function chooseTariff(tariff) {
 function openBrief() {
   try {
     if (window.logToSheets) window.logToSheets({ type:'event', event:'клик_бриф', screen:'consult', value:'open_form' });
-  } catch(e) {}
-  // 🔥 Мгновенное уведомление Евгении
-  try {
-    const chosen = window._chosenTariff || '';
-    notifyLead('клик_бриф', { tariff: chosen });
   } catch(e) {}
 
   // Открываем Google Form во внешнем браузере / Telegram WebView
@@ -7136,11 +7100,6 @@ function openTelegramBot() {
 
 function reopenBrief() {
   try { if (window.logToSheets) window.logToSheets({ type:'event', event:'клик_переоткрыть_бриф', screen:'brief_post', value:BRIEF_FORM_URL }); } catch(e) {}
-  // 🔥 ОЧЕНЬ горячий сигнал — лид вернулся к брифу повторно
-  try {
-    const chosen = window._chosenTariff || '';
-    notifyLead('клик_переоткрыть_бриф', { tariff: chosen, details: 'Вернулся к брифу повторно — очень тёплый!' });
-  } catch(e) {}
   try {
     if (window.Telegram?.WebApp?.openLink) {
       window.Telegram.WebApp.openLink(BRIEF_FORM_URL);
@@ -7971,8 +7930,7 @@ function adminResetStorage() {
     } else {
       track('завершил_квиз', JSON.stringify(answers));
       // 🔥 Уведомление Евгении: лид прошёл квиз — это горячий сигнал
-      try { notifyLead('завершил_квиз', { details: JSON.stringify(answers) }); } catch(e) {}
-      buildPersonalReport();
+          buildPersonalReport();
       goStep(4);
       track('увидел_свой_отчёт', JSON.stringify(answers));
     }
